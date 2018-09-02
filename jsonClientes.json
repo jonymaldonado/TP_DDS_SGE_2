@@ -1,0 +1,76 @@
+[
+  {
+    "tipoDoc": "dni",
+    "numeroDoc": 29239711,
+    "telefono": 42387212,
+    "lstDispositivos": [
+      {
+        "nombre": "lampara",
+        "encendido": true,
+        "kwPorHora": 2,
+        "kwConsumido": 20.0
+      },
+      {
+        "nombre": "tv",
+        "encendido": true,
+        "kwPorHora": 4,
+        "kwConsumido": 30.0
+      },
+      {
+        "nombre": "lavarropa",
+        "encendido": false,
+        "kwPorHora": 3,
+        "kwConsumido": 25.0
+      }
+    ],
+    "categoria": {
+      "nombre": "r1",
+      "valorFijo": 18.79,
+      "valorVariable": 0.64
+    },
+    "nombre_usuario": "tomipe23",
+    "contraseña": "tomipe23",
+    "nombre": "tomi",
+    "apellido": "perez",
+    "domicilio": "boedo 2010",
+    "alta": {
+      "year": 2010,
+      "month": 10,
+      "day": 21
+    }
+  },
+  {
+    "tipoDoc": "dni",
+    "numeroDoc": 39239411,
+    "telefono": 42317902,
+    "lstDispositivos": [
+      {
+        "nombre": "lampara",
+        "encendido": true,
+        "kwPorHora": 2,
+        "kwConsumido": 20.0
+      },
+      {
+        "nombre": "heladera",
+        "encendido": true,
+        "kwPorHora": 2,
+        "kwConsumido": 22.0
+      }
+    ],
+    "categoria": {
+      "nombre": "r2",
+      "valorFijo": 35.32,
+      "valorVariable": 0.64
+    },
+    "nombre_usuario": "robert.23",
+    "contraseña": "robert.23",
+    "nombre": "roberto",
+    "apellido": "gonzales",
+    "domicilio": "la plata 2010",
+    "alta": {
+      "year": 2010,
+      "month": 11,
+      "day": 10
+    }
+  }
+]

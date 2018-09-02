@@ -1,0 +1,32 @@
+[
+  {
+    "idZona": 5,
+    "nombreDeLaZona": "CapitalFederal",
+    "posZonaCentral": {
+      "latitud": 15.4,
+      "longitud": 20.8
+    },
+    "radioEnMetros": 50,
+    "listaDeTransformadores": []
+  },
+  {
+    "idZona": 4,
+    "nombreDeLaZona": "Lugano",
+    "posZonaCentral": {
+      "latitud": 20.0,
+      "longitud": 10.6
+    },
+    "radioEnMetros": 35,
+    "listaDeTransformadores": []
+  },
+  {
+    "idZona": 2,
+    "nombreDeLaZona": "La Boca",
+    "posZonaCentral": {
+      "latitud": 40.3,
+      "longitud": 10.2
+    },
+    "radioEnMetros": 45,
+    "listaDeTransformadores": []
+  }
+]

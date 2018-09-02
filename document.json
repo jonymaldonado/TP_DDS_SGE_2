@@ -1,0 +1,29 @@
+[
+  {
+    "idtransformador": 1,
+    "posTransformador": {
+      "latitud": 24.0,
+      "longitud": 45.0
+    },
+    "idZonaCorrespondiente": 5,
+    "listaDeclientesConectados": []
+  },
+  {
+    "idtransformador": 2,
+    "posTransformador": {
+      "latitud": 30.0,
+      "longitud": 40.0
+    },
+    "idZonaCorrespondiente": 5,
+    "listaDeclientesConectados": []
+  },
+  {
+    "idtransformador": 3,
+    "posTransformador": {
+      "latitud": 10.0,
+      "longitud": 15.0
+    },
+    "idZonaCorrespondiente": 4,
+    "listaDeclientesConectados": []
+  }
+]

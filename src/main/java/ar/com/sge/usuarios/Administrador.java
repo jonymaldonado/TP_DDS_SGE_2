@@ -140,6 +140,15 @@ public class Administrador extends Usuario{
 			// TODO: handle exception
 		}
 	}// fin actializarlistas
+	
+	public void actualizarListasDeTransformadores(RepoTransformador repoTransformador) {
+		
+		
+		
+		
+		
+		
+	}
 
 }
  

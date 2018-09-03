@@ -36,6 +36,9 @@ public class RepoTransformador {
 	public List<Transformador> getAllTransformadores() throws IOException {
 		return daoTransformador.getAll();
 	}
+	public void asignarTransformadores() throws IOException{
+		listaTransformadores=getAllTransformadores();
+	}
 
 	public void addTransformador(Transformador untransformador) throws IOException {
 		daoTransformador.add(untransformador);
@@ -43,6 +46,31 @@ public class RepoTransformador {
 
 	public void modificarTransformador(Transformador transformador) throws IOException {
 		daoTransformador.update(transformador);
+	}
+	
+	public void actualizarListasDeTransformadores(RepoCliente repoCliente) throws IOException{
+		Transformador transfElegido=new Transformador();
+		try {
+			
+			double distancia;
+			for (Cliente cliente : repoCliente.getAllUsuario()) {
+				double transformadorMasCercano = cliente.getDomicilio().distanciaAlPunto(listaTransformadores.get(0).getPosTransformador());
+				for (Transformador transformador : listaTransformadores) {
+					distancia=cliente.getDomicilio().distanciaAlPunto(transformador.getPosTransformador());
+					distancia=Math.abs(distancia);
+					transformadorMasCercano=Math.abs(transformadorMasCercano);
+					if (transformadorMasCercano>=distancia)  {
+						transformadorMasCercano=distancia;
+						transfElegido=transformador;
+						//cliente.setIdTransformadorCorrespondiente(transformador.getIdtransformador()); 
+					};//fin if
+				};//fin for transfo
+				//transfElegido=this.buscarTransformador(cliente.getIdTransformadorCorrespondiente());
+				transfElegido.agregarCliente(cliente);
+			};//fin for clientes
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 	
 

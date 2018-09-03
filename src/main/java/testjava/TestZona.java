@@ -30,7 +30,7 @@ public class TestZona {
 	@Before
 	public void init()throws IOException{
 		DaoJsonZona dao = new DaoJsonZona();
-		dao.setFilePath("D:\\Users\\juamp\\git\\Tp_Dds_SGE\\jsonZona.json");
+		dao.setFilePath("jsonZona.json");
 		repoZona = new RepoZona(dao);
 		listainicial=repoZona.getAllZonas();
 	
@@ -40,7 +40,7 @@ public class TestZona {
 	public void reiniciarEstadoInit() throws IOException{
 		
 		DaoJsonZona dao = new DaoJsonZona();
-		dao.setFilePath("D:\\Users\\juamp\\git\\Tp_Dds_SGE\\jsonZona.json");
+		dao.setFilePath("jsonZona.json");
 		String indicadoresstring=dao.getMyGson().toJson(listainicial);
 		PrintWriter pw = new PrintWriter(dao.getFilePath());
 		pw.close();

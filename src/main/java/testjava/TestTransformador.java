@@ -27,7 +27,7 @@ public class TestTransformador {
 	@Before
 	public void init()throws IOException{
 		DaoJsonTransformadores dao = new DaoJsonTransformadores();
-		dao.setFilePath("D:\\Users\\juamp\\git\\TP_DDS_SGE_2\\document.json");
+		dao.setFilePath("document.json");
 		repoTransformador = new RepoTransformador(dao);
 		listainicial=repoTransformador.getAllTransformadores();
 	
@@ -37,7 +37,7 @@ public class TestTransformador {
 	public void reiniciarEstadoInit() throws IOException{
 		
 		DaoJsonCliente dao = new DaoJsonCliente();
-		dao.setFilePath("D:\\Users\\juamp\\git\\TP_DDS_SGE_2\\document.json");
+		dao.setFilePath("document.json");
 		String indicadoresstring=dao.getMyGson().toJson(listainicial);
 		PrintWriter pw = new PrintWriter(dao.getFilePath());
 		pw.close();

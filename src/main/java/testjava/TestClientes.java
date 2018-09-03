@@ -29,7 +29,7 @@ public class TestClientes {
 	@Before
 	public void init()throws IOException{
 		DaoJsonCliente dao = new DaoJsonCliente();
-		dao.setFilePath("D:\\Users\\juamp\\git\\Tp_Dds_SGE\\bin\\src\\main\\java\\json\\clientes.json");
+		dao.setFilePath("jsonClientes.json");
 		repoCliente = new RepoCliente(dao);
 		listainicial=repoCliente.getAllUsuario();
 	
@@ -39,7 +39,7 @@ public class TestClientes {
 	public void reiniciarEstadoInit() throws IOException{
 		
 		DaoJsonCliente dao = new DaoJsonCliente();
-		dao.setFilePath("D:\\Users\\juamp\\git\\Tp_Dds_SGE\\bin\\src\\main\\java\\json\\clientes.json");
+		dao.setFilePath("jsonClientes.json");
 		String indicadoresstring=dao.getMyGson().toJson(listainicial);
 		PrintWriter pw = new PrintWriter(dao.getFilePath());
 		pw.close();

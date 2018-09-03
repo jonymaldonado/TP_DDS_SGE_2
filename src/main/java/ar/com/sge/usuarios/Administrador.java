@@ -118,7 +118,7 @@ public class Administrador extends Usuario{
 		return transformadorElegido;
 	}
 	
-	public void actualizarListasDeTransformadores() {
+	/*public void actualizarListasDeTransformadores() {
 		try {
 			Transformador transfElegido;
 			double distancia;
@@ -139,15 +139,15 @@ public class Administrador extends Usuario{
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-	}// fin actializarlistas
+	}// fin actializarlistas*/
 	
-	public void actualizarListasDeTransformadores(RepoTransformador repoTransformador) {
+	public void actualizarListasDeTransformadores(RepoTransformador repoTransformador,RepoCliente repo) throws IOException{
+		repoTransformador.actualizarListasDeTransformadores(repo);
 		
-		
-		
-		
-		
-		
+		}
+	
+	public void actualizarListasZona(RepoZona repoZona,RepoTransformador repo) throws IOException{
+		repoZona.actualizarListasDeZonas(repo);
 	}
 
 }

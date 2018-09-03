@@ -63,6 +63,9 @@ public class Zona {
 	public void setListaDeTransformadores(List<Transformador> listaDeTransformadores) {
 		this.listaDeTransformadores = listaDeTransformadores;
 	}
+	public void agregarTransformador(Transformador transformador) {
+		listaDeTransformadores.add(transformador);
+	}
 	
 	
 	

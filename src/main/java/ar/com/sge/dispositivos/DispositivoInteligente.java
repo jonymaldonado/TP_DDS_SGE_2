@@ -15,7 +15,7 @@ public class DispositivoInteligente implements IDispositivo{
 
 	private String nombre;
 	private double kwPorHora;
-	protected Boolean encendido = false;
+	private Boolean encendido ;
 	private Estado estado;
 	private List<Estado> listaDeEstados = new ArrayList<Estado>();
 	private static final float coeficienteAhorroEnergia = (float) 0.6;

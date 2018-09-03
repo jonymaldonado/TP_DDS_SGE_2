@@ -3,6 +3,8 @@ package ar.com.sge.geografia;
 import java.io.IOException;
 import java.util.List;
 
+import ar.com.sge.usuarios.Cliente;
+import ar.com.sge.usuarios.RepoCliente;
 import ar.com.sge.util.DaoJsonZona;
 import ar.com.sge.util.DaoZona;
 
@@ -34,6 +36,10 @@ public class RepoZona {
 	public List<Zona> getAllZonas() throws IOException {
 		return daoZonas.getAll();
 	}
+	
+	public void asignarZonas() throws IOException{
+		listaZona=getAllZonas();
+	}
 
 	public void addZona(Zona unaZona) throws IOException {
 		daoZonas.add(unaZona);
@@ -41,6 +47,26 @@ public class RepoZona {
 
 	public void modificarZona(Zona zona) throws IOException {
 		daoZonas.update(zona);
+	}
+	
+	public void actualizarListasDeZonas(RepoTransformador repoTransformador) throws IOException{
+
+		try {
+			
+			for (Transformador transformador : repoTransformador.getAllTransformadores()) {
+				//double transformadorMasCercano = cliente.getDomicilio().distanciaAlPunto(listaTransformadores.get(0).getPosTransformador());
+				for (Zona zona : getAllZonas()) {
+					if(transformador.getIdZonaCorrespondiente()==zona.getIdZona()) {
+						zona.agregarTransformador(transformador);
+					}
+				}
+			}
+					
+					
+			
+		} catch (Exception e) {
+		
+		}
 	}
 	
 

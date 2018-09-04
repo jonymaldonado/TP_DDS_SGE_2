@@ -8,39 +8,33 @@ import ar.com.sge.dispositivos.DispositivoInteligente;
 public class Encendido extends Estado {
 
 	
-	public Encendido(DispositivoInteligente d) {
-		super(d);
+	public Encendido() {
 		this.nombre = "encendido";
-		fechaInicio = LocalDateTime.now();	
-	}
-	public Encendido (String nombre,LocalDateTime inicio,LocalDateTime fin,float consumo) {
-		super(nombre,inicio,fin,consumo);
+		this.fechaInicio = LocalDateTime.now();
 	}
 	
+	public Encendido (String nombre,LocalDateTime inicio,LocalDateTime fin,double consumo) {
+		this.nombre = nombre;
+		this.fechaInicio = inicio;
+		this.fechaFin= fin;
+		this.consumo = consumo;
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	public void encender() {
-		
+	public void encender(DispositivoInteligente dispositivo) {
 	}
 
-	public void apagar() {		
+	public void apagar(DispositivoInteligente dispositivo) {		
 		fechaFin = LocalDateTime.now();
-		float tiempo= ChronoUnit.HOURS.between(fechaInicio,fechaFin);
+		double tiempo= ChronoUnit.HOURS.between(fechaInicio,fechaFin);
 		consumo = tiempo * dispositivo.getKwPorHora();
 		dispositivo.agregarEstado(this);
-		dispositivo.setEstado(new Apagado(dispositivo));
+		dispositivo.setEstado(new Apagado());
+		dispositivo.setEstadoDipositivo(false);
 	}
 
-	public void ahorroDeEnergia() {
-		dispositivo.setEstado(new AhorroDeEnergia(dispositivo));
+	
+	public void ahorroDeEnergia(DispositivoInteligente dispositivo) {
+		dispositivo.setEstado(new AhorroDeEnergia());
 	}
+	
 }

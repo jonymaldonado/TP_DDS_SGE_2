@@ -7,24 +7,23 @@ import ar.com.sge.dispositivos.DispositivoInteligente;
 
 public class AhorroDeEnergia extends Estado {
 	
-	public AhorroDeEnergia(DispositivoInteligente d) {
-		super(d);
+	public AhorroDeEnergia() {
 		this.nombre = "modo ahorro";
-		fechaInicio = LocalDateTime.now();
+		this.fechaInicio = LocalDateTime.now();
 	}
-	public void encender() {
+	public void encender(DispositivoInteligente dispositivo) {
 		fechaFin = LocalDateTime.now();
-		float tiempo = ChronoUnit.HOURS.between(fechaInicio,fechaFin);
+		double tiempo = ChronoUnit.HOURS.between(fechaInicio,fechaFin);
 		consumo = tiempo * dispositivo.getKwPorHora();
 		dispositivo.agregarEstado(this);
-		dispositivo.setEstado(new Encendido(dispositivo));
+		dispositivo.setEstado(new Encendido());
 	}
 
-	public void apagar() {
+	public void apagar(DispositivoInteligente dispositivo) {
 
 	}
 
-	public void ahorroDeEnergia() {
+	public void ahorroDeEnergia(DispositivoInteligente dispositivo) {
 
 	}
 }

@@ -26,13 +26,19 @@ public class TestZona {
 	
 	private RepoZona repoZona;
 	private List<Zona> listainicial;
+	private RepoTransformador repoTans;
+	private List<Transformador> lista2;
 	
 	@Before
 	public void init()throws IOException{
 		DaoJsonZona dao = new DaoJsonZona();
+		DaoJsonTransformadores dao1 = new DaoJsonTransformadores();
 		dao.setFilePath("jsonZona.json");
+		dao1.setFilePath("document.json");
 		repoZona = new RepoZona(dao);
 		listainicial=repoZona.getAllZonas();
+		repoTans = new RepoTransformador(dao1);
+		lista2 = repoTans.getAllTransformadores();
 	
 	}
 	
@@ -69,6 +75,8 @@ public class TestZona {
 		Assert.assertTrue(zonas.size()==3);
 		Assert.assertEquals(zona1.getNombreDeLaZona(), "Lugano");
 		Assert.assertTrue(zona1.getRadioEnMetros() == 35);
+		Assert.assertTrue(zona1.getListaDeTransformadores().get(0).getIdtransformador() == repoTans.getAllTransformadores().get(0).getIdtransformador());
+		//Assert.assertEquals(zona1.getListaDeTransformadores(),repoTans.getAllTransformadores());
 		
 	}
 

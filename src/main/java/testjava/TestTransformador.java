@@ -54,7 +54,7 @@ public class TestTransformador {
 		Transformador trans1=transformadores.get(0);
 		Assert.assertTrue(trans1.getIdtransformador()==1);
 		Assert.assertTrue(transformadores.size()==3);
-		Assert.assertTrue(trans1.getIdZonaCorrespondiente() == 5);
+		Assert.assertTrue(trans1.getIdZonaCorrespondiente() == 4);
 		
 		
 		
@@ -63,7 +63,7 @@ public class TestTransformador {
 		
 		Assert.assertTrue(trans1.getIdtransformador()==2);
 		Assert.assertTrue(transformadores.size()==3);
-		Assert.assertTrue(trans1.getIdZonaCorrespondiente() == 5);
+		Assert.assertTrue(trans1.getIdZonaCorrespondiente() == 4);
 		
 	}
 

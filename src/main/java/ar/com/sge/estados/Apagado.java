@@ -32,11 +32,4 @@ public class Apagado extends Estado{
 	public void ahorroDeEnergia(DispositivoInteligente dispositivo) {
 
 	}
-	
-	
-	
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> bb6cc89b10d0cf2c1d77370ff58e58d1a8c812d8

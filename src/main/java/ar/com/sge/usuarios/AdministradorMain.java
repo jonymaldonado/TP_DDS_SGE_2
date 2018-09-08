@@ -78,7 +78,7 @@ public class AdministradorMain {
 		admin.agregarCliente(cliente4);
 		admin.agregarCliente(cliente5);
 		
-		admin.actualizarListasDeTransformadores();
+		//admin.actualizarListasDeTransformadores();
 		
 		//PRUEBAS
 		System.out.println("--------------------- DISTANCIA DE LOS CLIENTES CON LOS TRANSFORMADORES" );

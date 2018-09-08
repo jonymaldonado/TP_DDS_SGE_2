@@ -28,7 +28,6 @@ public class Cliente extends Usuario {
 	private static servicioSimplex servicio;
 	//private int idTransformadorCorrespondiente;//despues se vera si vale la pena poner este atributo
 	//private Transformador transformador;
-	private servicioSimplex servicio;
 
 	/*public Cliente(String _nombre, String _apellido,String _tipoDoc,int _numeroDoc,double latitud,double longitud) {		
 =======

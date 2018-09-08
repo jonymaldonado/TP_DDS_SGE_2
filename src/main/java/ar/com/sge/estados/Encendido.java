@@ -37,8 +37,4 @@ public class Encendido extends Estado {
 		dispositivo.setEstado(new AhorroDeEnergia());
 	}
 	
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> bb6cc89b10d0cf2c1d77370ff58e58d1a8c812d8

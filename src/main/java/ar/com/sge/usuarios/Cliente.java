@@ -25,6 +25,7 @@ public class Cliente extends Usuario {
 	private List<DispositivoEstandar> lstDispositivosEstandares ;
 	private Categoria categoria;
 	private int puntos;
+	private static servicioSimplex servicio;
 	//private int idTransformadorCorrespondiente;//despues se vera si vale la pena poner este atributo
 	//private Transformador transformador;
 
@@ -42,7 +43,6 @@ public class Cliente extends Usuario {
 	/*public Transformador getTransformador() {
 		return transformador;
 	}
-
 	public void setTransformador(Transformador transformador) {
 		this.transformador = transformador;
 	}*/
@@ -260,6 +260,14 @@ public class Cliente extends Usuario {
 //		}
 //		return array;
 //	}
+	
+	public static servicioSimplex getServicioSimplex() {
+		
+		if(servicio == null) {
+			servicio = new servicioSimplex();
+		}
+		return servicio;
+	}
 
 
 }

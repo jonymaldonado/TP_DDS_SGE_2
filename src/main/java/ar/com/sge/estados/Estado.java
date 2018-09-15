@@ -2,18 +2,24 @@ package ar.com.sge.estados;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import ar.com.sge.dispositivos.DispositivoInteligente;
 
+
+@Entity
+@Table(name ="Estado")
 public abstract class Estado {
 	
 	protected String nombre;
-	protected DispositivoInteligente dispositivo;
+	//protected DispositivoInteligente dispositivo;
 	protected LocalDateTime fechaInicio;
 	protected LocalDateTime fechaFin;
 	protected double consumo;
 
-	public Estado(DispositivoInteligente d) {
-		this.dispositivo = d;
+	public Estado(DispositivoInteligente inteligente) {
+		//this.dispositivo = d;
 	}
 	
 	
@@ -32,11 +38,11 @@ public abstract class Estado {
 	public String getNombre() {
 		return nombre;
 	}	
-	public abstract void encender();
+	public abstract void encender(DispositivoInteligente inteligente);
 
-	public abstract void apagar();
+	public abstract void apagar(DispositivoInteligente inteligente);
 
-	public abstract void ahorroDeEnergia();
+	public abstract void ahorroDeEnergia(DispositivoInteligente inteligente);
 	
 	public double getConsumo() {
 		return consumo;

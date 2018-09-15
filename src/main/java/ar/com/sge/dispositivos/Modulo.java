@@ -1,8 +1,22 @@
 package ar.com.sge.dispositivos;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+
+@Entity
+@Table(name ="Modulo")
 public class Modulo extends DispositivoInteligente {
 
+	@Id
+	@GeneratedValue
+	private int Id;
+	
+	@OneToOne(cascade={CascadeType.ALL},fetch=FetchType.LAZY,mappedBy="condicion")
 	private DispositivoEstandar dispositivoEstandar;
 		
 	

@@ -6,17 +6,33 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import ar.com.sge.estados.Apagado;
 import ar.com.sge.estados.Estado;
 import ar.com.sge.reglas.Sensor;
 
+@Entity
+@Table(name ="Inteligentes")
 
 public class DispositivoInteligente implements IDispositivo{
 
+	@Id
+	@GeneratedValue
+	private int id_inteligente;
+	@Column(name="Nombre",nullable=false,length=50)
 	private String nombre;
 	private double kwPorHora;
 	private Boolean encendido ;
 	private Estado estado;
+	@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY,mappedBy="inteligente")
 	private List<Estado> listaDeEstados = new ArrayList<Estado>();
 	private static final float coeficienteAhorroEnergia = (float) 0.6;
 	private LocalDateTime inicioPeriodo;
@@ -72,15 +88,15 @@ public class DispositivoInteligente implements IDispositivo{
 	}
 
 	public void encender() {
-		estado.encender();
+		estado.encender(this);
 	}
 
 	public void apagar() {
-		estado.apagar();
+		estado.apagar(this);
 	}
 
 	public void ahorroDeEnergia() {
-		estado.ahorroDeEnergia();
+		estado.ahorroDeEnergia(this);
 	}
 
 	public Boolean estasEncendido() {

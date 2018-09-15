@@ -2,12 +2,23 @@ package ar.com.sge.estados;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import ar.com.sge.dispositivos.DispositivoInteligente;
 
+@Entity
+@Table(name ="Apagado")
 public class Apagado extends Estado{
 
-	public Apagado(DispositivoInteligente d) {
-		super(d);
+	@Id
+	@GeneratedValue
+	private int Id;
+	
+	public Apagado(DispositivoInteligente inteligente) {
+		super(inteligente);
 		this.nombre = "apagado";
 		fechaInicio =LocalDateTime.now();
 	}
@@ -15,18 +26,18 @@ public class Apagado extends Estado{
 		super(nombre,inicio,fin,0);
 	}
 	
-	public void encender() {
+	public void encender(DispositivoInteligente dispositivo) {
 		fechaFin = LocalDateTime.now();
 		consumo = 0;
 		dispositivo.agregarEstado(this);
 		dispositivo.setEstado(new Encendido(dispositivo));			
 	}
 
-	public void apagar() {
+	public void apagar(DispositivoInteligente inteligente) {
 		
 	}
 
-	public void ahorroDeEnergia() {
+	public void ahorroDeEnergia(DispositivoInteligente inteligente) {
 
 	}
 }

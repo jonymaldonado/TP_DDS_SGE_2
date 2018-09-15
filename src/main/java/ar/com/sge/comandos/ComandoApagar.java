@@ -2,7 +2,7 @@ package ar.com.sge.comandos;
 
 import ar.com.sge.dispositivos.DispositivoInteligente;
 
-public abstract class ComandoApagar implements Comando {
+public class ComandoApagar implements Comando {
 
 	private String nombreComando;
 	private DispositivoInteligente dispositivo;
@@ -10,12 +10,14 @@ public abstract class ComandoApagar implements Comando {
 	
 	
 	public ComandoApagar(String nombreComando, DispositivoInteligente dispositivo) {
-		super();
+		
 		this.nombreComando = nombreComando;
 		this.dispositivo = dispositivo;
 	}
 
-	public void ejecutar() {}
+	public void ejecutar() {
+		dispositivo.apagar();
+	}
 
 
 

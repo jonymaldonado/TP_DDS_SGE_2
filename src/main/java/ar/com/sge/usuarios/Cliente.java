@@ -29,7 +29,7 @@ public class Cliente extends Usuario {
 	//private int idTransformadorCorrespondiente;//despues se vera si vale la pena poner este atributo
 	//private Transformador transformador;
 
-	/*public Cliente(String _nombre, String _apellido,String _tipoDoc,int _numeroDoc,double latitud,double longitud) {		
+	/*public Cliente(String _nombre, String _apellido,String _tipoDoc,int _numeroDoc,float latitud,float longitud) {		
 =======
 	public Cliente(String _nombre, String _apellido,String _tipoDoc,int _numeroDoc,float latitud,float longitud) {		
 >>>>>>> 55d6153bb164c64abe9f3fcdd29e944e114d8019
@@ -47,7 +47,7 @@ public class Cliente extends Usuario {
 		this.transformador = transformador;
 	}*/
 
-	public Cliente(String _nombre, String _apellido, String tipoDoc, int numeroDoc, int telefono, Categoria categoria,int puntos,double latitud,double longitud ) {
+	public Cliente(String _nombre, String _apellido, String tipoDoc, int numeroDoc, int telefono, Categoria categoria,int puntos,float latitud,float longitud ) {
 		super(_nombre,_apellido,latitud,longitud);
 		this.tipoDoc = tipoDoc;
 		this.numeroDoc = numeroDoc;
@@ -58,7 +58,7 @@ public class Cliente extends Usuario {
 		this.puntos = 0;
 	//	this.idTransformadorCorrespondiente = 0;
 	}
-	public Cliente(String _nombre, String _apellido, String tipoDoc, int numeroDoc, int telefono,double latitud,double longitud ) {
+	public Cliente(String _nombre, String _apellido, String tipoDoc, int numeroDoc, int telefono,float latitud,float longitud ) {
 		super(_nombre,_apellido,latitud,longitud);
 		this.tipoDoc = tipoDoc;
 		this.numeroDoc = numeroDoc;
@@ -164,8 +164,8 @@ public class Cliente extends Usuario {
 		return resultado;
 	}
 	public float facturacionEntre(LocalDateTime inicioPeriodo,LocalDateTime finPeriodo){
-		float resultado=0;
-		float resultadototal=0;
+		float resultado = 0;
+		float resultadototal = 0;
 		
 		float vf = categoria.getValorFijo();
 		float vv = categoria.getValorVariable();
@@ -218,7 +218,7 @@ public class Cliente extends Usuario {
 	
 	public class IdDistancia{
 		private int id;
-		private double distancia;
+		private float distancia;
 		
 		public IdDistancia (){
 			
@@ -229,17 +229,17 @@ public class Cliente extends Usuario {
 		public void setId(int id) {
 			this.id = id;
 		}
-		public double getDistancia() {
+		public float getDistancia() {
 			return distancia;
 		}
-		public void setDistancia(double distancia) {
+		public void setDistancia(float distancia) {
 			this.distancia = distancia;
 		}
 			
 	}
 	
 	public int calcularMinimo (ArrayList<IdDistancia> lista) {
-		double unValor=1000;
+		float unValor=1000;
 		int idlocal=0;
 		for (IdDistancia idDistancia : lista) {
 			if (idDistancia.getDistancia()<unValor) {

@@ -10,7 +10,7 @@ public class Transformador {
 	private int idtransformador; //por ahora va int, despues vemos se vera si queda asi o String
 	private Coordenada posTransformador;
 	private int idZonaCorrespondiente;
-	private List <Cliente> listaDeclientesConectados;
+	private List<Cliente> listaDeclientesConectados;
 	//public Enum<Enum<E>> estado;  no si si vale la oena podner el atributo
 
 	public Transformador(){
@@ -26,7 +26,7 @@ public class Transformador {
 	
 	public float totalDeConsumoDelTransformadores() {
 		float totalDeConsumoDeCadaCliente=0;
-		for (Cliente unCliente : listaDeclientesConectados) {
+		for(Cliente unCliente : listaDeclientesConectados) {
 			totalDeConsumoDeCadaCliente += unCliente.consumoDeEnergia();
 		}//fin for
 		return totalDeConsumoDeCadaCliente;

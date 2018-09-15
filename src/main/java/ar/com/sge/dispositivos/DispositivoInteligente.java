@@ -114,7 +114,7 @@ public class DispositivoInteligente implements IDispositivo{
 	
 	//consumo en lo que va del mes
 	public double consumoEnKw() {
-		return consumidoComprendidoEntre(inicioPeriodo, LocalDateTime.now());		
+		return consumidoComprendidoEntre(this.inicioPeriodo, LocalDateTime.now());		
 	}
 			
 	public double consumidoUltimasNhoras (int cantHoras) {

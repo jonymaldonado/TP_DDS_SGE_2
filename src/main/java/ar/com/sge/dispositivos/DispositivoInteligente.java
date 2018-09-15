@@ -39,11 +39,13 @@ public class DispositivoInteligente implements IDispositivo{
 	private double maximoconsumo;
 	private double minimoconsumo;
 	private Sensor sensor;
+	private boolean apagarPorSimplex;
+	private boolean estadoDispositivo;
 
 	public DispositivoInteligente(String nombre, double kw) {
 		this.nombre = nombre;
 		this.kwPorHora = kw;
-		this.estado = new Apagado(this);
+		this.estado = new Apagado();
 	}
 	@Override
 	public IDispositivo clone() throws CloneNotSupportedException{
@@ -100,10 +102,10 @@ public class DispositivoInteligente implements IDispositivo{
 	}
 
 	public Boolean estasEncendido() {
-		return this.estado.getNombre().equals("encendido");
+		return this.estadoDispositivo;
 	}
 	public Boolean estasApagado() {
-		return this.estado.getNombre().equals("apagado");
+		return this.estadoDispositivo;
 	}
 
 	public void agregarEstado(Estado e) {
@@ -218,6 +220,22 @@ public class DispositivoInteligente implements IDispositivo{
 	public void desactivarSensor() {
 		sensor.desactivate();
 	}
+	
+	public void activarApagadoAutomaticoSimplex() {
+		this.apagarPorSimplex = true;
+	}
+	
+	public void desactivarApagadoAutomaticoSimplex() {
+		this.apagarPorSimplex = false;
+	}
+	
+	public boolean apagadoAutomaticoPorSimplex() {
+		return this.apagarPorSimplex;
+	}
+	
+	public void setEstadoDipositivo(boolean valor) {
+		this.estadoDispositivo = valor;
+	}
+
 
 }
-

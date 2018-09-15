@@ -25,6 +25,7 @@ public class Cliente extends Usuario {
 	private List<DispositivoEstandar> lstDispositivosEstandares ;
 	private Categoria categoria;
 	private int puntos;
+	private static servicioSimplex servicio;
 	//private int idTransformadorCorrespondiente;//despues se vera si vale la pena poner este atributo
 	//private Transformador transformador;
 
@@ -42,7 +43,6 @@ public class Cliente extends Usuario {
 	/*public Transformador getTransformador() {
 		return transformador;
 	}
-
 	public void setTransformador(Transformador transformador) {
 		this.transformador = transformador;
 	}*/
@@ -196,10 +196,8 @@ public class Cliente extends Usuario {
 	}
 	
 	public PointValuePair consultarASimplex() {
-		servicioSimplex servicio=new servicioSimplex();
-		PointValuePair solucion=servicio.consultarSimplex(getLstDispositivosInteligentes());
+		PointValuePair solucion = this.getServicioSimplex().consultarSimplex(getLstDispositivosInteligentes());
 		return solucion;
-		
 	}
 
 	public List<DispositivoInteligente> getLstDispositivosInteligentes() {
@@ -217,7 +215,6 @@ public class Cliente extends Usuario {
 	public void setLstDispositivosEstandares(List<DispositivoEstandar> lstDispositivosEstandares) {
 		this.lstDispositivosEstandares = lstDispositivosEstandares;
 	}
-	
 	
 	public class IdDistancia{
 		private int id;
@@ -253,6 +250,7 @@ public class Cliente extends Usuario {
 		
 		return idlocal;
 	}
+	
 //	public IdDistancia[] inicializarArray(IdDistancia[] array){
 //		for (int i = 0; i < array.length; i++) {
 //			array[i].setId(0);
@@ -261,5 +259,13 @@ public class Cliente extends Usuario {
 //		return array;
 //	}
 
+	
+	public static servicioSimplex getServicioSimplex() {
+		
+		if(servicio == null) {
+			servicio = new servicioSimplex();
+		}
+		return servicio;
+	}
 
 }

@@ -81,9 +81,17 @@ public class DispositivoInteligente implements IDispositivo{
 	public void setEstado(Estado e) {
 		this.estado = e;
 	}
+	
 	public List<Estado> getEstados(){
 		return this.listaDeEstados;
 	}
+	/*
+	public void getEstados(){
+		//return this.listaDeEstados;
+		for(Estado e: listaDeEstados) {
+			System.out.println(e.getNombre());
+		}
+	}*/
 	
 	public Estado getEstado() {
 		return estado;
@@ -122,7 +130,7 @@ public class DispositivoInteligente implements IDispositivo{
 	
 	//consumo en lo que va del mes
 	public double consumoEnKw() {
-		return consumidoComprendidoEntre(inicioPeriodo, LocalDateTime.now());		
+		return consumidoComprendidoEntre(this.inicioPeriodo, LocalDateTime.now());		
 	}
 			
 	public double consumidoUltimasNhoras (int cantHoras) {

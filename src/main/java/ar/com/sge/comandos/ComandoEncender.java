@@ -2,14 +2,14 @@ package ar.com.sge.comandos;
 
 import ar.com.sge.dispositivos.DispositivoInteligente;
 
-public abstract class ComandoEncender implements Comando{
+public class ComandoEncender implements Comando{
 	
 	
 	private String nombreComando;
 	private DispositivoInteligente dispositivo;
 	
 	public ComandoEncender(String nombreComando, DispositivoInteligente dispositivo) {
-		super();
+		
 		this.nombreComando = nombreComando;
 		this.dispositivo = dispositivo;
 	}

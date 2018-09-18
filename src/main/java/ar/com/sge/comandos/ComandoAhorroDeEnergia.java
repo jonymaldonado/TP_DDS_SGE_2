@@ -2,7 +2,7 @@ package ar.com.sge.comandos;
 
 import ar.com.sge.dispositivos.DispositivoInteligente;
 
-public abstract class ComandoAhorroDeEnergia implements Comando {
+public class ComandoAhorroDeEnergia implements Comando {
 	private AdapterAhorroDeEnergia adaptador;
 	private String nombreComando;
 	private DispositivoInteligente dispositivo;
@@ -10,7 +10,7 @@ public abstract class ComandoAhorroDeEnergia implements Comando {
 	
 	
 	public ComandoAhorroDeEnergia(String nombreComando, DispositivoInteligente dispositivo) {
-		super();
+		
 		this.nombreComando = nombreComando;
 		this.dispositivo = dispositivo;
 	}

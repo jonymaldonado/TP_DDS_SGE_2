@@ -94,7 +94,7 @@ public class TestClientes {
 	
 	@Test
 	public void agregarclienteTest()throws IOException {
-		Cliente clientenuevo= new Cliente("cris","sele","dni",40908923,4392382,10.4,14.6);
+		Cliente clientenuevo= new Cliente("cris","sele","dni",40908923,4392382,10.4f,14.6f);
 		clientenuevo.setTelefono(42981321);
 		
 		

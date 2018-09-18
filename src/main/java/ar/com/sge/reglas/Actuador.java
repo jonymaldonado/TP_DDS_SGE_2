@@ -17,9 +17,8 @@ public class Actuador {
 
 	public void ejecutarAccion(String accion) {
 		Comando comandobuscado;
-		List<Comando> listafiltrada;
-		listafiltrada = listacomandos.stream().filter(a -> a.getNombre().equalsIgnoreCase(accion))
-				.collect(Collectors.toList());
+		List<Comando> listafiltrada = new ArrayList<Comando>();
+		listafiltrada = listacomandos.stream().filter(a -> (a.getNombre().equalsIgnoreCase(accion))).collect(Collectors.toList());
 		comandobuscado = listafiltrada.get(0);
 		comandobuscado.ejecutar();
 

@@ -4,12 +4,27 @@ import java.util.ArrayList;
 //import java.util.Iterator;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
 import ar.com.sge.usuarios.Cliente;
 
+@Entity
+ 
 public class Transformador {
+	@Id
+	
 	private int idtransformador; //por ahora va int, despues vemos se vera si queda asi o String
+	@OneToOne
 	private Coordenada posTransformador;
+	@OneToOne
 	private int idZonaCorrespondiente;
+	@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY,mappedBy="transformador")	
 	private List<Cliente> listaDeclientesConectados;
 	//public Enum<Enum<E>> estado;  no si si vale la oena podner el atributo
 

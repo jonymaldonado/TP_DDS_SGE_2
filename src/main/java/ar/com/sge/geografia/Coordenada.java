@@ -1,6 +1,13 @@
 package ar.com.sge.geografia;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+@Entity
 public class Coordenada {
+	@Id
+	@GeneratedValue
+	private long id_coordenada;
 	private double latitud;
 	private double longitud;
 	

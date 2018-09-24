@@ -12,12 +12,15 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import ar.com.sge.estados.Apagado;
 import ar.com.sge.estados.Estado;
 import ar.com.sge.reglas.Sensor;
+import ar.com.sge.usuarios.Administrador;
 
 @Entity
 @Table(name ="Inteligentes")
@@ -41,6 +44,9 @@ public class DispositivoInteligente implements IDispositivo{
 	private Sensor sensor;
 	private boolean apagarPorSimplex;
 	private boolean estadoDispositivo;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name = "idAdministrador")	
+	private Administrador administrador;
 
 	public DispositivoInteligente(String nombre, double kw) {
 		this.nombre = nombre;

@@ -3,12 +3,21 @@ package ar.com.sge.geografia;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import ar.com.sge.usuarios.Administrador;
+
 public class Zona {
 	private int idZona;
 	private String nombreDeLaZona;
 	private Coordenada posZonaCentral;
 	private int radioEnMetros;
 	private List<Transformador> listaDeTransformadores; 
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name = "idAdministrador")	
+	private Administrador administrador;
 	
 	public Zona() {
 		this.listaDeTransformadores=new ArrayList<>();

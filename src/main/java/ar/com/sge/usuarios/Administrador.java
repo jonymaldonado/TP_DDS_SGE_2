@@ -9,6 +9,15 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
@@ -18,17 +27,25 @@ import ar.com.sge.usuarios.Cliente.IdDistancia;
 import ar.com.sge.util.DaoJsonTransformadores;
 //import ar.com.sge.util.DaoTransFormadores;
 
+@Entity
+@Table(name ="Administradores")
 public class Administrador extends Usuario{
-
-	private int numeroId;
+	
+	@Id
+	@GeneratedValue
+	@Column(nullable=false,unique=true)
+	private int idAdministrador;
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="administrador")
 	private List<Cliente>listaDeClientes;
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="administrador")
 	private List<Transformador> listaDeTransformadoresActivos;
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="administrador")
 	private List<Zona> listaDeZonas;
 	
 	
 	public Administrador(String _nombre, String _apellido, int _numeroId) {
 		super(_nombre,_apellido);
-		this.numeroId = _numeroId;
+		this.idAdministrador = _numeroId;
 		this.listaDeClientes= new ArrayList<>();
 		this.listaDeTransformadoresActivos= new ArrayList<>();
 		this.listaDeZonas= new ArrayList<>();
@@ -50,7 +67,7 @@ public class Administrador extends Usuario{
 	}
 	
 	public int getNumeroId() {
-		return numeroId;
+		return idAdministrador;
 	}
 	public void tiempoEnElCargo() {
 		LocalDate ini = getAlta();

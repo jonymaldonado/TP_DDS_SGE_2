@@ -5,6 +5,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import org.apache.commons.math3.optim.PointValuePair;
 
 import ar.com.sge.dispositivos.DispositivoEstandar;
@@ -15,14 +26,28 @@ import ar.com.sge.geografia.Transformador;
 import ar.com.sge.util.servicioSimplex;
 //import ar.com.sge.geografia.Coordenada;
 
+@Entity
+@Table(name ="Clientes")
 public class Cliente extends Usuario {
-	
+
+
+	@Id
+	@GeneratedValue
+	@Column(nullable=false,unique=true)
+	private int idCliente;	
 	private String tipoDoc;
 	private int numeroDoc;
 //	private Coordenada domicilio;
-	private int telefono;	
+	private int telefono;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name = "idAdministrador")	
+	private Administrador administrador;
+	@OneToMany(cascade={CascadeType.REMOVE},fetch=FetchType.LAZY,mappedBy="cliente")
 	private List<DispositivoInteligente> lstDispositivosInteligentes ;
+	//@OneToMany(cascade={CascadeType.REMOVE},fetch=FetchType.LAZY,mappedBy="cliente")
 	private List<DispositivoEstandar> lstDispositivosEstandares ;
+	@OneToMany(fetch=FetchType.LAZY)
+	@JoinColumn(name = "idCategoria")
 	private Categoria categoria;
 	private int puntos;
 	private static servicioSimplex servicio;

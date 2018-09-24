@@ -1,7 +1,20 @@
 package ar.com.sge.usuarios;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name ="Categorias")
 public class Categoria {
 	
+	@Id
+	@GeneratedValue
+	@Column(nullable=false,unique=true)
+	private int idCategoria;
+	@Column(length = 45)
 	private String nombre;
 	private float valorFijo;
 	private float valorVariable;

@@ -9,9 +9,12 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import ar.com.sge.usuarios.Administrador;
 import ar.com.sge.usuarios.Cliente;
 
 @Entity
@@ -27,7 +30,10 @@ public class Transformador {
 	@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY,mappedBy="transformador")	
 	private List<Cliente> listaDeclientesConectados;
 	//public Enum<Enum<E>> estado;  no si si vale la oena podner el atributo
-
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name = "idAdministrador")	
+	private Administrador administrador;
+	
 	public Transformador(){
 	}
 

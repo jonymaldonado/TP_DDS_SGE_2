@@ -33,5 +33,12 @@ public class Modulo extends DispositivoInteligente {
 	public void setDispositivoEstandar(DispositivoEstandar dispositivoEstandar) {
 		this.dispositivoEstandar = dispositivoEstandar;
 	}
+
+	public int getId() {
+		return Id;
+	}
+
+
+	
 	
 }

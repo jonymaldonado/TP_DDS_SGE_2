@@ -16,7 +16,7 @@ public class Apagado extends Estado{
 
 	@Id
 	@GeneratedValue
-	private int Id;
+	private int id;
 	
 	public Apagado() {
 
@@ -47,4 +47,8 @@ public class Apagado extends Estado{
 
 
 	}
+	public int getId() {
+		return id;
+	}
+
 }

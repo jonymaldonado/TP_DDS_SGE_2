@@ -17,7 +17,7 @@ public class AhorroDeEnergia extends Estado {
 
 	@Id
 	@GeneratedValue
-	private int Id;
+	private int id;
 	
 	public AhorroDeEnergia() {
 		this.nombre = "modo ahorro";
@@ -41,4 +41,8 @@ public class AhorroDeEnergia extends Estado {
 
 
 	}
+	public int getId() {
+		return id;
+	}
+
 }

@@ -1,15 +1,26 @@
 package ar.com.sge.geografia;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+
 @Entity
+@Table(name = "coordenadas")
 public class Coordenada {
+    
 	@Id
-	@GeneratedValue
-	private long id_coordenada;
-	private double latitud;
-	private double longitud;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+    @Column(name = "latitud")
+    private double latitud;
+    @Column(name = "longitud")
+    private double longitud;
+	
 	
 	public Coordenada(double unLatitud,double unLongitud) {
 

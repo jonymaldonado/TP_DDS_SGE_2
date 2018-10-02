@@ -6,14 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,32 +20,43 @@ import ar.com.sge.estados.Apagado;
 import ar.com.sge.estados.Estado;
 import ar.com.sge.reglas.Sensor;
 import ar.com.sge.usuarios.Administrador;
+import entity.UsuarioDispositivos;
 
 @Entity
-@Table(name ="Inteligentes")
-
+@Table(name = "dispositivos")
 public class DispositivoInteligente implements IDispositivo{
 
 	@Id
-	@GeneratedValue
-	private int id_inteligente;
-	@Column(name="Nombre",nullable=false,length=50)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Integer id;
+	@Column(name = "nombre_dispositivo")
 	private String nombre;
+	@Column(name = "inteligente")
+	private String inteligente;
+	@Column(name = "bajo_consumo")
+	private String bajoConsumo;
+	@Column(name = "consumo_kwh")
 	private double kwPorHora;
+	@Column(name = "consumo_min")
+	private int minimoconsumo;
+	@Column(name = "consumo_max")
+	private int maximoconsumo;
+	//@OneToMany(cascade = CascadeType.ALL, mappedBy = "dispositivo")
+	//private List<UsuarioDispositivos> usuarioDispositivosList;
 	private Boolean encendido ;
 	private Estado estado;
-	@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY,mappedBy="inteligente")
 	private List<Estado> listaDeEstados = new ArrayList<Estado>();
 	private static final float coeficienteAhorroEnergia = (float) 0.6;
 	private LocalDateTime inicioPeriodo;
-	private double maximoconsumo;
-	private double minimoconsumo;
 	private Sensor sensor;
 	private boolean apagarPorSimplex;
-	private boolean estadoDispositivo;
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "idAdministrador")	
-	private Administrador administrador;
+	private boolean estadoDispositivo;	
+	//private Administrador administrador;
+   
+	public DispositivoInteligente() {
+		
+	}
 
 	public DispositivoInteligente(String nombre, double kw) {
 		this.nombre = nombre;
@@ -75,13 +85,13 @@ public class DispositivoInteligente implements IDispositivo{
 	public double getMaximoconsumo() {
 		return maximoconsumo;
 	}
-	public void setMaximoconsumo(double maximoconsumo) {
+	public void setMaximoconsumo(int maximoconsumo) {
 		this.maximoconsumo = maximoconsumo;
 	}
 	public double getMinimoconsumo() {
 		return minimoconsumo;
 	}
-	public void setMinimoconsumo(double minimoconsumo) {
+	public void setMinimoconsumo(int minimoconsumo) {
 		this.minimoconsumo = minimoconsumo;
 	}
 	public void setEstado(Estado e) {

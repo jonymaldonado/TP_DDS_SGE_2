@@ -1,17 +1,39 @@
 package ar.com.sge.geografia;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import ar.com.sge.usuarios.Administrador;
 
-public class Zona {
-	private int idZona;
-	private String nombreDeLaZona;
+@Entity
+@Table(name = "zonas")
+@XmlRootElement
+public class Zona implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Basic(optional = false)
+    @Column(name = "id")
+    private int idZona;
+	@Basic(optional = false)
+    @Column(name = "nombre_zona")
+    private String nombreDeLaZona;
+    
+    
 	private Coordenada posZonaCentral;
 	private int radioEnMetros;
 	private List<Transformador> listaDeTransformadores; 
@@ -20,10 +42,10 @@ public class Zona {
 	private Administrador administrador;
 	
 	public Zona() {
-		this.listaDeTransformadores=new ArrayList<>();
+		//this.listaDeTransformadores=new ArrayList<>();
 	}//constructor
 	
-
+	
 	//}//fin consumoTotalDelaZona
 	public float consumoTotalDeLaZona() {
 		float consumoTotalEnLaZona = 0 ;

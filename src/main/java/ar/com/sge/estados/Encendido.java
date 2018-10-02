@@ -10,15 +10,8 @@ import javax.persistence.Table;
 
 import ar.com.sge.dispositivos.DispositivoInteligente;
 
-@Entity
-@Table(name ="Encendido")
 public class Encendido extends Estado {
 	
-
-	@Id
-	@GeneratedValue
-	private int IdPeriodo;
-
 	
 	public Encendido() {
 		this.nombre = "encendido";
@@ -52,8 +45,4 @@ public class Encendido extends Estado {
 		dispositivo.setEstado(new AhorroDeEnergia());
 
 	}
-	public int getIdPeriodo() {
-		return IdPeriodo;
-	}
-	
 }

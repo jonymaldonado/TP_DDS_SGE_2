@@ -11,14 +11,8 @@ import javax.persistence.Table;
 import ar.com.sge.dispositivos.DispositivoInteligente;
 
 
-@Entity
-@Table(name ="AhorroEnergia")
 public class AhorroDeEnergia extends Estado {
 
-	@Id
-	@GeneratedValue
-	private int id;
-	
 	public AhorroDeEnergia() {
 		this.nombre = "modo ahorro";
 		this.fechaInicio = LocalDateTime.now();
@@ -41,8 +35,4 @@ public class AhorroDeEnergia extends Estado {
 
 
 	}
-	public int getId() {
-		return id;
-	}
-
 }

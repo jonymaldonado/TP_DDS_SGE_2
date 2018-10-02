@@ -2,22 +2,11 @@ package ar.com.sge.estados;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 import ar.com.sge.dispositivos.DispositivoInteligente;
 
-@Entity
-@Table(name ="Apagado")
 public class Apagado extends Estado{
 
-
-	@Id
-	@GeneratedValue
-	private int id;
-	
 	public Apagado() {
 
 		this.nombre = "apagado";
@@ -47,8 +36,4 @@ public class Apagado extends Estado{
 
 
 	}
-	public int getId() {
-		return id;
-	}
-
 }

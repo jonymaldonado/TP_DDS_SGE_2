@@ -5,10 +5,29 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import ar.com.sge.dispositivos.DispositivoInteligente;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+import ar.com.sge.dispositivos.DispositivoInteligente;
+import entity.UsuarioDispositivos;
+
+@Entity
+@Table(name = "sensores")
 public class Sensor {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Integer id;
+	@Column(name = "descripcion")
+	private String descripcion;
+
 	private List<Regla> observadores ;
 	private TimerTask tarea;
 	

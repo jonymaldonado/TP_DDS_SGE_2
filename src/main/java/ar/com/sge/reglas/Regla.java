@@ -1,10 +1,35 @@
 package ar.com.sge.reglas;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import entity.Actuadores;
+
+@Entity
+@Table(name = "reglas")
 public class Regla {
-	private String operador;
-	private float valorcomparacion;
-	private Actuador actuador;
-	private String accion;
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
+    @Column(name = "operador")
+    private String operador;
+    @Column(name = "valor")
+    private float valorcomparacion;
+    @Column(name = "accion")
+    private String accion;
+    @JoinColumn(name = "actuador", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Actuador actuador;
+	
 	
 	public Regla(String operador,float valor,String accion,Actuador actuador) {
 		this.operador=operador;

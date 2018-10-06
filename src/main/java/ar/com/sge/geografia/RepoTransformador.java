@@ -72,6 +72,10 @@ public class RepoTransformador {
 			// TODO: handle exception
 		}
 	}
+
+	public List<Transformador> getAllUsuario() throws IOException {
+		return daoTransformador.getAll();
+	}
 	
 
 	/*public void ubicarCliente(RepoCliente unrepo) throws IOException{

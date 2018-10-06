@@ -25,7 +25,7 @@ public class Zona {
 	
 
 	//}//fin consumoTotalDelaZona
-	public float consumoTotalDeLaZona() {
+	public double consumoTotalDeLaZona() {
 		float consumoTotalEnLaZona = 0 ;
 		for (Transformador unTransformador : listaDeTransformadores) {
 			consumoTotalEnLaZona +=  unTransformador.totalDeConsumoDelTransformadores();

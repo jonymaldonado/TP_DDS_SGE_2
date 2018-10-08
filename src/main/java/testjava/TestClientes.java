@@ -30,7 +30,7 @@ public class TestClientes {
 	public void init()throws IOException{
 		DaoJsonCliente dao = new DaoJsonCliente();
 		dao.setFilePath("jsonClientes.json");
-		repoCliente = new RepoCliente(dao);
+		repoCliente = new RepoCliente(null, dao);
 		listainicial=repoCliente.getAllUsuario();
 	
 	}

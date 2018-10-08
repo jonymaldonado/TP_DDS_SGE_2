@@ -2,14 +2,34 @@ package ar.com.sge.usuarios;
 
 import java.time.LocalDate;
 
-import ar.com.sge.geografia.Coordenada;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
-public abstract class Usuario {
+import ar.com.sge.geografia.Coordenada;
+import ar.com.sge.util.Persistible;
+
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "tipo")
+public abstract class Usuario extends Persistible {
+	@Column(name = "nombreUsuario", length=45)
 	private String nombre_usuario;
+	@Column(length=45)
 	private String contrasenia;
+	@Column(length=45)
 	private String nombre;
+	@Column(length=45)
 	private String apellido;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "georef_id", referencedColumnName = "id_coordenada")
 	private Coordenada domicilio;
+	@Column(length=45)
 	private LocalDate alta;
 	
 	public Usuario(String _nombre,String _apellido,double latitud,double longitud) {

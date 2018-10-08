@@ -17,30 +17,14 @@
     </plugins>
   </build>
   <dependencies>
-  		<!-- JPA Persistence Dependencies -->
-		<dependency>
-			<groupId>org.uqbar-project</groupId>
-			<artifactId>jpa-java8-extras</artifactId>
-			<version>1.0-alpha-1</version>
-		</dependency><!-- hibernete -->
+  		
 
       <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
         <version>4.12</version>
       </dependency>
-      <dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>5.2.10.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.26</version>
-		</dependency>
-		
-		  <dependency>
+     	  <dependency>
      		 <groupId>org.hsqldb</groupId>
       		 <artifactId>hsqldb</artifactId>
      		 <version>2.2.8</version>
@@ -55,8 +39,33 @@
 			<artifactId>gson</artifactId>
 			<version>2.8.0</version>
 		</dependency>
-
-   </dependencies>
-
-
+	
+   
+		<!-- JPA Persistence Dependencies -->
+		<dependency>
+			<groupId>org.uqbar-project</groupId>
+			<artifactId>jpa-java8-extras</artifactId>
+			<version>1.0-alpha-1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.2.10.Final</version>
+		</dependency>
+		
+		<!-- driver jdbc -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.26</version>
+		</dependency>
+	
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.0</version>
+		</dependency>
+	</dependencies>
+	
 </project>

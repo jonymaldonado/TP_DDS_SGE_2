@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -28,20 +29,16 @@ import ar.com.sge.util.servicioSimplex;
 
 @Entity
 @Table(name ="Clientes")
+@DiscriminatorValue("cliente")
 public class Cliente extends Usuario {
 
-
-	@Id
-	@GeneratedValue
-	@Column(nullable=false,unique=true)
-	private int idCliente;	
 	private String tipoDoc;
 	private int numeroDoc;
 //	private Coordenada domicilio;
 	private int telefono;
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "idAdministrador")	
-	private Administrador administrador;
+	//@ManyToOne(fetch=FetchType.LAZY) tiene sentido?
+	//@JoinColumn(name = "id")	
+	//private Administrador administrador;
 	@OneToMany(cascade={CascadeType.REMOVE},fetch=FetchType.LAZY,mappedBy="cliente")
 	private List<DispositivoInteligente> lstDispositivosInteligentes ;
 	//@OneToMany(cascade={CascadeType.REMOVE},fetch=FetchType.LAZY,mappedBy="cliente")

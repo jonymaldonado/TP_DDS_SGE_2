@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -46,10 +47,10 @@ public class DaoJsonCliente implements Dao {
 
 	}
 
-	public ArrayList<Cliente> getAll() throws IOException{
+	public List<Cliente> getAll() throws IOException{
 		FileReader reader = new	FileReader(this.filePath);
 		this.bufferToReader = new BufferedReader(reader);
-		ArrayList<Cliente> clientes = myGson.fromJson(getJson(), new TypeToken<ArrayList<Cliente>>(){}.getType());
+		List<Cliente> clientes = myGson.fromJson(getJson(), new TypeToken<ArrayList<Cliente>>(){}.getType());
 		return clientes;
 	}
 
@@ -103,6 +104,5 @@ public class DaoJsonCliente implements Dao {
 	public String getFilePath() {
 		return filePath;
 	}
-
 
 }

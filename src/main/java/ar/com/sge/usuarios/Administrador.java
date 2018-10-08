@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -29,12 +30,9 @@ import ar.com.sge.util.DaoJsonTransformadores;
 
 @Entity
 @Table(name ="Administradores")
+@DiscriminatorValue("administrador")
 public class Administrador extends Usuario{
 	
-	@Id
-	@GeneratedValue
-	@Column(nullable=false,unique=true)
-	private int idAdministrador;
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="administrador")
 	private List<Cliente>listaDeClientes;
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="administrador")
@@ -43,9 +41,8 @@ public class Administrador extends Usuario{
 	private List<Zona> listaDeZonas;
 	
 	
-	public Administrador(String _nombre, String _apellido, int _numeroId) {
+	public Administrador(String _nombre, String _apellido, long _numeroId) {
 		super(_nombre,_apellido);
-		this.idAdministrador = _numeroId;
 		this.listaDeClientes= new ArrayList<>();
 		this.listaDeTransformadoresActivos= new ArrayList<>();
 		this.listaDeZonas= new ArrayList<>();
@@ -66,8 +63,8 @@ public class Administrador extends Usuario{
 		this.listaDeZonas = listaDeZonas;
 	}
 	
-	public int getNumeroId() {
-		return idAdministrador;
+	public long getNumeroId() {
+		return id;
 	}
 	public void tiempoEnElCargo() {
 		LocalDate ini = getAlta();

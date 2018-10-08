@@ -4,50 +4,44 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import ar.com.sge.util.Dao;
 import ar.com.sge.util.DaoJsonCliente;
+import ar.com.sge.util.ModelHelper;
 
 public class RepoCliente {
-	private Dao daocliente;
-
+	private ModelHelper mh;
 	private static RepoCliente instance;
-
-	public RepoCliente(DaoJsonCliente dao) {
+	private List<Cliente> clientes;
+	private Dao daocliente;
+	
+	
+	public RepoCliente(ModelHelper mh, DaoJsonCliente dao) {
+		this.mh = mh;
 		this.daocliente = dao;
-
 	}
-
-	public static RepoCliente getInstance(DaoJsonCliente dao) {
+	
+	public static RepoCliente getInstance(ModelHelper mh, DaoJsonCliente dao) {
 		if (instance == null)
-			instance = new RepoCliente(dao);
+			instance = new RepoCliente(mh, dao);
 		return instance;
 	}
-
-	public void delete(Cliente cliente) throws IOException {
-		this.daocliente.delete(cliente);
-
+	
+	public void addCliente(Cliente unCliente) {
+		this.mh.agregar(unCliente);
 	}
-
+	public void delete(Cliente unCliente) throws IOException {
+			this.mh.eliminar(unCliente);
+	}
+	
+	public void modificarCliente(Cliente unCliente) throws IOException {
+		this.mh.modificar(unCliente);
+	}
+	
 	public List<Cliente> getAllUsuario() throws IOException {
-		return daocliente.getAll();
+		return clientes;
 	}
-
-	/*
-	 * public Cliente getUsuario(String nombre,String clave)throws IOException{
-	 * List<Cliente> lista =
-	 * this.daocliente.getAll().stream().filter(s->s.getNombre().equalsIgnoreCase(
-	 * nombre)&&
-	 * s.getContrase�a().equalsIgnoreCase(clave)).collect(Collectors.toList());
-	 * return lista.get(0); }
-	 */
-
-	public void addCliente(Cliente cliente) throws IOException {
-		daocliente.add(cliente);
+	
+	public void importarClientes ()  throws IOException {
+		this.clientes = this.daocliente.getAll();	
+	}	
 	}
-
-	public void modificarCliente(Cliente cliente) throws IOException {
-		daocliente.update(cliente);
-	}
-
-}

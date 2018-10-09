@@ -1,22 +1,24 @@
 package ar.com.sge.util;
 
+
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
-
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 
 import ar.com.sge.usuarios.Cliente;
 
 public class ModelHelper {
+
 	private static EntityManagerFactory factory;
 	private static ThreadLocal<EntityManager> threadLocal;
 	
@@ -92,6 +94,7 @@ public class ModelHelper {
 		return find;
 	}
 	
+	@SuppressWarnings("unchecked")
 	private <T> TypedQuery<T> generarQueryPara(Class<T> clase, ImmutablePair<Object, Object> ... pair){
 		String condiciones =  " where ";
 		for(int index = 0; index<pair.length; index++) {
@@ -104,6 +107,7 @@ public class ModelHelper {
 		return query;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public <T> T buscar(Class<T> clase, ImmutablePair<Object, Object> ... pair) {
 		TypedQuery<T> query = this.generarQueryPara(clase, pair);
 		List<T> resultados = query.getResultList();
@@ -115,6 +119,7 @@ public class ModelHelper {
 		return resultList;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public <T> List<T> buscarTodos(Class<T> clase, ImmutablePair<Object, Object> ... pair) {
 		TypedQuery<T> query = this.generarQueryPara(clase, pair);
 		return query.getResultList();
@@ -144,4 +149,6 @@ public class ModelHelper {
     		throw e;
     	}
     }
+
+
 }

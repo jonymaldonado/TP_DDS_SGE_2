@@ -252,7 +252,7 @@ public class Cliente extends Usuario {
 		PointValuePair solucion = this.getServicioSimplex().consultarSimplex(getLstDispositivosInteligentes());
 		return solucion;
 	}
-
+	
 	public List<DispositivoInteligente> getLstDispositivosInteligentes() {
 		return lstDispositivosInteligentes;
 	}

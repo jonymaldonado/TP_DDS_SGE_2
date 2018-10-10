@@ -53,8 +53,16 @@ public class TestZona {
 		repoTans = new RepoTransformador(dao1);
 		lista2 = repoTans.getAllTransformadores();
 		
-		transformador1=new Transformador(001, -43.55f, 3.44f,01);
-		transformador2=new Transformador(002, 54.47f,-24.55f,02);
+		Zona zona1 = new Zona();
+		zona1.setIdZona(1);
+		zona1.setNombreDeLaZona("La zona1");
+		
+		Zona zona2 = new Zona();
+		zona2.setIdZona(2);
+		zona2.setNombreDeLaZona("La zona2");
+		
+		transformador1=new Transformador(001, -43.55f, 3.44f,zona1);
+		transformador2=new Transformador(002, 54.47f,-24.55f,zona2);
 		
 		unaCategoriaR1= new Categoria("R1", (float) 18.76,(float) 0.644);
 		
@@ -123,7 +131,7 @@ public class TestZona {
 	public void reiniciarEstadoInit() throws IOException{
 		
 		DaoJsonZona dao = new DaoJsonZona();
-		dao.setFilePath("jsonZona.json");
+		dao.setFilePath("jsonZona2.json");
 		String indicadoresstring=dao.getMyGson().toJson(listainicial);
 		PrintWriter pw = new PrintWriter(dao.getFilePath());
 		pw.close();

@@ -29,6 +29,10 @@ public abstract class IDispositivo implements Cloneable {
 	//@JoinColumn(name = "id_Usuario")
 	//private Cliente cliente;
 	//private Usuario cliente;
+	/*@ManyToOne(fetch=FetchType.LAZY)
+	//@ManyToOne()
+	@JoinColumn(name = "id_Usuario")
+	private Cliente cliente;*/
 	
 	public  IDispositivo clone() throws CloneNotSupportedException{
 		return (IDispositivo) super.clone();
@@ -40,11 +44,8 @@ public abstract class IDispositivo implements Cloneable {
 
 	public void setId_Dispositivo(int id_Dispositivo) {
 		Id_Dispositivo = id_Dispositivo;
-	}
-	
-	
-	
-	/*public Cliente getCliente() {
+	}/*
+	public Cliente getCliente() {
 		return cliente;
 	}
 	public void setCliente(Cliente cliente) {

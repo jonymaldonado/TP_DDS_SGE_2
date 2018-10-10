@@ -10,6 +10,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 
+import ar.com.sge.comandos.Comando;
+import ar.com.sge.comandos.ComandoApagar;
 import ar.com.sge.dispositivos.DispositivoEstandar;
 import ar.com.sge.dispositivos.DispositivoInteligente;
 import ar.com.sge.geografia.Coordenada;
@@ -69,8 +71,8 @@ public class TestPersistenciaCliente {
 		
 	}
 
-
-	/*@Test
+/*
+	@Test
 	public void TestPersistirCliente() {
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
@@ -100,8 +102,8 @@ public class TestPersistenciaCliente {
 		transaction.commit();
 		//termina la transaccion
 	}*/
-	
-	/*@Test
+	/*
+	@Test
 	public void TestRecuperarCliente() {
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
@@ -120,27 +122,56 @@ public class TestPersistenciaCliente {
 		
 		transaction.commit();
 	}*/
-	
+	/*
 	@Test
 	public void TestRecuperar() {
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
 		//Cliente cliente= (Cliente)entityManager.find(Usuario.class,2);
-		Cliente cliente= entityManager.find(Cliente.class,2);
+		Cliente cliente= entityManager.find(Cliente.class,1);
 		//Coordenada coordenada1=cliente.getCoordenada();
 		//coordenada1.setLatitud(10);
 		//coordenada1.setLongitud(20);
+		//System.out.println(cliente.getLstDispositivosEstandares());
 		int a=cliente.getLstDispositivosInteligentes().size();
-		//Assert.assertTrue(cliente.getLstDispositivosInteligentes().size()==2);
-		//Assert.assertTrue(cliente.getLstDispositivosInteligentes().get(1).getId_Dispositivo()==3);
+		Assert.assertTrue(cliente.getLstDispositivosInteligentes().size()==2);
+		Assert.assertTrue(cliente.getLstDispositivosInteligentes().get(1).getId_Dispositivo()==3);
+		Assert.assertTrue(cliente.getLstDispositivosInteligentes().get(0).getEstado().getNombre().equals("encendido"));
+		System.out.println(cliente.getLstDispositivosInteligentes().get(0).getEstado().getFechaInicio());
+		cliente.getLstDispositivosInteligentes().get(0).setNombre("TV Smart 55");
+		
 		//cliente.getCoordenada().setLongitud(20);
 		//entityManager.persist(cliente);
 		//Cliente cliente1= entityManager.find(Cliente.class,2);
 		//Assert.assertTrue(cliente1.getCoordenada().getLatitud()==10);
 		//Assert.assertTrue(cliente1.getCoordenada().getLongitud()==20);
+		transaction.commit();
 		
+		
+	}*/
+	
+	@Test
+	public void cambioDeAccion() {
+		EntityTransaction transaction = entityManager.getTransaction();
+		transaction.begin();
+		Regla regla = entityManager.find(Regla.class,1);
+		regla.setAccion("apagar");
+		Assert.assertTrue(regla.getAccion().equals("apagar"));
+		regla.setOperador("menor");
+		Assert.assertTrue(regla.getOperador().equals("menor"));
+		
+		Actuador actuador = new Actuador();
+		DispositivoInteligente dispositivo = entityManager.find(DispositivoInteligente.class,2);
+		dispositivo.setActuador(actuador);
+		
+		Comando comando = new ComandoApagar("apagar",dispositivo);
+		actuador.addcomando(comando);
+		
+		
+		dispositivo.getSensor().setValor(1);
 		
 		transaction.commit();
+		
 		
 		
 	}

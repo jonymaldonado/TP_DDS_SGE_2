@@ -17,7 +17,7 @@ public class DispositivoEstandar extends IDispositivo{
 	private int horasDeUso;
 	@ManyToOne(fetch=FetchType.LAZY)
 	//@ManyToOne()
-	@JoinColumn(name = "id_Usuario")
+	@JoinColumn(name = "id_Usuario1")
 	private Cliente cliente;
 	
 	public DispositivoEstandar(String nombre, double kw, int hs) {

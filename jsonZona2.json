@@ -1,0 +1,33 @@
+[
+  {
+    "idZona": 6,
+    "nombreDeLaZona": "CapitalFederal",
+    "radioEnMetros": 50,
+    "listaDeTransformadores": []
+  },
+  {
+    "idZona": 7,
+    "nombreDeLaZona": "Lugano",
+    "radioEnMetros": 35,
+    "listaDeTransformadores": [
+      {
+        "idtransformador": 4,
+        "listaDeclientesConectados": []
+      },
+      {
+        "idtransformador": 5,
+        "listaDeclientesConectados": []
+      },
+      {
+        "idtransformador": 6,
+        "listaDeclientesConectados": []
+      }
+    ]
+  },
+  {
+    "idZona": 8,
+    "nombreDeLaZona": "La Boca",
+    "radioEnMetros": 45,
+    "listaDeTransformadores": []
+  }
+]

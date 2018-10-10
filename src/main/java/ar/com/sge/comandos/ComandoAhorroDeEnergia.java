@@ -12,7 +12,9 @@ public class ComandoAhorroDeEnergia extends Comando {
 	private String nombreComando;
 	//private DispositivoInteligente dispositivo;
 	
-	
+	public ComandoAhorroDeEnergia() {
+		
+	}
 	
 	public ComandoAhorroDeEnergia(String nombreComando, DispositivoInteligente dispositivo) {
 		

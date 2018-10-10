@@ -13,6 +13,9 @@ public class ComandoEncender extends Comando{
 	private String nombreComando;
 	//private DispositivoInteligente dispositivo;
 	
+	public ComandoEncender() {
+		
+	}
 	public ComandoEncender(String nombreComando, DispositivoInteligente dispositivo) {
 		
 		this.nombreComando = nombreComando;

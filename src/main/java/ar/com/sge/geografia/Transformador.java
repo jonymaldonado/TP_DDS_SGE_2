@@ -24,7 +24,7 @@ import ar.com.sge.usuarios.Cliente;
  
 public class Transformador {
 	@Id
-	@GeneratedValue
+	//@GeneratedValue
 	private int idtransformador; //por ahora va int, despues vemos se vera si queda asi o String
 	@OneToOne(cascade={CascadeType.ALL})
 	@JoinColumn(name = "id_coordenada")
@@ -46,6 +46,13 @@ public class Transformador {
 
 	public Transformador(double lat,double longitud,Zona unazona){
 		//this.setIdtransformador(id);
+		this.setZona(unazona);
+		this.setPosTransformador(new Coordenada(lat, longitud));
+
+		this.listaDeclientesConectados = new ArrayList <>(); 
+	}//constructor
+	public Transformador(int id,double lat,double longitud,Zona unazona){
+		this.setIdtransformador(id);
 		this.setZona(unazona);
 		this.setPosTransformador(new Coordenada(lat, longitud));
 

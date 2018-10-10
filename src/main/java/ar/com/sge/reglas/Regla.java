@@ -79,6 +79,9 @@ public class Regla {
 		this.actuador = actuador;
 	}*/
 
+	public String getOperador() {
+		return this.operador;
+	}
 	public String getAccion() {
 		return accion;
 	}

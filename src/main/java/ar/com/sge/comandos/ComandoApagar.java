@@ -21,6 +21,9 @@ public class ComandoApagar extends Comando {
 		//this.dispositivo = dispositivo;
 	}
 
+	public ComandoApagar() {
+		
+	}
 	public void ejecutar(DispositivoInteligente dispositivo) {
 		dispositivo.apagar();
 	}

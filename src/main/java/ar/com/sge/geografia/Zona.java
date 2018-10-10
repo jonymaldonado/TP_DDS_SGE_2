@@ -21,7 +21,7 @@ import ar.com.sge.usuarios.Administrador;
 @Table(name ="Zona")
 public class Zona {
 	@Id
-	@GeneratedValue
+	//@GeneratedValue
 	private int idZona;
 	private String nombreDeLaZona;
 	@OneToOne(cascade={CascadeType.ALL})
@@ -92,6 +92,7 @@ public class Zona {
 	}
 	public void agregarTransformador(Transformador transformador) {
 		listaDeTransformadores.add(transformador);
+		transformador.setZona(this);
 	}
 	
 	

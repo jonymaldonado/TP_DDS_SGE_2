@@ -15,7 +15,7 @@ public class AdapterEncender extends ComandoEncender {
 	private String nombre;
 	
 	@Override
-	public void ejecutar() {
+	public void ejecutar(DispositivoInteligente dispositivo) {
 		dispositivo.encender();
 	}
 	

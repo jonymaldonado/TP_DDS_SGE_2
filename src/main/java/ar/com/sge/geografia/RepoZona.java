@@ -56,7 +56,7 @@ public class RepoZona {
 			for (Transformador transformador : repoTransformador.getAllTransformadores()) {
 				//double transformadorMasCercano = cliente.getDomicilio().distanciaAlPunto(listaTransformadores.get(0).getPosTransformador());
 				for (Zona zona : getAllZonas()) {
-					if(transformador.getIdZonaCorrespondiente()==zona.getIdZona()) {
+					if(transformador.getZona().getIdZona()==zona.getIdZona()) {
 						zona.agregarTransformador(transformador);
 					}
 				}

@@ -1,29 +1,37 @@
 package ar.com.sge.comandos;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 import ar.com.sge.dispositivos.DispositivoInteligente;
 
-public class ComandoAhorroDeEnergia implements Comando {
-	private AdapterAhorroDeEnergia adaptador;
+@Entity
+@DiscriminatorValue("ahorro")
+public class ComandoAhorroDeEnergia extends Comando {
+	//private AdapterAhorroDeEnergia adaptador;
 	private String nombreComando;
-	private DispositivoInteligente dispositivo;
+	//private DispositivoInteligente dispositivo;
 	
 	
 	
 	public ComandoAhorroDeEnergia(String nombreComando, DispositivoInteligente dispositivo) {
 		
 		this.nombreComando = nombreComando;
-		this.dispositivo = dispositivo;
+		//this.dispositivo = dispositivo;
 	}
 
-	public void ejecutar() {}
+	public void ejecutar(DispositivoInteligente dispositivo) {
+		dispositivo.ahorroDeEnergia();
+		
+	}
 
-	public AdapterAhorroDeEnergia getAdaptador() {
+	/*public AdapterAhorroDeEnergia getAdaptador() {
 		return adaptador;
 	}
 
 	public void setAdaptador(AdapterAhorroDeEnergia adaptador) {
 		this.adaptador = adaptador;
-	}
+	}*/
 
 	public String getNombre() {
 		return nombreComando;

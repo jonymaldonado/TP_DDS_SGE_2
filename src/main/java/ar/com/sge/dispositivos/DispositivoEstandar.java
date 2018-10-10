@@ -1,10 +1,24 @@
 package ar.com.sge.dispositivos;
 
-public class DispositivoEstandar implements IDispositivo{
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import ar.com.sge.usuarios.Cliente;
+
+@Entity
+@DiscriminatorValue("estandar")
+public class DispositivoEstandar extends IDispositivo{
 	
 	private String nombre;
 	protected double kwPorHora;
 	private int horasDeUso;
+	@ManyToOne(fetch=FetchType.LAZY)
+	//@ManyToOne()
+	@JoinColumn(name = "id_Usuario")
+	private Cliente cliente;
 	
 	public DispositivoEstandar(String nombre, double kw, int hs) {
 		this.nombre = nombre;
@@ -14,6 +28,10 @@ public class DispositivoEstandar implements IDispositivo{
 	public DispositivoEstandar(String nombre, double kw) {
 		this.nombre = nombre;
 		this.kwPorHora = kw;
+		
+	}
+	
+	public DispositivoEstandar() {
 		
 	}
 	
@@ -47,5 +65,19 @@ public class DispositivoEstandar implements IDispositivo{
 	public double consumoEnKw() {
 		return horasDeUso * this.getKwPorHora();
 	}
+	public Cliente getCliente() {
+		return cliente;
+	}
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public void setKwPorHora(double kwPorHora) {
+		this.kwPorHora = kwPorHora;
+	}
+	
+	
 	
 }

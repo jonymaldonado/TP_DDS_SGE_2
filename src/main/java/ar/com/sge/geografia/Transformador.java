@@ -13,33 +13,40 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import ar.com.sge.usuarios.Administrador;
 import ar.com.sge.usuarios.Cliente;
 
+
 @Entity
+@Table(name ="Transformador")
  
 public class Transformador {
 	@Id
-	
+	@GeneratedValue
 	private int idtransformador; //por ahora va int, despues vemos se vera si queda asi o String
-	@OneToOne
-	private Coordenada posTransformador;
-	@OneToOne
-	private int idZonaCorrespondiente;
+	@OneToOne(cascade={CascadeType.ALL})
+	@JoinColumn(name = "id_coordenada")
+	private Coordenada coordenada;
+
 	@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY,mappedBy="transformador")	
 	private List<Cliente> listaDeclientesConectados;
 	//public Enum<Enum<E>> estado;  no si si vale la oena podner el atributo
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "idAdministrador")	
 	private Administrador administrador;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name = "id_Zona")
+	private Zona zona;
+	
 	
 	public Transformador(){
 	}
 
-	public Transformador(int id,double lat,double longitud,int unazona){
-		this.setIdtransformador(id);
-		this.setIdZonaCorrespondiente(unazona);
+	public Transformador(double lat,double longitud,Zona unazona){
+		//this.setIdtransformador(id);
+		this.setZona(unazona);
 		this.setPosTransformador(new Coordenada(lat, longitud));
 
 		this.listaDeclientesConectados = new ArrayList <>(); 
@@ -60,16 +67,16 @@ public class Transformador {
 		this.idtransformador = idtransformador;
 	}
 	public Coordenada getPosTransformador() {
-		return posTransformador;
+		return coordenada;
 	}
 	public void setPosTransformador(Coordenada posTransformador) {
-		this.posTransformador = posTransformador;
+		this.coordenada = posTransformador;
 	}
-	public int getIdZonaCorrespondiente() {
-		return idZonaCorrespondiente;
+	public Zona getZona() {
+		return zona;
 	}
-	public void setIdZonaCorrespondiente(int idZonaCorrespondiente) {
-		this.idZonaCorrespondiente = idZonaCorrespondiente;
+	public void setZona(Zona zona1) {
+		this.zona = zona1;
 	}
 	public List<Cliente> getListaDeclientesConectados() {
 		return listaDeclientesConectados;
@@ -77,6 +84,7 @@ public class Transformador {
 	
 	public void agregarCliente(Cliente unCliente) {
 		this.getListaDeclientesConectados().add(unCliente);
+		unCliente.setTransformador(this);
 	}
 
 	

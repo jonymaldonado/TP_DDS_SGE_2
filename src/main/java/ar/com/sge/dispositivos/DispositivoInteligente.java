@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,43 +16,68 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import ar.com.sge.estados.Apagado;
 import ar.com.sge.estados.Estado;
+import ar.com.sge.reglas.Actuador;
 import ar.com.sge.reglas.Sensor;
 import ar.com.sge.usuarios.Administrador;
+import ar.com.sge.usuarios.Cliente;
+
 
 @Entity
-@Table(name ="Inteligentes")
+@DiscriminatorValue("inteligente")
 
-public class DispositivoInteligente implements IDispositivo{
+public class DispositivoInteligente extends IDispositivo{
 
-	@Id
+	/*@Id
 	@GeneratedValue
-	private int id_inteligente;
-	@Column(name="Nombre",nullable=false,length=50)
+	private int id_inteligente;*/
+	//@Column(name="Nombre",nullable=false,length=50)
 	private String nombre;
 	private double kwPorHora;
 	private Boolean encendido ;
+	@OneToOne(cascade={CascadeType.ALL})
+	//@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY)
+	@JoinColumn(name="id_estado1")
+	//@OneToOne(cascade={CascadeType.ALL},fetch=FetchType.LAZY,mappedBy="inteligente")
 	private Estado estado;
-	@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY,mappedBy="inteligente")
-	private List<Estado> listaDeEstados = new ArrayList<Estado>();
-	private static final float coeficienteAhorroEnergia = (float) 0.6;
+	//@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY,mappedBy="inteligente")
+	@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY)
+	@JoinColumn(name="id_estado")
+	private List<Estado> listaDeEstados;
+	//private static final float coeficienteAhorroEnergia = (float) 0.6;
+	private double coeficienteAhorroEnergia;
 	private LocalDateTime inicioPeriodo;
 	private double maximoconsumo;
 	private double minimoconsumo;
+	@OneToOne(cascade={CascadeType.ALL},fetch=FetchType.LAZY,mappedBy="inteligente")
 	private Sensor sensor;
+	@OneToOne(cascade={CascadeType.ALL},fetch=FetchType.LAZY,mappedBy="inteligente")
+	private Actuador actuador;
 	private boolean apagarPorSimplex;
 	private boolean estadoDispositivo;
 	@ManyToOne(fetch=FetchType.LAZY)
+	//@ManyToOne()
+	@JoinColumn(name = "id_Usuario")
+	private Cliente cliente;
+	/*@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "idAdministrador")	
-	private Administrador administrador;
+	private Administrador administrador;*/
 
 	public DispositivoInteligente(String nombre, double kw) {
 		this.nombre = nombre;
 		this.kwPorHora = kw;
-		this.estado = new Apagado();
+		coeficienteAhorroEnergia=0.6;
+		listaDeEstados = new ArrayList<Estado>();
+		this.setEstado(new Apagado());
+		//this.estado = new Apagado();
+	}
+	
+	public DispositivoInteligente() {
+		//listaDeEstados = new ArrayList<>();
 	}
 	@Override
 	public IDispositivo clone() throws CloneNotSupportedException{
@@ -86,6 +112,7 @@ public class DispositivoInteligente implements IDispositivo{
 	}
 	public void setEstado(Estado e) {
 		this.estado = e;
+		//e.setInteligente(this);
 	}
 	
 	public List<Estado> getEstados(){
@@ -224,6 +251,7 @@ public class DispositivoInteligente implements IDispositivo{
 	
 	public void setSensor(Sensor sensor) {
 		this.sensor = sensor;
+		sensor.setInteligente(this);
 	}
 
 	//activo el sensor y como parametro le indico las cada cuantas horas se va a ejecutar
@@ -232,7 +260,7 @@ public class DispositivoInteligente implements IDispositivo{
 	}
 	
 	public void desactivarSensor() {
-		sensor.desactivate();
+		//sensor.desactivate();
 	}
 	
 	public void activarApagadoAutomaticoSimplex() {
@@ -250,6 +278,62 @@ public class DispositivoInteligente implements IDispositivo{
 	public void setEstadoDipositivo(boolean valor) {
 		this.estadoDispositivo = valor;
 	}
+	public Actuador getActuador() {
+		return actuador;
+	}
+	public void setActuador(Actuador acuador) {
+		this.actuador = acuador;
+		actuador.setInteligente(this);
+	}
+	public boolean isEstadoDispositivo() {
+		return estadoDispositivo;
+	}
+	public void setEstadoDispositivo(boolean estadoDispositivo) {
+		this.estadoDispositivo = estadoDispositivo;
+	}
+	public Sensor getSensor() {
+		return sensor;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public Boolean getEncendido() {
+		return encendido;
+	}
+	public void setEncendido(Boolean encendido) {
+		this.encendido = encendido;
+	}
+	public List<Estado> getListaDeEstados() {
+		return listaDeEstados;
+	}
+	public void setListaDeEstados(List<Estado> listaDeEstados) {
+		this.listaDeEstados = listaDeEstados;
+	}
+	public boolean isApagarPorSimplex() {
+		return apagarPorSimplex;
+	}
+	public void setApagarPorSimplex(boolean apagarPorSimplex) {
+		this.apagarPorSimplex = apagarPorSimplex;
+	}
+	public Cliente getCliente() {
+		return cliente;
+	}
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+	/*public Administrador getAdministrador() {
+		return administrador;
+	}
+	public void setAdministrador(Administrador administrador) {
+		this.administrador = administrador;
+	}*/
+	public double getCoeficienteahorroenergia() {
+		return coeficienteAhorroEnergia;
+	}
+	public void setKwPorHora(double kwPorHora) {
+		this.kwPorHora = kwPorHora;
+	}
+	
 
 
 }

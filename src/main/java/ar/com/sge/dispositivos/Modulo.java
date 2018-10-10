@@ -1,6 +1,7 @@
 package ar.com.sge.dispositivos;
 
 import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -10,17 +11,24 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name ="Modulo")
+@DiscriminatorValue("modulo")
 public class Modulo extends DispositivoInteligente {
 
-	@Id
+	/*@Id
 	@GeneratedValue
-	private int Id;
+	private int Id;*/
 	
-	@OneToOne(cascade={CascadeType.ALL},fetch=FetchType.LAZY,mappedBy="condicion")
+	//@OneToOne(cascade={CascadeType.ALL},fetch=FetchType.LAZY,mappedBy="condicion")
+	
+	
+	@OneToOne(cascade={CascadeType.ALL},fetch=FetchType.LAZY)
 	private DispositivoEstandar dispositivoEstandar;
 		
 	
+	public Modulo() {
+		//super(nombre, kw);
+	}
+
 	public Modulo(DispositivoEstandar dispositivo) {
 		super(dispositivo.getNombre(),dispositivo.getKwPorHora());
 		this.dispositivoEstandar = dispositivo;

@@ -2,6 +2,7 @@ package ar.com.sge.estados;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,13 +11,14 @@ import javax.persistence.Table;
 import ar.com.sge.dispositivos.DispositivoInteligente;
 
 @Entity
-@Table(name ="Apagado")
+@DiscriminatorValue("apagado")
+//@Table(name ="Apagado")
 public class Apagado extends Estado{
 
 
-	@Id
+	/*@Id
 	@GeneratedValue
-	private int Id;
+	private int Id;*/
 	
 	public Apagado() {
 

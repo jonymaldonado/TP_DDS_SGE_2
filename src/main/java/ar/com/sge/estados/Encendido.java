@@ -3,6 +3,8 @@ package ar.com.sge.estados;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,13 +13,14 @@ import javax.persistence.Table;
 import ar.com.sge.dispositivos.DispositivoInteligente;
 
 @Entity
-@Table(name ="Encendido")
+@DiscriminatorValue("encendido")
+//@Table(name ="Encendido")
 public class Encendido extends Estado {
 	
 
-	@Id
+	/*@Id
 	@GeneratedValue
-	private int IdPeriodo;
+	private int IdPeriodo;*/
 
 	
 	public Encendido() {

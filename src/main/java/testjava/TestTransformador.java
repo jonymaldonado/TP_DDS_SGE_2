@@ -135,7 +135,7 @@ public class TestTransformador {
 		
 		List<Transformador> transformadores = repoTransformador.getAllTransformadores();
 		Transformador trans1=transformadores.get(0);
-		Assert.assertTrue(trans1.getIdtransformador()==1);
+		Assert.assertTrue(trans1.getIdtransformador()==4);
 		Assert.assertTrue(transformadores.size()==3);
 		//Assert.assertTrue(trans1.getIdZonaCorrespondiente() == 4);
 		
@@ -144,7 +144,7 @@ public class TestTransformador {
 		
 		trans1 = transformadores.get(1);
 		
-		Assert.assertTrue(trans1.getIdtransformador()==2);
+		Assert.assertTrue(trans1.getIdtransformador()==5);
 		Assert.assertTrue(transformadores.size()==3);
 		//Assert.assertTrue(trans1.getIdZonaCorrespondiente() == 4);
 		

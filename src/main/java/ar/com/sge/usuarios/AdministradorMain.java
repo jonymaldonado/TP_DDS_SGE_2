@@ -9,7 +9,7 @@ import ar.com.sge.geografia.Transformador;
 public class AdministradorMain {
 
 	public static void main(String[] args) throws Exception {
-		// TODO Auto-generated method stu
+	/*	// TODO Auto-generated method stu
 		Transformador transformador1, transformador2, transformador3;
 		Cliente cliente1,cliente2,cliente3,cliente4,cliente5; 
 		Categoria unaCategoriaR1;
@@ -20,9 +20,9 @@ public class AdministradorMain {
 		
 		admin= new Administrador("Jony", "Maldo",1986);
 		
-		transformador1=new Transformador(001, -43.55f, 3.44f,01);
-		transformador2=new Transformador(002, 54.47f,-24.55f,02);
-		transformador3=new Transformador(003, 55.55f, 3.23f,01);
+//		transformador1=new Transformador(001, -43.55f, 3.44f,01);
+//		transformador2=new Transformador(002, 54.47f,-24.55f,02);
+//		transformador3=new Transformador(003, 55.55f, 3.23f,01);
 		
 		unaCategoriaR1= new Categoria("R1", (float) 18.76,(float) 0.644);
 		
@@ -68,9 +68,9 @@ public class AdministradorMain {
 		cliente5.agregarDispositivosInteligentes(pc1);
 		cliente5.agregarDispositivosInteligentes(unTV40);
 		
-		admin.agregarTransformadores(transformador1);
-		admin.agregarTransformadores(transformador2);
-		admin.agregarTransformadores(transformador3);
+//		admin.agregarTransformadores(transformador1);
+//		admin.agregarTransformadores(transformador2);
+//		admin.agregarTransformadores(transformador3);
 		
 		admin.agregarCliente(cliente1);
 		admin.agregarCliente(cliente2);
@@ -109,9 +109,9 @@ public class AdministradorMain {
 		
 		
 		
-		System.out.print(transformador1.getListaDeclientesConectados().size());System.out.println("  DEBERIA SER 2");	
-		System.out.print(transformador2.getListaDeclientesConectados().size());System.out.println("  DEBERIA SER 1");	
-		System.out.print(transformador3.getListaDeclientesConectados().size());System.out.println("  DEBERIA SER 2");	
+//		System.out.print(transformador1.getListaDeclientesConectados().size());System.out.println("  DEBERIA SER 2");	
+//		System.out.print(transformador2.getListaDeclientesConectados().size());System.out.println("  DEBERIA SER 1");	
+//		System.out.print(transformador3.getListaDeclientesConectados().size());System.out.println("  DEBERIA SER 2");	
 		
 		System.out.println("--------------------- CONSUMO DE ENERGIA DE CADA CLIENTE ");
 		
@@ -140,7 +140,7 @@ public class AdministradorMain {
 		System.out.println("---------------------");
 		System.out.println("---------------------");	
 		
-
+*/
 	}
 
 }

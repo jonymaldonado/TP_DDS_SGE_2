@@ -1,33 +1,20 @@
 [
   {
-    "idZona": 6,
+    "idZona": 5,
     "nombreDeLaZona": "CapitalFederal",
     "radioEnMetros": 50,
     "listaDeTransformadores": []
   },
   {
-    "idZona": 7,
+    "idZona": 4,
     "nombreDeLaZona": "Lugano",
-    "radioEnMetros": 35,
-    "listaDeTransformadores": [
-      {
-        "idtransformador": 4,
-        "listaDeclientesConectados": []
-      },
-      {
-        "idtransformador": 5,
-        "listaDeclientesConectados": []
-      },
-      {
-        "idtransformador": 6,
-        "listaDeclientesConectados": []
-      }
-    ]
+    "radioEnMetros": 50,
+    "listaDeTransformadores": []
   },
   {
-    "idZona": 8,
+    "idZona": 2,
     "nombreDeLaZona": "La Boca",
-    "radioEnMetros": 45,
+    "radioEnMetros": 50,
     "listaDeTransformadores": []
   }
 ]

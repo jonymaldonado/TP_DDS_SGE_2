@@ -1,0 +1,26 @@
+{{#partial "contenido"}}
+
+	<h3 style="text-align:center">Detalle venta</h3>
+	<div class="table-responsive">
+	<table class="table">
+	<tr>
+	<td>
+	<table class="table">
+		<tr>
+			<th>Cuenta</th>
+			<th>Valor</th>
+		</tr>
+		{{#each cuentas}}
+		<tr>
+			<td>{{nombre}}</td>
+			<td>{{valor}}</td>
+		</tr>
+		{{/each}}
+	</table>
+		</td>
+	</tr>
+	</table>
+	</div>
+
+{{/partial}}
+{{>base.hbs}}

@@ -2,8 +2,11 @@ package testjava;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -65,7 +68,7 @@ public class TestPersistenciaCliente {
 		cliente1.setContrasenia("1234");
 		
 		
-		//cliente1.agregarDispositivosInteligentes(ventilador);
+		//cliente1.agregarDispositivosEstandares(ventilador);
 		
 		//EntityTransaction transaction = entityManager.getTransaction();
 		
@@ -102,13 +105,13 @@ public class TestPersistenciaCliente {
 		transaction.commit();
 		//termina la transaccion
 	}*/
-	/*
-	@Test
+	
+/*	@Test
 	public void TestRecuperarCliente() {
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
 		//Cliente cliente= (Cliente)entityManager.find(Usuario.class,2);
-		Cliente cliente= entityManager.find(Cliente.class,2);
+		Cliente cliente= entityManager.find(Cliente.class,1);
 		//Coordenada coordenada1=cliente.getCoordenada();
 		//coordenada1.setLatitud(10);
 		//coordenada1.setLongitud(20);
@@ -150,7 +153,7 @@ public class TestPersistenciaCliente {
 		
 	}*/
 	
-	@Test
+	/*@Test
 	public void cambioDeAccion() {
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
@@ -174,6 +177,48 @@ public class TestPersistenciaCliente {
 		
 		
 		
+	}*/
+	
+	
+	@SuppressWarnings({ "unused", "unchecked" })
+	@Test
+	public void TestPersistirCliente() {
+		EntityTransaction transaction = entityManager.getTransaction();
+		transaction.begin();
+	/*	Zona unazona =new Zona();
+		unazona.setNombreDeLaZona("boedo");
+		unazona.setRadioEnMetros(24);
+		Coordenada coordenada1=new Coordenada(45.2, 48.2);
+		unazona.setPosZonaCentral(coordenada1);
+		Transformador unTransformador=new Transformador(32.1,43.4,unazona);
+		unazona.agregarTransformador(unTransformador);
+		entityManager.persist(unazona);
+		entityManager.persist(categoria1);
+		Cliente cliente2=new Cliente("luca", "lope", "dni", 2493, 1521, 42.2, 42.1);
+		tv.encender();
+		cliente2.agregarDispositivosInteligentes(tv);
+		cliente2.agregarDispositivosInteligentes(lavarropa);
+		cliente2.agregarDispositivosEstandares(ventilador);
+		cliente2.setNombre_usuario("lucalope");
+		cliente2.setContrasenia("1112");
+		cliente2.setCategoria(categoria1);
+		unTransformador.agregarCliente(cliente2);
+		
+		 
+		//entityManager.persist(cliente1);//guardar registro en base de datos
+		entityManager.persist(cliente2);
+		*/
+		
+		Query query=entityManager.createQuery("select t from Transformador t ");
+		List<Transformador> listaclientesbase=(List<Transformador>)query.getResultList();
+		String apellido="lope";
+
+		Query query1=entityManager.createQuery("select t from Usuario t where t.apellido='" + apellido+"'");
+		List<Cliente> listaclientes=(List<Cliente>)query1.getResultList();
+		System.out.println(listaclientes.get(0).getApellido());
+		//entityManager.createQuery("from usuario").executeUpdate();
+		transaction.commit();
+		//termina la transaccion
 	}
 
 }

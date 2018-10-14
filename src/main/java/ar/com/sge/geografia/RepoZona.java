@@ -65,7 +65,30 @@ public class RepoZona {
 
 		try {
 			
-			for (Transformador transformador : repoTransformador.getAllTransformadores()) {
+			for (Transformador transformador : repoTransformador.getTransformadores()) {
+				//double transformadorMasCercano = cliente.getDomicilio().distanciaAlPunto(listaTransformadores.get(0).getPosTransformador());
+				for (Zona zona : this.getZona()) {
+					
+					if(transformador.getZona().getIdZona()==zona.getIdZona()) {
+						System.out.println(transformador.getZona().getIdZona());
+						System.out.println(zona.getIdZona());
+						zona.agregarTransformador(transformador);
+					}
+				}
+			}
+					
+					
+			
+		} catch (Exception e) {
+		
+		}
+	}
+	
+	public void actualizarZonas(RepoTransformador repoTransformador) throws IOException{
+		
+		try {
+			repoTransformador.actualizarListasDeTransformadoresbase();
+			for (Transformador transformador : repoTransformador.getTransformadores()) {
 				//double transformadorMasCercano = cliente.getDomicilio().distanciaAlPunto(listaTransformadores.get(0).getPosTransformador());
 				for (Zona zona : this.getZona()) {
 					
@@ -90,14 +113,66 @@ public class RepoZona {
 		transaction.begin();
 		
 		
-		entityManager.createQuery("delete from transformador").executeUpdate();
-		entityManager.createQuery("delete from zona").executeUpdate();
+	//	entityManager.createQuery("delete from transformador").executeUpdate(); 
+		//entityManager.createQuery("delete from zona").executeUpdate();
 		
 		for(Zona z: this.listaZona) {
 			entityManager.persist(z);
 		}
 		transaction.commit();
 	}
+	
+	@SuppressWarnings("unchecked")
+	public void persistir2() {
+		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
+		EntityTransaction transaction = entityManager.getTransaction();
+		transaction.begin();
+		List<Zona> listaZonabase=(List<Zona>) entityManager.createQuery("select z from zona z").getResultList(); 
+		//entityManager.createQuery("delete from zona").executeUpdate();
+		
+//		transaction.commit();
+		
+		for(Zona z: this.listaZona) {
+			for(Zona zonabase: listaZonabase) {
+				if(z.getIdZona()==zonabase.getIdZona()) {
+					comparar(zonabase, z);
+					
+				}
+				
+			}
+			//entityManager.persist(z);
+		}
+		transaction.commit();
+	}
+	
+	public void comparar(Zona zona1,Zona zona2) {
+		
+
+		for(Transformador t: zona1.getListaDeTransformadores()) {
+			for(Transformador transformador: zona2.getListaDeTransformadores()) {
+				if(t.getIdtransformador()==transformador.getIdtransformador()) {
+					
+				}
+			}
+			t.setActivo(false);
+			//zona1.agregarTransformador(Transformador);
+			
+		}
+		
+		for(Transformador t: zona1.getListaDeTransformadores()) {
+			for(Transformador transformador: zona2.getListaDeTransformadores()) {
+				if(t.getIdtransformador()==transformador.getIdtransformador()) {
+					
+				}
+			}
+			//t.setActivo(false);
+			zona1.agregarTransformador(Transformador);
+			
+		}
+		
+	}
+	
+	
 	
 
 	/*public void ubicarCliente(RepoCliente unrepo) throws IOException{

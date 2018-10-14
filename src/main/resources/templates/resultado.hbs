@@ -1,0 +1,51 @@
+{{#partial "contenido"}}
+	<h2>{{indicador.nombre}} aplicado a {{empresa.nombre}}</h2>
+	
+
+	<div >
+	<table class="table">
+	<tr>
+	<td>
+		<table class="table">
+		<tr>
+			<th>cuenta</th>
+			<th>valorcotizacion</th>
+			
+		</tr>
+		{{#each  cuentas }}
+		<tr>
+			<td>{{nombre}}</td>
+			<td>{{valor}}</td>
+			
+		</tr>
+		{{/each}}	
+		</table>
+		</td>
+		<td>
+		<table class="table">
+		<tr>
+			<th>resultado</th>
+		</tr>
+		
+		{{#each  resultados }}
+		<tr>
+			<td>{{this}}</td>
+		
+		</tr>
+		{{/each}}	
+		
+		
+	
+		</table>
+		</td>
+		</tr>
+	</table>
+	
+	
+	</div>
+	
+	
+	
+	
+{{/partial}}
+{{>base.hbs}}

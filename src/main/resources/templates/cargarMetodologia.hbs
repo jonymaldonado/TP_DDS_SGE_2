@@ -1,0 +1,85 @@
+{{#partial "contenido"}}
+	<h3>Cargar Datos Metodologia</h3>
+
+<form class="form-horizontal" role="form"  action="/usuario/cargarMetodologia/{{usuario.nombre}}/metodologias"  method="POST">
+  <div class="form-group">
+    <label for="ejemplo_email_3" class="col-lg-2 control-label">NombreMetodologia</label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" id="ejemplo_email_3" name="nombre"
+             placeholder="Nombre Metodologia">
+    </div>
+   </div>
+    
+
+  <div class="form-group">
+    <label for="ejemplo_password_3" class="col-lg-2 control-label">Tipo</label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" id="ejemplo_password_3"  name="tipo"
+             placeholder="Taxativa o ordinaria">
+   </div>
+    
+  </div>
+  
+  	<h3> Datos de la condicion</h3>
+  
+  <div class="form-group">
+    <label for="ejemplo_password_3" class="col-lg-2 control-label">NombreCondicion</label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" id="ejemplo_password_3"  name="nombrecondicion"
+             placeholder="Nombre Condicion">
+   </div>
+    
+  </div>
+  
+  
+  <div class="form-group">
+    <label for="ejemplo_password_3" class="col-lg-2 control-label">operador</label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" id="ejemplo_password_3"  name="operador"
+             placeholder="mayor ,igual o menor">
+   </div>
+   
+   </div>
+   
+   
+  <div class="form-group">
+    <label for="ejemplo_password_3" class="col-lg-2 control-label">valor </label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" id="ejemplo_password_3"  name="valor"
+             placeholder="0.0">
+   </div>
+   </div>
+   
+   
+  <div class="form-group">
+    <label for="ejemplo_password_3" class="col-lg-2 control-label">Indicador</label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" id="ejemplo_password_3"  name="indicador"
+             placeholder="Nombre indicador">
+   </div>
+    
+  </div>
+  
+  
+  <div class="form-group">
+    <label for="ejemplo_password_3" class="col-lg-2 control-label">formula</label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" id="ejemplo_password_3"  name="formula"
+             placeholder="ingrese formula">
+   </div>
+    
+  </div>
+    
+ 
+    
+
+  
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <button type="submit" class="btn btn-default">cargar</button>
+    </div>
+  </div>
+</form>
+
+{{/partial}}
+{{>base.hbs}}

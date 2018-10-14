@@ -51,5 +51,17 @@ public class TestTransformadorPersist {
 		repoZona.persistir();
 		//transaction.commit();
 	}
+	
+	/*@Test
+	public void persistirZonas() throws IOException{
+		//EntityTransaction transaction = entityManager.getTransaction();
+		//transaction.begin();
+		repoTans.actualizarListasDeTransformadoresbase();
+		repoZona.getAllZonas();
+		//repoTans.asignarTransformadores();
+		repoZona.actualizarZonas(repoTans);
+		repoZona.persistir2();
+		//transaction.commit();
+	}*/
 
 }

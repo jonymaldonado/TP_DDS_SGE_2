@@ -1,0 +1,64 @@
+{{#partial "contenido"}}
+	<h3>Seleccione una empresa</h3>
+	<div class="form-group">
+	<form role="form" action="/usuario/periodos" method="POST">
+		<select name="nombreEmpresa" class="selectpicker" >
+			<option value="-1">Seleccionar</option>
+			{{#each empresas}}
+			<option value= {{nombre}}> {{nombre}}</option>
+			{{/each}}
+		</select>
+		<button  type="submit" class="btn btn-primary">Ver periodos</button>
+	</form>
+	</div>
+	
+	<h3>Seleccione un indicador</h3>
+	<div class="form-group">
+	<form role="form" action="/usuario/indicadores" method="POST">
+		<select name="nombreIndicador" class="custom-select">
+			<option value="-1">Seleccionar</option>
+			{{#each indicadores}}
+			<option value= {{nombre}}> {{nombre}}</option>
+			{{/each}}
+		</select>
+		<button  type="submit" class="btn btn-primary">Ver indicador</button>
+	</form>
+	</div>
+	
+	
+	<h3>Aplicar un indicador</h3>
+	<div class="form-group">
+	
+	<form class="form-inline" role="form" action="/usuario/resultado" method="POST">
+		<select name="nombreIndicador" class="selectpicker" >
+			<option value="-1">Seleccionar</option>
+			{{#each indicadores}}
+			<option value= {{nombre}}> {{nombre}}</option>
+			{{/each}}
+		</select>
+		<select name="nombreEmpresa" class="selectpicker" >
+			<option value="-1">Seleccionar</option>
+			{{#each empresas}}
+			<option value= {{nombre}}> {{nombre}}</option>
+			{{/each}}
+		</select>
+		<div class="form-group">
+		<input type="text" class="form-control" name="mesinicio" 
+           placeholder="mesinicio">
+        </div>
+        <div class="form-group">   
+        <input type="text" class="form-control" name="mesfin" 
+           placeholder="mesfin">
+        </div>
+        <div class="form-group">
+        <input type="text" class="form-control" name="anio" 
+           placeholder="anio">
+		</div>
+		<button  type="submit" class="btn btn-primary">Aplicar</button>
+	</form>
+	</div>
+	
+	
+	
+{{/partial}}
+{{>base.hbs}}

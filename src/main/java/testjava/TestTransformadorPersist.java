@@ -39,8 +39,7 @@ public class TestTransformadorPersist {
 		repoTans = new RepoTransformador(dao1);
 		lista2 = repoTans.getAllTransformadores();
 	}
-	
-
+	/*
 	@Test
 	public void persistirTransformadores() throws IOException{
 		//EntityTransaction transaction = entityManager.getTransaction();
@@ -50,9 +49,9 @@ public class TestTransformadorPersist {
 		repoZona.actualizarListasDeZonas(repoTans);
 		repoZona.persistir();
 		//transaction.commit();
-	}
+	}*/
 	
-	/*@Test
+	@Test
 	public void persistirZonas() throws IOException{
 		//EntityTransaction transaction = entityManager.getTransaction();
 		//transaction.begin();
@@ -62,6 +61,6 @@ public class TestTransformadorPersist {
 		repoZona.actualizarZonas(repoTans);
 		repoZona.persistir2();
 		//transaction.commit();
-	}*/
+	}
 
 }

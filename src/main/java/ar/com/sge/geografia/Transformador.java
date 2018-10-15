@@ -39,9 +39,11 @@ public class Transformador {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "id_Zona")
 	private Zona zona;
+	private boolean activo;
 	
 	
 	public Transformador(){
+		this.activo = true;
 	}
 
 	public Transformador(double lat,double longitud,Zona unazona){
@@ -92,6 +94,14 @@ public class Transformador {
 	public void agregarCliente(Cliente unCliente) {
 		this.getListaDeclientesConectados().add(unCliente);
 		unCliente.setTransformador(this);
+	}
+	
+	public void setActivo(boolean valor) {
+		this.activo = valor;
+	}
+	
+	public boolean getActivo() {
+		return this.activo;
 	}
 
 	

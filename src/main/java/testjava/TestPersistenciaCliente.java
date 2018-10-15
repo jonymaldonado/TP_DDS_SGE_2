@@ -105,8 +105,8 @@ public class TestPersistenciaCliente {
 		transaction.commit();
 		//termina la transaccion
 	}*/
-	
-/*	@Test
+	/*
+	@Test
 	public void TestRecuperarCliente() {
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
@@ -152,8 +152,8 @@ public class TestPersistenciaCliente {
 		
 		
 	}*/
-	
-	/*@Test
+	/*
+	@Test
 	public void cambioDeAccion() {
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
@@ -213,12 +213,11 @@ public class TestPersistenciaCliente {
 		List<Transformador> listaclientesbase=(List<Transformador>)query.getResultList();
 		String apellido="lope";
 
-		Query query1=entityManager.createQuery("select t from Usuario t where t.apellido='" + apellido+"'");
+		Query query1=entityManager.createQuery("from Usuario where tipo_usuario='cliente'");
 		List<Cliente> listaclientes=(List<Cliente>)query1.getResultList();
 		System.out.println(listaclientes.get(0).getApellido());
 		//entityManager.createQuery("from usuario").executeUpdate();
 		transaction.commit();
 		//termina la transaccion
 	}
-
 }

@@ -127,7 +127,7 @@ public class RepoZona {
 		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
-		List<Zona> listaZonabase=(List<Zona>) entityManager.createQuery("select z from zona z").getResultList(); 
+		List<Zona> listaZonabase=(List<Zona>) entityManager.createQuery("from Zona").getResultList(); 
 		//entityManager.createQuery("delete from zona").executeUpdate();
 		
 //		transaction.commit();
@@ -159,14 +159,14 @@ public class RepoZona {
 			
 		}
 		
-		for(Transformador t: zona1.getListaDeTransformadores()) {
-			for(Transformador transformador: zona2.getListaDeTransformadores()) {
+		for(Transformador t: zona2.getListaDeTransformadores()) {
+			for(Transformador transformador: zona1.getListaDeTransformadores()) {
 				if(t.getIdtransformador()==transformador.getIdtransformador()) {
 					
 				}
 			}
 			//t.setActivo(false);
-			zona1.agregarTransformador(Transformador);
+			zona1.agregarTransformador(t);
 			
 		}
 		

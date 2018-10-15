@@ -94,7 +94,7 @@ public class RepoTransformador {
 		transaction.begin();
 		
 		
-		List<Cliente> listaclientesbase=(List<Cliente>) entityManager.createQuery("select t from Usuario t where t.tipo_usuario='cliente'").getResultList(); 
+		List<Cliente> listaclientesbase=(List<Cliente>) entityManager.createQuery("from Usuario where tipo_usuario='cliente'").getResultList(); 
 		//entityManager.createQuery("from usuario").executeUpdate();
 		
 		

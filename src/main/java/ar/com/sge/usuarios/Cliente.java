@@ -95,7 +95,16 @@ public class Cliente extends Usuario {
 		this.lstDispositivosEstandares  = new ArrayList<>();
 		
 	}
-
+	
+	public Cliente(String nombre_usuario, String contrasenia,String _nombre, String _apellido, String tipoDoc, int numeroDoc, int telefono) {
+		super(nombre_usuario,contrasenia,_nombre,_apellido);
+		this.tipoDoc = tipoDoc;
+		this.numeroDoc = numeroDoc;
+		this.telefono = telefono;
+		this.puntos = 0;
+		this.tipo_usuario = "cliente";
+	}
+	
 	public Cliente(String _nombre, String _apellido, String tipoDoc, int numeroDoc, int telefono, Categoria categoria,int puntos,float latitud,float longitud ) {
 		super(_nombre,_apellido,latitud,longitud);
 		this.tipoDoc = tipoDoc;

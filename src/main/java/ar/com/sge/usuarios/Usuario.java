@@ -23,7 +23,6 @@ import ar.com.sge.geografia.Coordenada;
 
 @Entity
 @Inheritance
-@DiscriminatorColumn(name="tipo_usuario")
 //@ForceDiscriminator
 @Table(name ="Usuario")
 public abstract class Usuario {
@@ -46,7 +45,7 @@ public abstract class Usuario {
 	@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY,mappedBy="cliente")
 	private List<DispositivoEstandar> lstDispositivosEstandares ;
 	//private List<IDispositivo> lstDispositivosEstandares ;*/
-	//private String tipo_usuario;
+	private String tipo_usuario;
 	
 	public Usuario(String _nombre,String _apellido,double latitud,double longitud) {
 		this.nombre = _nombre;
@@ -115,7 +114,7 @@ public abstract class Usuario {
 	public void setAlta(LocalDate alta) {
 		this.alta = alta;
 	}
-	/*
+	
 	public void setTipoUsuario(String tipo) {
 		this.tipo_usuario = tipo;
 	}
@@ -123,7 +122,7 @@ public abstract class Usuario {
 	public String getTipoUsuario() {
 		return this.tipo_usuario;
 	}
-	*/
+	
 	
 	
 	

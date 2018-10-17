@@ -1,0 +1,33 @@
+{{#partial "contenido"}}
+
+<script>
+	var a = document.querySelector('#test');
+	a.innerHTML = "Bienvenido "+'{{cliente}}';
+</script>
+
+<div class="container">
+  <h2>Lista de Dispositivos</h2>          
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+      	<th>Nombre Dispositivo</th>
+        <th>Estado Dispositivo</th>
+      </tr>
+    </thead>
+    <tbody>
+    {{#each lista}}
+    	<tr>
+    	<td>{{nombre}}</td>
+        {{#if estadoDispositivo}}
+		<td>Encendido</td>
+		{{else}}
+		<td>Apagado</td>
+		{{/if}}
+		</tr>
+     {{/each}}
+    </tbody>
+  </table>
+</div>
+	
+{{/partial}}
+{{>base.hbs}}

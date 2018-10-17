@@ -14,22 +14,18 @@
         <th>Apellido</th>
         <th>Tipo Documento</th>
         <th>Numero Documento</th>
-        <th>Categoria</th>
         <th>Telefono</th>
         <th>Puntos</th>
       </tr>
     </thead>
     <tbody>
-    {{#each usuarios}}
+    {{#each lista}}
     	<tr>
     	<td>{{nombre_usuario}}</td>
         <td>{{nombre}}</td>
 		<td>{{apellido}}</td>
 		<td>{{tipoDoc}}</td>
 		<td>{{numeroDoc}}</td>
-		{{#equal categoria null}}
-    		<td>no tiene categoria</td>
-  		{{/equal}}
 		<td>{{telefono}}</td>
 		<td>{{puntos}}</td>
 		</tr>

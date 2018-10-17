@@ -1,0 +1,34 @@
+{{#partial "contenidos"}}
+	<h3>Usuario Nuevo</h3>
+
+<form class="form-horizontal" role="form"  action="/usuario/create"  method="POST">
+  <div class="form-group">
+    <label for="ejemplo_email_3" class="col-lg-2 control-label">Nombre</label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" id="ejemplo_email_3" name="usuario" placeholder="Nombre">
+    </div>
+    
+    <label for="ejemplo_password_3" class="col-lg-2 control-label">Apellido</label>
+    <div class="col-lg-10">
+      <input type="password" class="form-control" id="ejemplo_password_3"  name="clave" placeholder="Apellido">
+   	</div>
+   	
+   	<label for="ejemplo_password_3" class="col-lg-2 control-label">Tipo Documento</label>
+    <div class="col-lg-10">
+      <select class="form-control" id="ejemplo_password_3"  name="tipo_doc" placeholder="Ingrese el tipo de documento">
+      	<option value="dni">DNI</option> 
+  		<option value="pasaporte">Pasaporte</option>
+      </select>
+   	</div>
+    
+  </div>
+  
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <button type="submit" class="btn btn-primary">Aceptar</button>
+    </div>
+  </div>
+</form>
+
+{{/partial}}
+{{>baseDos.hbs}}

@@ -1,75 +1,42 @@
 {{#partial "contenido"}}
-	<h1>Bienvenido {{usuario.nombre}}</h1>
-	<h3>consultar Metodologia Ordenamiento</h3>
-	<div class="form-group">
+<script>
+	var a = document.querySelector('#test');
+	a.innerHTML = "Bienvenido "+'{{cliente}}';
+</script>
 	
-	<form class="form-inline" role="form" action="/usuario/ordenamientoconsulta/{{usuario.nombre}}" method="POST">
-	<select name="nombreMetodologiaOrdenamiento" class="selectpicker"  >
-		
-			<option value="-1">Seleccionar</option>
-			{{#each metodologiasordenamiento}}
-			<option value= {{nombre}}> {{nombre}}</option>
-			{{/each}}
-		</select>
-		<div class="form-group">
-		<input type="text" class="form-control" name="nombreEmpresa" 
-           placeholder="empresa1,empresa2,....">
-        </div>
-		<div class="form-group">
-		<input type="text" class="form-control" name="mesinicio" 
-           placeholder="mesinicio">
-        </div>
-        <div class="form-group">   
-        <input type="text" class="form-control" name="mesfin" 
-           placeholder="mesfin">
-        </div>
-        <div class="form-group">
-        <input type="text" class="form-control" name="anio" 
-           placeholder="anio">
-		</div>
-		<button  type="submit" class="btn btn-primary">Aplicar</button>
-	</form>
-	</div>
+<div class="container">
+  <h2>Lista de Usuarios</h2>          
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+      	<th>Nombre Usuario</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Tipo Documento</th>
+        <th>Numero Documento</th>
+        <th>Categoria</th>
+        <th>Telefono</th>
+        <th>Puntos</th>
+      </tr>
+    </thead>
+    <tbody>
+    {{#each usuarios}}
+    	<tr>
+    	<td>{{nombre_usuario}}</td>
+        <td>{{nombre}}</td>
+		<td>{{apellido}}</td>
+		<td>{{tipoDoc}}</td>
+		<td>{{numeroDoc}}</td>
+		{{#equal categoria null}}
+    		<td>no tiene categoria</td>
+  		{{/equal}}
+		<td>{{telefono}}</td>
+		<td>{{puntos}}</td>
+		</tr>
+     {{/each}}
+    </tbody>
+  </table>
+</div>
 	
-	
-	<h3>consultar Metodologia Taxativa</h3>
-	<div class="form-group">
-	<form class="form-inline" role="form" action="/usuario/taxativaconsulta/{{usuario.nombre}}" method="POST">
-		<select name="nombreMetodologiaTaxativa" class="selectpicker" >
-			<option value="-1">Seleccionar</option>
-			{{#each metodologiastaxativas}}
-			<option value= {{nombre}}> {{nombre}}</option>
-			{{/each}}
-		</select>
-	<select name="nombreEmpresa" class="selectpicker" >
-			<option value="-1">Seleccionar</option>
-			{{#each empresas}}
-			<option value= {{nombre}}> {{nombre}}</option>
-			{{/each}}
-		</select>
-		<div class="form-group">
-		<input type="text" class="form-control" name="mesinicio" 
-           placeholder="mesinicio">
-        </div>
-        <div class="form-group">   
-        <input type="text" class="form-control" name="mesfin" 
-           placeholder="mesfin">
-        </div>
-        <div class="form-group">
-        <input type="text" class="form-control" name="anio" 
-           placeholder="anio">
-		</div>
-		<button  type="submit" class="btn btn-primary">Aplicar</button>
-	</form>
-	</div>
-	<div class="form-group">
-	
-		<a class="btn btn-primary" href="usuario/cargarMetodologia/{{usuario.nombre}}">cargarMetodologia</a>
-	</div>
-	
-	<div class="form-group">
-	
-		<a class="btn btn-primary" href="usuario/empresas_indicadores">empresas e indicadores</a>
-	</div>
 {{/partial}}
 {{>base.hbs}}

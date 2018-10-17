@@ -2,6 +2,7 @@ package server;
 
 
 import controllers.EmpresaController;
+import controllers.Registro;
 import controllers.indicadorController;
 import controllers.inicio;
 import controllers.inicioEmpresa;
@@ -26,9 +27,12 @@ public class router {
 		EmpresaController empresaController = new EmpresaController();
 		indicadorController indicadorController=new indicadorController();
 		metodologiaController metodologiacontroller=new metodologiaController();
+		Registro registro = new Registro();
 		
 		Spark.get("/", inicio::inicio, engine);
 		Spark.post("/usuario", inicio::inicioUsuario, engine);
+		Spark.get("/registro",registro::index,engine);
+		Spark.post("/usuario/create",registro::create,engine);
 		/*Spark.get("/usuario/empresas_indicadores", inicioController::inicio, engine);
 		Spark.post("/usuario/periodos", empresaController::listarPeriodos, engine);
 		Spark.post("/usuario/indicadores", indicadorController::mostrarformula, engine);

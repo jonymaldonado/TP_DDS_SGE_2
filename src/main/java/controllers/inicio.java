@@ -1,7 +1,9 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -15,8 +17,8 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-public class inicio {
-private Map<String, Object> model=new HashMap<>();
+public class inicio<T> {
+private Map<String,T> model=new HashMap<String,T>();
 	
 	public ModelAndView inicio(Request req, Response res)throws IOException{
 		//daoUsuario dao=new daoUsuario();
@@ -35,28 +37,36 @@ private Map<String, Object> model=new HashMap<>();
 		return new ModelAndView(model, "inicio.hbs");
 	}
 	
+	/*public ModelAndView inicioUsuario(Request req, Response res)throws IOException{
+		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
+		EntityTransaction transaction = entityManager.getTransaction();
+		
+		String usuario = req.queryParams("usuario");
+		String contrasenia = req.queryParams("clave");
+		
+		Cliente clientebase=(Cliente) entityManager.createNativeQuery("select * from usuario where contrasenia = "+contrasenia+" and nombre_usuario = '"+usuario+"'", Cliente.class).getResultList().get(0);
+		
+		model.put("usuario", clientebase);
+		return new ModelAndView(model, "usuario.hbs");
+	}*/
+	
 	public ModelAndView inicioUsuario(Request req, Response res)throws IOException{
 		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
 		EntityTransaction transaction = entityManager.getTransaction();
-		//transaction.begin();
-
-		String usuarioBuscado = req.queryParams("usuario");
-		String contraseñaBuscado = req.queryParams("clave");
-		//Cliente clientebase=(Cliente) entityManager.createNativeQuery("from usuario where usuario.contrasenia="+contraseñaBuscado, Cliente.class).getResultList().get(0);
-		//Cliente clientebase=(Cliente) entityManager.createQuery("from usuario where usuario.contrasenia="+contraseñaBuscado).getResultList().get(0); 
-		//entityManager.createQuery("from usuario").executeUpdate();
+		String usuario = req.queryParams("usuario");
+		String contrasenia = req.queryParams("clave");
+		
+		int clientebase= entityManager.createNativeQuery("select * from usuario where contrasenia = "+contrasenia+" and nombre_usuario = '"+usuario+"'", Cliente.class).getFirstResult();
+		
+		System.out.println(clientebase);
+		List<Cliente> lista = entityManager.createNativeQuery(
+				"select u.*,c.nombre as categoria from usuario u left join categorias c on c.idCategoria = u.idCategoria where u.tipo_usuario='cliente'", Cliente.class).getResultList();
+		
+		model.put("usuarios", (T) lista);
+		model.put("cliente", (T) usuario);
 		
 		
-		//repoUsuario repo=repoUsuario.getInstance(dao);
-		//Cliente usuario=;
-		
-		model.put("usuario", clientebase);
-		//model.put("metodologiastaxativas", usuario.getMetodologiaTaxativa());
-		//model.put("lista", usuario.getMetodologiaOrdenamiento());
-		//model.put("empresas", repoempresa.getAllEmpresas());
-		//model.put("metodologiasOrdenamiento", repometodologia.getAllMetodologiaOrdenamieto());
-		//model.put("metodologiastaxativas", repometodologia.getAllMetodologiaTaxativa());
-		return new ModelAndView(model, "usuario.hbs");
+		return new ModelAndView(model,"usuario.hbs");
 	}
 
 }

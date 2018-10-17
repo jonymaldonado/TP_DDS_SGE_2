@@ -179,7 +179,7 @@ public class TestPersistenciaCliente {
 		
 	}*/
 	
-	
+	/*
 	@SuppressWarnings({ "unused", "unchecked" })
 	@Test
 	public void TestPersistirCliente() {
@@ -208,7 +208,7 @@ public class TestPersistenciaCliente {
 		//entityManager.persist(cliente1);//guardar registro en base de datos
 		entityManager.persist(cliente2);
 		*/
-		
+		/*
 		Query query=entityManager.createQuery("select t from Transformador t ");
 		List<Transformador> listaclientesbase=(List<Transformador>)query.getResultList();
 		String apellido="lope";
@@ -217,6 +217,30 @@ public class TestPersistenciaCliente {
 		List<Cliente> listaclientes=(List<Cliente>)query1.getResultList();
 		System.out.println(listaclientes.get(0).getApellido());
 		//entityManager.createQuery("from usuario").executeUpdate();
+		transaction.commit();
+		//termina la transaccion
+	}*/
+	
+	@Test
+	public void TestPersistirCliente() {
+		EntityTransaction transaction = entityManager.getTransaction();
+		transaction.begin();
+		
+		Cliente cliente2=new Cliente("jorge", "lope", "dni", 2493, 1521, 42.2, 42.1);
+		Cliente cliente3=new Cliente("pepe", "lope", "dni", 2493, 1521, 42.2, 42.1);
+		Cliente cliente4=new Cliente("maria", "lope", "dni", 2493, 1521, 42.2, 42.1);
+		Cliente cliente5=new Cliente("ana", "lope", "dni", 2493, 1521, 42.2, 42.1);
+		Cliente cliente6=new Cliente("marcos", "lope", "dni", 2493, 1521, 42.2, 42.1);
+		Cliente cliente7=new Cliente("jony", "lope", "dni", 2493, 1521, 42.2, 42.1);
+		Cliente cliente8=new Cliente("juany", "lope", "dni", 2493, 1521, 42.2, 42.1);
+		entityManager.persist(cliente2);
+		entityManager.persist(cliente3);
+		entityManager.persist(cliente4);
+		entityManager.persist(cliente5);
+		entityManager.persist(cliente6);
+		entityManager.persist(cliente7);
+		entityManager.persist(cliente8);
+		
 		transaction.commit();
 		//termina la transaccion
 	}

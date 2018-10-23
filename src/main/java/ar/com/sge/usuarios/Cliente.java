@@ -64,32 +64,10 @@ public class Cliente extends Usuario {
 	@JoinColumn(name = "id_Transfomador")
 	private Transformador transformador;
 	private static servicioSimplex servicio;
-	//private int idTransformadorCorrespondiente;//despues se vera si vale la pena poner este atributo
-	//private Transformador transformador;
-
-	/*public Cliente(String _nombre, String _apellido,String _tipoDoc,int _numeroDoc,float latitud,float longitud) {		
-=======
-	public Cliente(String _nombre, String _apellido,String _tipoDoc,int _numeroDoc,float latitud,float longitud) {		
->>>>>>> 55d6153bb164c64abe9f3fcdd29e944e114d8019
-		super(_nombre,_apellido,latitud,longitud);
-		this.tipoDoc = _tipoDoc;
-		this.numeroDoc = _numeroDoc;
-		lstDispositivosInteligentes = new ArrayList<>();
-		lstDispositivosEstandares = new ArrayList<>();
-	}*/
+	@OneToMany(cascade = {CascadeType.PERSIST})
+	private List<Hogar> hogares;
 	
 	
-	
-	public Transformador getTransformador() {
-		return transformador;
-	}
-	
-	public void setTransformador(Transformador transformador) {
-		this.transformador = transformador;
-	}
-	
-	
-
 	public Cliente() {
 		this.lstDispositivosInteligentes  = new ArrayList<>();
 		this.lstDispositivosEstandares  = new ArrayList<>();
@@ -103,9 +81,10 @@ public class Cliente extends Usuario {
 		this.telefono = telefono;
 		this.puntos = 0;
 		this.tipo_usuario = "cliente";
+		this.hogares = new ArrayList<>();
 	}
 	
-	public Cliente(String _nombre, String _apellido, String tipoDoc, int numeroDoc, int telefono, Categoria categoria,int puntos,float latitud,float longitud ) {
+	public Cliente(String _nombre, String _apellido, String tipoDoc, int numeroDoc, int telefono, Categoria categoria,float latitud,float longitud ) {
 		super(_nombre,_apellido,latitud,longitud);
 		this.tipoDoc = tipoDoc;
 		this.numeroDoc = numeroDoc;
@@ -329,5 +308,22 @@ public class Cliente extends Usuario {
 		}
 		return servicio;
 	}
+	
+	public void agregarHogar(Hogar hogar) {
+		this.hogares.add(hogar);
+	}
+	
+	public List<Hogar> getListaHogares(){
+		return this.hogares;
+	}
+	
+	public Transformador getTransformador() {
+		return transformador;
+	}
+	
+	public void setTransformador(Transformador transformador) {
+		this.transformador = transformador;
+	}
+	
 
 }

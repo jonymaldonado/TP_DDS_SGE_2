@@ -59,7 +59,7 @@ public class Sensor {
 	}
 	public void notificarALosObservadores(float valor) {
 		//this.getObservadores().forEach(r -> r.verificarRegla(valor));
-		this.getObservadores().forEach(r -> r.verificarRegla(valor,inteligente));
+		this.observadores.forEach(r -> r.verificarRegla(valor,inteligente));
 		
 	}
 	

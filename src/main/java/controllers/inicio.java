@@ -38,9 +38,7 @@ private Map<String,T> model=new HashMap<String,T>();
 			model.put("cliente", (T) usuario);
 			String vista;
 			if(clientebase.getTipoUsuario().equalsIgnoreCase("administrador")) {
-				/*List<Cliente> lista = entityManager.createNativeQuery(
-						"select u.*,c.nombre as categoria from usuario u left join categorias c on c.idCategoria = u.idCategoria where u.tipo_usuario='cliente'", Cliente.class).getResultList();
-				*/
+				
 				List<Cliente> lista = entityManager.createNativeQuery(
 						"select * from usuario where tipo_usuario='cliente'", Cliente.class).getResultList();
 				
@@ -55,7 +53,7 @@ private Map<String,T> model=new HashMap<String,T>();
 				
 				model.put("lista", (T) lista);
 				
-				vista = "dispositivos.hbs";
+				vista = "base.hbs";
 			}
 			model.put("tipo", (T) clientebase.getTipoUsuario());
 			return new ModelAndView(model,vista);

@@ -35,8 +35,9 @@ public class router {
 		Spark.post("/usuario", inicio::inicioUsuario, engine);
 		Spark.get("/registro",registro::index,engine);
 		Spark.post("/usuario/create",registro::create,engine);
-		Spark.post("/registroHogar",hogar::index,engine);
+		Spark.get("/registroHogar",hogar::index,engine);
 		Spark.post("/hogar/create",hogar::create,engine);
+		Spark.get("/hogar/listarDispositivos/:id",hogar::listarDispositivos,engine);
 		/*Spark.get("/usuario/empresas_indicadores", inicioController::inicio, engine);
 		Spark.post("/usuario/periodos", empresaController::listarPeriodos, engine);
 		Spark.post("/usuario/indicadores", indicadorController::mostrarformula, engine);

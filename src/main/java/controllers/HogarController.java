@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
@@ -9,18 +10,19 @@ import javax.persistence.EntityTransaction;
 
 import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 
+import ar.com.sge.dispositivos.IDispositivo;
 import ar.com.sge.usuarios.Hogar;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-public class HogarController {
+public class HogarController<T> {
 
-	private Map<String,Object> model=new HashMap<>();
+	private Map<String,T> model=new HashMap<String,T>();
 	
 	public ModelAndView index(Request req, Response res)throws IOException{
 		
-		return new ModelAndView(model, "formHogar.hbs");
+		return new ModelAndView(null, "formHogar.hbs");
 	}
 	
 	
@@ -39,5 +41,19 @@ public class HogarController {
 		transaction.commit();
 		
 		return new ModelAndView(null, "base.hbs");
+	}
+	
+	public ModelAndView listarDispositivos(Request req, Response res)throws IOException{
+		
+		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
+		EntityTransaction transaction = entityManager.getTransaction();
+		
+		int id_hogar = Integer.parseInt(req.params(":id"));
+		
+		List<IDispositivo> lista = entityManager.createNativeQuery(
+		"select d.* from dispositivo d join hogar_dispositivo hd on hd.Id_Dispositivo = d.Id_Dispositivo  where hd.id = "+id_hogar, IDispositivo.class).getResultList();
+
+		model.put("lista", (T) lista);
+		return new ModelAndView(model, "dispositivos.hbs");
 	}
 }

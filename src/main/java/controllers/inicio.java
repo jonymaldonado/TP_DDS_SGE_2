@@ -14,6 +14,8 @@ import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 
 import ar.com.sge.dispositivos.IDispositivo;
 import ar.com.sge.usuarios.Cliente;
+import ar.com.sge.usuarios.Hogar;
+import ar.com.sge.usuarios.Session;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -35,12 +37,12 @@ private Map<String,T> model=new HashMap<String,T>();
 			String contrasenia = req.queryParams("clave");
 			Cliente clientebase=(Cliente) entityManager.createNativeQuery("select * from usuario where contrasenia = "+contrasenia+" and nombre_usuario = '"+usuario+"'", Cliente.class).getResultList().get(0);
 			
-			model.put("cliente", (T) usuario);
+			Session session = new Session(clientebase.getId_Usuario(),clientebase.getNombre_usuario(),clientebase.getTipoUsuario());
+			
+			model.put("session", (T) usuario);
 			String vista;
 			if(clientebase.getTipoUsuario().equalsIgnoreCase("administrador")) {
-				/*List<Cliente> lista = entityManager.createNativeQuery(
-						"select u.*,c.nombre as categoria from usuario u left join categorias c on c.idCategoria = u.idCategoria where u.tipo_usuario='cliente'", Cliente.class).getResultList();
-				*/
+				
 				List<Cliente> lista = entityManager.createNativeQuery(
 						"select * from usuario where tipo_usuario='cliente'", Cliente.class).getResultList();
 				
@@ -50,12 +52,11 @@ private Map<String,T> model=new HashMap<String,T>();
 				
 			}
 			else {
-				List<IDispositivo> lista = entityManager.createNativeQuery(
-						"select * from dispositivo where id_usuario = "+clientebase.getId_Usuario(), IDispositivo.class).getResultList();
-				
+				List<Hogar> lista = entityManager.createNativeQuery("select h.* from hogares h join usuario_hogares uh on uh.hogares_id = h.id where uh.Usuario_id_Usuario = "+session.getId(),Hogar.class).getResultList();
+								
 				model.put("lista", (T) lista);
 				
-				vista = "dispositivos.hbs";
+				vista = "listaHogares.hbs";
 			}
 			model.put("tipo", (T) clientebase.getTipoUsuario());
 			return new ModelAndView(model,vista);

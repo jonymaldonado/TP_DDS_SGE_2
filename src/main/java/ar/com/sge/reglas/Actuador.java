@@ -39,6 +39,7 @@ public class Actuador {
 		listafiltrada = listacomandos.stream().filter(a -> (a.getNombre().equalsIgnoreCase(accion))).collect(Collectors.toList());
 		comandobuscado = listafiltrada.get(0);
 		comandobuscado.ejecutar(inteligente);
+		
 
 	}
 

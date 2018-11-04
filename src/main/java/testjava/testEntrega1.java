@@ -75,6 +75,8 @@ public class testEntrega1 {
 		inteligente1.setSensor(sensor1);
 		actuador1.addcomando(comandoApagar);
 		actuador1.addcomando(comandoprender);
+		
+		inteligente1.setActuador(actuador1);
 		// comandoAhorroDeEnergia=new
 		comandoAhorroDeEnergia = new ComandoAhorroDeEnergia("ahorroDeEnergia",inteligente1);
 		actuador1.addcomando(comandoAhorroDeEnergia);
@@ -132,10 +134,10 @@ public class testEntrega1 {
 
 	@Test
 	public void apagarDispositivo() {
-		adapterEncender.ejecutar(inteligente1);
-		adapterApagar.ejecutar(inteligente1);
+		//adapterEncender.ejecutar(inteligente1);
+		//adapterApagar.ejecutar(inteligente1);
 		// comandoprender.ejecutar();
-		// comandoApagar.ejecutar();
+		comandoApagar.ejecutar(inteligente1);
 		Assert.assertTrue(inteligente1.getEstado().getNombre() == "apagado");
 	}
 

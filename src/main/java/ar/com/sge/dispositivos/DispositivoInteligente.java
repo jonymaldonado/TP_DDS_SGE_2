@@ -130,25 +130,32 @@ public class DispositivoInteligente extends IDispositivo{
 		return estado;
 	}
 
+	//Enciende el Dispositivo
 	public void encender() {
 		estado.encender(this);
 	}
 
+	//Apaga el Dispositivo
 	public void apagar() {
 		estado.apagar(this);
 	}
 
+	//Pone el Dispositivo en Modo Ahorro de Energia
 	public void ahorroDeEnergia() {
 		estado.ahorroDeEnergia(this);
 	}
 
+	//Devuelve si esta encendido
 	public Boolean estasEncendido() {
 		return this.estadoDispositivo;
 	}
+	
+	//Devuelve si esta apagado
 	public Boolean estasApagado() {
 		return this.estadoDispositivo;
 	}
 
+	//Agrega un estado a la lista de estados
 	public void agregarEstado(Estado e) {
 		listaDeEstados.add(e);
 	}
@@ -165,13 +172,15 @@ public class DispositivoInteligente extends IDispositivo{
 	public double consumoEnKw() {
 		return consumidoComprendidoEntre(this.inicioPeriodo, LocalDateTime.now());		
 	}
-			
+	
+	//Devuelve lo consumido en las N horas
 	public double consumidoUltimasNhoras (int cantHoras) {
 		LocalDateTime fechaInicio = LocalDateTime.now().minusHours(cantHoras);
 		LocalDateTime fechaFin = LocalDateTime.now();
 		return this.consumidoComprendidoEntre(fechaInicio, fechaFin);
 	}
 	
+	//Devuelve lo que consumio el Dispotivo entre dos fechas
 	public double consumidoComprendidoEntre(LocalDateTime fechaInicio , LocalDateTime fechaFin) {
 		double totalConsumo ;
 		float totalHoras ;
@@ -192,6 +201,7 @@ public class DispositivoInteligente extends IDispositivo{
 		
 	}
 	
+	//Devuelve una lista de los estados que cumplan con cumpleCondicion y el nombre del estado sea igual a tipoDeEstado
 	public List<Estado> listaDeEstadosSegun(LocalDateTime fechaInicio , LocalDateTime fechaFin, String tipoDeEstado) {
 		List<Estado> lstEstadosSegun;
 		lstEstadosSegun = listaDeEstados.stream().filter(e -> (cumpleCondicion(e,fechaInicio,fechaFin)) 
@@ -208,10 +218,12 @@ public class DispositivoInteligente extends IDispositivo{
 		return totalConsumo;
 	}*/
 		
+	//Verifica que la fecha de inicio de un estados sea antes de fechaFin y que la fecha de inicio del estado sea despues de fechaInicio
 	public boolean cumpleCondicion(Estado e, LocalDateTime fechaInicio, LocalDateTime fechaFin) {
 		return (e.getFechaInicio().isBefore(fechaFin) && e.getFechaFin().isAfter(fechaInicio));
 	}
 	
+	//
 	public float totalDeHoras (List<Estado> lstEstados,  LocalDateTime fechaInicio, LocalDateTime fechaFin) {		
 		LocalDateTime fechaMinima;
 		LocalDateTime fechaMaxima;

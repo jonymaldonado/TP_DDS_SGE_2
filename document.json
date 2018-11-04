@@ -1,29 +1,14 @@
 [
   {
-    "idtransformador": 12,
-    "zona":{
-    	"idZona": 5,
-    	"nombreDeLaZona": "CapitalFederal",
-    	"radioEnMetros": 50
-    },
+    "idtransformador": 4,
     "listaDeclientesConectados": []
   },
   {
-    "idtransformador": 14,
-    "zona":{
-    	"idZona": 4,
-    	"nombreDeLaZona": "Lugano",
-    	"radioEnMetros": 50
-    },
+    "idtransformador": 5,
     "listaDeclientesConectados": []
   },
   {
-    "idtransformador": 13,
-    "zona":{
-    	"idZona": 2,
-    	"nombreDeLaZona": "La Boca",
-    	"radioEnMetros": 50
-    },
+    "idtransformador": 6,
     "listaDeclientesConectados": []
   }
 ]

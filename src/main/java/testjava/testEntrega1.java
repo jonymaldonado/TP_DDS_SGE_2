@@ -125,15 +125,15 @@ public class testEntrega1 {
 
 	@Test
 	public void prenderDispositivo() {
-		adapterEncender.ejecutar();
+		adapterEncender.ejecutar(inteligente1);
 		// comandoprender.ejecutar();
 		Assert.assertTrue(inteligente1.getEstado().getNombre() == "encendido");
 	}
 
 	@Test
 	public void apagarDispositivo() {
-		adapterEncender.ejecutar();
-		adapterApagar.ejecutar();
+		adapterEncender.ejecutar(inteligente1);
+		adapterApagar.ejecutar(inteligente1);
 		// comandoprender.ejecutar();
 		// comandoApagar.ejecutar();
 		Assert.assertTrue(inteligente1.getEstado().getNombre() == "apagado");
@@ -141,8 +141,8 @@ public class testEntrega1 {
 
 	@Test
 	public void ahorroDeEnergiaDispositivo() {
-		adapterEncender.ejecutar();
-		adapterAhorroDeEnergia.ejecutar();
+		adapterEncender.ejecutar(inteligente1);
+		adapterAhorroDeEnergia.ejecutar(inteligente1);
 		// comandoprender.ejecutar();
 		// comandoAhorroDeEnergia.ejecutar();
 		Assert.assertTrue(inteligente1.getEstado().getNombre() == "modo ahorro");
@@ -150,17 +150,17 @@ public class testEntrega1 {
 
 	@Test
 	public void tomarmedicion() {
-		adapterEncender.ejecutar();
+		adapterEncender.ejecutar(inteligente1);
 		Encendido enc = new Encendido();
 		inteligente1.setEstado(enc);
-		Assert.assertTrue(inteligente1.getEstado().getNombre() == "encendido");
+		Assert.assertEquals(inteligente1.getEstado().getNombre(), "encendido");
 		sensor1.setValor(30);
-		Assert.assertTrue(inteligente1.getEstado().getNombre() == "apagado");
+		Assert.assertEquals(inteligente1.getEstado().getNombre(), "apagado");
 	}
 
 	@Test
 	public void tomarmedicionnocumpleRegla() {
-		adapterEncender.ejecutar();
+		adapterEncender.ejecutar(inteligente1);
 		// comandoprender.ejecutar();
 		Assert.assertTrue(inteligente1.getEstado().getNombre() == "encendido");
 		sensor1.setValor(22);
@@ -234,6 +234,6 @@ public class testEntrega1 {
 		dispositivo.agregarEstado(estadoDos);
 		
 		double consumo = dispositivo.consumidoUltimasNhoras(40);
-		Assert.assertTrue(consumo == 600.0);
+		Assert.assertTrue(consumo == 600);
 	}
 }

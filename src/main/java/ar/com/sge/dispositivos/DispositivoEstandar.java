@@ -61,7 +61,8 @@ public class DispositivoEstandar extends IDispositivo{
 	public int getHorasDeUso() {
 		return horasDeUso;
 	}
-
+	
+	//Calcula el consumo del Dispositivo Estandar
 	public double consumoEnKw() {
 		return horasDeUso * this.getKwPorHora();
 	}

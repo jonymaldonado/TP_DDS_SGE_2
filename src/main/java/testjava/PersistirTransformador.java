@@ -19,7 +19,7 @@ import ar.com.sge.geografia.Zona;
 import ar.com.sge.util.DaoJsonTransformadores;
 import ar.com.sge.util.DaoJsonZona;
 
-public class TestTransformadorPersist {
+public class PersistirTransformador {
 	EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
 	EntityTransaction transaction = entityManager.getTransaction();
 	Transformador unTransformador;
@@ -39,9 +39,9 @@ public class TestTransformadorPersist {
 		repoTans = new RepoTransformador(dao1);
 		lista2 = repoTans.getAllTransformadores();
 	}
-	/*
+	
 	@Test
-	public void persistirTransformadores() throws IOException{
+	public void TestPersistirTransformadores() throws IOException{
 		//EntityTransaction transaction = entityManager.getTransaction();
 		//transaction.begin();
 		repoZona.getAllZonas();
@@ -49,18 +49,5 @@ public class TestTransformadorPersist {
 		repoZona.actualizarListasDeZonas(repoTans);
 		repoZona.persistir();
 		//transaction.commit();
-	}*/
-	
-	@Test
-	public void persistirZonas() throws IOException{
-		//EntityTransaction transaction = entityManager.getTransaction();
-		//transaction.begin();
-		repoTans.actualizarListasDeTransformadoresbase();
-		repoZona.getAllZonas();
-		//repoTans.asignarTransformadores();
-		repoZona.actualizarZonas(repoTans);
-		repoZona.persistir2();
-		//transaction.commit();
 	}
-
 }

@@ -42,20 +42,15 @@ private Map<String, Object> model=new HashMap<>();
 
 		String usuarioBuscado = req.queryParams("usuario");
 		String contraseñaBuscado = req.queryParams("clave");
-		//Cliente clientebase=(Cliente) entityManager.createNativeQuery("from usuario where usuario.contrasenia="+contraseñaBuscado, Cliente.class).getResultList().get(0);
-		//Cliente clientebase=(Cliente) entityManager.createQuery("from usuario where usuario.contrasenia="+contraseñaBuscado).getResultList().get(0); 
-		//entityManager.createQuery("from usuario").executeUpdate();
+
+		List<Cliente> listaclientesbase=(List<Cliente>) entityManager.createQuery("from Usuario where contrasenia='"+contraseñaBuscado+"'").getResultList(); 
+		Cliente clientebase=listaclientesbase.get(0);
 		
-		
-		//repoUsuario repo=repoUsuario.getInstance(dao);
-		//Cliente usuario=;
 		
 		model.put("usuario", clientebase);
-		//model.put("metodologiastaxativas", usuario.getMetodologiaTaxativa());
-		//model.put("lista", usuario.getMetodologiaOrdenamiento());
-		//model.put("empresas", repoempresa.getAllEmpresas());
-		//model.put("metodologiasOrdenamiento", repometodologia.getAllMetodologiaOrdenamieto());
-		//model.put("metodologiastaxativas", repometodologia.getAllMetodologiaTaxativa());
+		model.put("listainteligentes", clientebase.getLstDispositivosInteligentes());
+		model.put("listaestandar", clientebase.getLstDispositivosEstandares());
+	
 		return new ModelAndView(model, "usuario.hbs");
 	}
 

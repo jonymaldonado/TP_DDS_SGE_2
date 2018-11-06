@@ -23,23 +23,24 @@ public class router {
 		
 		inicio inicio=new inicio();
 		inicioEmpresa inicioController = new inicioEmpresa();
-		EmpresaController empresaController = new EmpresaController();
+		EmpresaController inteligenteController = new EmpresaController();
 		indicadorController indicadorController=new indicadorController();
 		metodologiaController metodologiacontroller=new metodologiaController();
 		
 		Spark.get("/", inicio::inicio, engine);
 		Spark.post("/usuario", inicio::inicioUsuario, engine);
-		/*Spark.get("/usuario/empresas_indicadores", inicioController::inicio, engine);
-		Spark.post("/usuario/periodos", empresaController::listarPeriodos, engine);
+	//	Spark.get("/usuario/", inicioController::inicio, engine);
+		/*Spark.post("/usuario/periodos", empresaController::listarPeriodos, engine);
 		Spark.post("/usuario/indicadores", indicadorController::mostrarformula, engine);
 		Spark.post("/usuario/resultado", indicadorController::mostrarResultado, engine);
 		//Spark.post("/taxativaconsulta", metodologiacontroller::mostrarConsulta, engine);
 		Spark.post("/usuario/taxativaconsulta/:usuario", metodologiacontroller::mostrarConsulta, engine);
 		Spark.post("/usuario/ordenamientoconsulta/:usuario", metodologiacontroller::mostrarlista, engine);
-		Spark.get("/usuario/cargarMetodologia/:usuario", metodologiacontroller::cargarMetodologia, engine);
-		Spark.post("/usuario/cargarMetodologia/:usuario/metodologias",metodologiacontroller::vermetodologias,engine);
-		Spark.get("/usuario/periodoDetalle/:empresa/:mesinicio/:mesfin/:anio", empresaController::verdetalleVenta2,engine);
-		//Spark.post("/periodoDetalle", empresaController::verdetalleVenta, engine);*/
+		Spark.get("/usuario/cargarMetodologia/:usuario", metodologiacontroller::cargarMetodologia, engine);*/
+		Spark.get("/usuario/:usuario/inteligentes",inteligenteController::verdetalleInteligente,engine);
+		Spark.get("/usuario/:usuario/standar",inteligenteController::verdetalleStandar,engine);
+		//Spark.get("/usuario/periodoDetalle/:empresa/:mesinicio/:mesfin/:anio", empresaController::verdetalleVenta2,engine);
+		//Spark.post("/periodoDetalle", empresaController::verdetalleVenta, engine);
 	}
 
 }

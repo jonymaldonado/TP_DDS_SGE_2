@@ -2,13 +2,17 @@ package controllers;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import dao.daoIndicador;
-import dao.daojson;
-import dao.repoEmpresa;
-import entidades.Empresa;
-import entidades.Periodo;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+
+import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
+
+import ar.com.sge.dispositivos.repositorioDispositivo;
+import ar.com.sge.usuarios.Cliente;
+
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -16,7 +20,7 @@ import spark.Response;
 public class EmpresaController {
 	private Map<String, Object> model=new HashMap<>();
 	
-	public ModelAndView listarPeriodos(Request req, Response res)throws IOException{
+	/*public ModelAndView listarPeriodos(Request req, Response res)throws IOException{
 		daojson dao=new daojson();
 		daoIndicador daoi=new daoIndicador();
 		dao.setFilePath("C:\\Users\\omar cristian coca\\Desktop\\donde-invierto-master\\back\\src\\test\\resources\\empresas.json");
@@ -26,9 +30,9 @@ public class EmpresaController {
 		model.put("empresa", empresa);
 		model.put("periodos", empresa.getPeriodos());
 		return new ModelAndView(model, "periodos.hbs");
-	}
+	}*/
 	
-	public ModelAndView verdetalleVenta(Request req, Response res)throws  Exception{
+	/*public ModelAndView verdetalleVenta(Request req, Response res)throws  Exception{
 		daojson dao=new daojson();
 		daoIndicador daoi=new daoIndicador();
 		dao.setFilePath("C:\\Users\\omar cristian coca\\Desktop\\donde-invierto-master\\back\\src\\test\\resources\\empresas.json");
@@ -47,9 +51,9 @@ public class EmpresaController {
 		model.put("periodo", periodo);
 		model.put("cuenta", periodo.getCuentas());
 		return new ModelAndView(model, "detallePeriodo.hbs");
-	}
+	}*/
 	
-	public ModelAndView verdetalleVenta2(Request req, Response res)throws  Exception{
+	/*public ModelAndView verdetalleVenta2(Request req, Response res)throws  Exception{
 		daojson dao=new daojson();
 		daoIndicador daoi=new daoIndicador();
 		dao.setFilePath("C:\\Users\\omar cristian coca\\Desktop\\donde-invierto-master\\back\\src\\test\\resources\\empresas.json");
@@ -67,6 +71,82 @@ public class EmpresaController {
 		model.put("periodo", periodo);
 		model.put("cuentas", periodo.getCuentas());
 		return new ModelAndView(model, "detallePeriodo.hbs");
+	}*/
+	public ModelAndView verdetalleInteligente(Request req, Response res)throws  Exception{
+		
+		String usuarioBuscado = req.params(":usuario");
+		/*int inicio = Integer.parseInt(req.params(":mesinicio"));
+		int fin = Integer.parseInt(req.params(":mesfin"));
+		int anio = Integer.parseInt(req.params(":anio"));*/
+		
+		
+		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
+		EntityTransaction transaction = entityManager.getTransaction();
+		//transaction.begin();
+
+		//String usuarioBuscado = req.queryParams("usuario");
+		//String contraseñaBuscado = req.queryParams("clave");
+		//List<repositorioDispositivo> listarepo=(List<repositorioDispositivo>) entityManager.createQuery("select r from repositorio r").getResultList(); 
+		//repositorioDispositivo repobase=listarepo.get(0);
+		
+		String nombreinteligente = req.queryParams("nombreinteligente");
+		String regla = req.queryParams("regla");
+		String valor = req.queryParams("valor");
+		repositorioDispositivo repobase=entityManager.find(repositorioDispositivo.class,2);
+		
+		List<Cliente> listaclientesbase=(List<Cliente>) entityManager.createQuery("from Usuario where nombre_usuario='"+usuarioBuscado+"'").getResultList(); 
+		Cliente clientebase=listaclientesbase.get(0);
+		if(nombreinteligente!=null) {
+			
+			System.out.println("nombre "+nombreinteligente+repobase.getListaActualInteligentes().get(0).getNombre());
+		repobase.seleccionarInteligente(clientebase, nombreinteligente);
+		}
+		model.clear();
+		model.put("usuario", clientebase);
+		model.put("listainteligentes", clientebase.getLstDispositivosInteligentes());
+		model.put("inteligentesbase", repobase.getListaActualInteligentes());
+		//model.put("listaestandar", clientebase.getLstDispositivosEstandares());
+	//	Empresa empresa = repo.getEmpresa(empresaBuscado);
+		
+		//Periodo periodo=empresa.getPeriodoByName(inicio, fin,anio);
+		
+		
+		//model.put("periodo", periodo);
+		//model.put("cuentas", periodo.getCuentas());
+		return new ModelAndView(model, "detallePeriodo.hbs");
 	}
+	
+public ModelAndView verdetalleStandar(Request req, Response res)throws  Exception{
+		
+		String usuarioBuscado = req.params(":usuario");
+		/*int inicio = Integer.parseInt(req.params(":mesinicio"));
+		int fin = Integer.parseInt(req.params(":mesfin"));
+		int anio = Integer.parseInt(req.params(":anio"));*/
+		
+		
+		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
+		EntityTransaction transaction = entityManager.getTransaction();
+		//transaction.begin();
+
+		//String usuarioBuscado = req.queryParams("usuario");
+		//String contraseñaBuscado = req.queryParams("clave");
+
+		List<Cliente> listaclientesbase=(List<Cliente>) entityManager.createQuery("from Usuario where nombre_usuario='"+usuarioBuscado+"'").getResultList(); 
+		Cliente clientebase=listaclientesbase.get(0);
+		
+		model.clear();
+		model.put("usuario", clientebase);
+		//model.put("listainteligentes", clientebase.getLstDispositivosInteligentes());
+		model.put("listaestandar", clientebase.getLstDispositivosEstandares());
+	//	Empresa empresa = repo.getEmpresa(empresaBuscado);
+		
+		//Periodo periodo=empresa.getPeriodoByName(inicio, fin,anio);
+		
+		
+		//model.put("periodo", periodo);
+		//model.put("cuentas", periodo.getCuentas());
+		return new ModelAndView(model, "detallePeriodo.hbs");
+	}
+
 
 }

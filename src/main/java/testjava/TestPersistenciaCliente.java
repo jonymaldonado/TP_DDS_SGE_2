@@ -17,6 +17,7 @@ import ar.com.sge.comandos.Comando;
 import ar.com.sge.comandos.ComandoApagar;
 import ar.com.sge.dispositivos.DispositivoEstandar;
 import ar.com.sge.dispositivos.DispositivoInteligente;
+import ar.com.sge.dispositivos.repositorioDispositivo;
 import ar.com.sge.geografia.Coordenada;
 import ar.com.sge.geografia.Transformador;
 import ar.com.sge.geografia.Zona;
@@ -30,13 +31,14 @@ import ar.com.sge.usuarios.Usuario;
 public class TestPersistenciaCliente {
 	
 	private EntityManager entityManager ;
-	private DispositivoInteligente tv , lavarropa;
+	private DispositivoInteligente tv , lavarropa,aire;
 	private DispositivoEstandar ventilador;
 	private Categoria categoria1;
 	private Cliente cliente1,clientenuevo;
 	private Sensor sensor1,sensor2;
 	private Regla regla1,regla2;
 	private Actuador actuador1,actuador2;
+	private repositorioDispositivo repo;
 	
 	
 	@Before
@@ -66,7 +68,13 @@ public class TestPersistenciaCliente {
 		cliente1.agregarDispositivosInteligentes(lavarropa);
 		cliente1.setNombre_usuario("tomi");
 		cliente1.setContrasenia("1234");
-		
+		aire =new DispositivoInteligente("bgh ", 0.18);
+		aire.setMinimoconsumo(90);
+		aire.setMaximoconsumo(370);
+		repo=new repositorioDispositivo();
+		/*repo.agregar(lavarropa);
+		repo.agregar(tv);
+		repo.agregar(aire);*/
 		
 		//cliente1.agregarDispositivosEstandares(ventilador);
 		
@@ -179,7 +187,7 @@ public class TestPersistenciaCliente {
 		
 	}*/
 	
-	
+	/*
 	@SuppressWarnings({ "unused", "unchecked" })
 	@Test
 	public void TestPersistirCliente() {
@@ -209,7 +217,7 @@ public class TestPersistenciaCliente {
 		entityManager.persist(cliente2);
 		*/
 		
-		Query query=entityManager.createQuery("select t from Transformador t ");
+		/*Query query=entityManager.createQuery("select t from Transformador t ");
 		List<Transformador> listaclientesbase=(List<Transformador>)query.getResultList();
 		String apellido="lope";
 
@@ -219,5 +227,17 @@ public class TestPersistenciaCliente {
 		//entityManager.createQuery("from usuario").executeUpdate();
 		transaction.commit();
 		//termina la transaccion
+	}*/
+	
+	
+	@Test
+	public void TestPersistirRepo() {
+		EntityTransaction transaction = entityManager.getTransaction();
+		transaction.begin();
+		//repo.agregar(lavarropa);
+		//repo.agregar(tv);
+		repo.agregar(aire);
+		entityManager.persist(repo);
+		transaction.commit();
 	}
 }

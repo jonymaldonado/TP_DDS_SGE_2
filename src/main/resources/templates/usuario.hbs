@@ -1,75 +1,77 @@
 {{#partial "contenido"}}
+<header>
+
+	<nav class="navbar navbar-default navbar-light bg-light">
+ 
+
+ 		<div class="container-fluid">
+ 			<div class="collapse navbar-collapse">
+    		<ul class="nav navbar-nav navbar-right ">
+      
+      			<li class="nav-item">
+        			<a class="nav-link" href="#">Simple</a>
+      			</li>
+      			<li class="nav-item">
+        			<a class="nav-link" href="#">Mapa</a>
+      			</li>
+      			<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" > Inteligentes <span class="caret"></span></a>
+        			<ul class="dropdown-menu" >
+          				<li><a href="#">Editar</a></li>
+          				<li><a href="#">Agregar</a></li>
+          				<li><a href="#">Eliminar</a></li>
+          
+        			</ul>
+	    		</li>
+	    		
+	    		<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" > dispositivo <span class="caret"></span></a>
+        			<ul class="dropdown-menu" >
+          				<li><a href="usuario/{{usuario.nombre_usuario}}/inteligentes">Inteligente</a></li>
+          				<li><a href="usuario/{{usuario.nombre_usuario}}/standar">Standar</a></li>
+          			
+          
+        			</ul>
+	    		</li>
+    		</ul>
+    		</div>
+  		</div>
+	</nav>
+</header>
+<div>
 	<h1>Bienvenido {{usuario.nombre}}</h1>
-	<h3>consultar Metodologia Ordenamiento</h3>
-	<div class="form-group">
-	
-	<form class="form-inline" role="form" action="/usuario/ordenamientoconsulta/{{usuario.nombre}}" method="POST">
-	<select name="nombreMetodologiaOrdenamiento" class="selectpicker"  >
-		
-			<option value="-1">Seleccionar</option>
-			{{#each metodologiasordenamiento}}
-			<option value= {{nombre}}> {{nombre}}</option>
-			{{/each}}
-		</select>
-		<div class="form-group">
-		<input type="text" class="form-control" name="nombreEmpresa" 
-           placeholder="empresa1,empresa2,....">
-        </div>
-		<div class="form-group">
-		<input type="text" class="form-control" name="mesinicio" 
-           placeholder="mesinicio">
-        </div>
-        <div class="form-group">   
-        <input type="text" class="form-control" name="mesfin" 
-           placeholder="mesfin">
-        </div>
-        <div class="form-group">
-        <input type="text" class="form-control" name="anio" 
-           placeholder="anio">
-		</div>
-		<button  type="submit" class="btn btn-primary">Aplicar</button>
-	</form>
+	<h3>consumo periodo  </h3>
+	<h3>Puntos  {{usuario.puntos}}</h3>
+	<div class="table-responsive">
+	<table class="table">
+	<tr>
+	<td>
+	<table class="table">
+		<tr>
+			<th>Nombre</th>
+			<th>Estado</th>
+			<th>Inicio</th>
+			<th>Regla</th>
+		</tr>
+		{{#each listainteligentes}}
+		<tr>
+			<td>{{nombre}}</td>
+			<td>{{estado.nombre}}</td>
+			<td>{{estado.fechaInicio}}</td>
+			<td>{{kwPorHora}}</td>
+			
+		</tr>
+		{{/each}}
+	</table>
+		</td>
+	</tr>
+	</table>
 	</div>
 	
 	
-	<h3>consultar Metodologia Taxativa</h3>
-	<div class="form-group">
-	<form class="form-inline" role="form" action="/usuario/taxativaconsulta/{{usuario.nombre}}" method="POST">
-		<select name="nombreMetodologiaTaxativa" class="selectpicker" >
-			<option value="-1">Seleccionar</option>
-			{{#each metodologiastaxativas}}
-			<option value= {{nombre}}> {{nombre}}</option>
-			{{/each}}
-		</select>
-	<select name="nombreEmpresa" class="selectpicker" >
-			<option value="-1">Seleccionar</option>
-			{{#each empresas}}
-			<option value= {{nombre}}> {{nombre}}</option>
-			{{/each}}
-		</select>
-		<div class="form-group">
-		<input type="text" class="form-control" name="mesinicio" 
-           placeholder="mesinicio">
-        </div>
-        <div class="form-group">   
-        <input type="text" class="form-control" name="mesfin" 
-           placeholder="mesfin">
-        </div>
-        <div class="form-group">
-        <input type="text" class="form-control" name="anio" 
-           placeholder="anio">
-		</div>
-		<button  type="submit" class="btn btn-primary">Aplicar</button>
-	</form>
-	</div>
 	<div class="form-group">
 	
-		<a class="btn btn-primary" href="usuario/cargarMetodologia/{{usuario.nombre}}">cargarMetodologia</a>
+		<a class="btn btn-primary" href="usuario/empresas_indicadores">consultarSimplex</a>
 	</div>
+</div>
 	
-	<div class="form-group">
-	
-		<a class="btn btn-primary" href="usuario/empresas_indicadores">empresas e indicadores</a>
-	</div>
 {{/partial}}
 {{>base.hbs}}

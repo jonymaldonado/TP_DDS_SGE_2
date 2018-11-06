@@ -1,5 +1,10 @@
-{{#partial "contenido"}}
-	<h3>Ingreso de Usuario</h3>
+{{#partial "contenidos"}}
+
+<h3>Ingreso de Usuario</h3>
+
+{{#if mensaje}}
+<h4 id="mensaje" style="background-color: red">{{mensaje}}</h4>
+{{/if}}
 
 <form class="form-horizontal" role="form"  action="/usuario"  method="POST">
   <div class="form-group">
@@ -22,10 +27,11 @@
   
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
-      <button type="submit" class="btn btn-default">Entrar</button>
+      <button type="submit" class="btn btn-primary">Entrar</button>
+      <a href="registro" class="btn btn-primary">Registrarse</a>
     </div>
   </div>
 </form>
 
 {{/partial}}
-{{>base.hbs}}
+{{>baseDos.hbs}}

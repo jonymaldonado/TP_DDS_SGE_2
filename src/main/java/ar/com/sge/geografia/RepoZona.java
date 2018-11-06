@@ -131,7 +131,8 @@ public class RepoZona {
 		//entityManager.createQuery("delete from zona").executeUpdate();
 		
 //		transaction.commit();
-		
+		System.out.println(this.listaZona);
+		System.out.println(listaZonabase);
 		for(Zona z: this.listaZona) {
 			for(Zona zonabase: listaZonabase) {
 				if(z.getIdZona()==zonabase.getIdZona()) {
@@ -149,30 +150,31 @@ public class RepoZona {
 		
 
 		for(Transformador t: zona1.getListaDeTransformadores()) {
+			boolean activo = false;
 			for(Transformador transformador: zona2.getListaDeTransformadores()) {
 				if(t.getIdtransformador()==transformador.getIdtransformador()) {
-					
+					activo = true;
 				}
 			}
-			t.setActivo(false);
+			t.setActivo(activo);
 			//zona1.agregarTransformador(Transformador);
 			
 		}
 		
 		for(Transformador t: zona2.getListaDeTransformadores()) {
+			boolean encontrado = false;
 			for(Transformador transformador: zona1.getListaDeTransformadores()) {
 				if(t.getIdtransformador()==transformador.getIdtransformador()) {
-					
+					encontrado = true;
 				}
 			}
-			//t.setActivo(false);
-			zona1.agregarTransformador(t);
+			if(encontrado == false) {
+				zona1.agregarTransformador(t);
+			}
 			
 		}
 		
 	}
-	
-	
 	
 
 	/*public void ubicarCliente(RepoCliente unrepo) throws IOException{

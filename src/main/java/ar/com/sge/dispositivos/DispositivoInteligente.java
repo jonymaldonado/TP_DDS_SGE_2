@@ -14,6 +14,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -25,6 +26,7 @@ import ar.com.sge.reglas.Actuador;
 import ar.com.sge.reglas.Sensor;
 import ar.com.sge.usuarios.Administrador;
 import ar.com.sge.usuarios.Cliente;
+import ar.com.sge.usuarios.Hogar;
 
 
 @Entity
@@ -38,6 +40,7 @@ public class DispositivoInteligente extends IDispositivo{
 	//@Column(name="Nombre",nullable=false,length=50)
 	private String nombre;
 	private double kwPorHora;
+	@Column(nullable=true)
 	private Boolean encendido ;
 	@OneToOne(cascade={CascadeType.ALL})
 	//@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY)
@@ -66,6 +69,9 @@ public class DispositivoInteligente extends IDispositivo{
 	/*@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "idAdministrador")	
 	private Administrador administrador;*/
+	@ManyToMany(mappedBy = "listaDispositivos")
+    private List<Hogar> hogares;
+ 
 
 	public DispositivoInteligente(String nombre, double kw) {
 		this.nombre = nombre;
@@ -74,6 +80,7 @@ public class DispositivoInteligente extends IDispositivo{
 		listaDeEstados = new ArrayList<Estado>();
 		this.setEstado(new Apagado());
 		//this.estado = new Apagado();
+		this.hogares = new ArrayList<>();
 	}
 	
 	public DispositivoInteligente() {
@@ -118,37 +125,37 @@ public class DispositivoInteligente extends IDispositivo{
 	public List<Estado> getEstados(){
 		return this.listaDeEstados;
 	}
-	/*
-	public void getEstados(){
-		//return this.listaDeEstados;
-		for(Estado e: listaDeEstados) {
-			System.out.println(e.getNombre());
-		}
-	}*/
 	
 	public Estado getEstado() {
 		return estado;
 	}
 
+	//Enciende el Dispositivo
 	public void encender() {
 		estado.encender(this);
 	}
 
+	//Apaga el Dispositivo
 	public void apagar() {
 		estado.apagar(this);
 	}
 
+	//Pone el Dispositivo en Modo Ahorro de Energia
 	public void ahorroDeEnergia() {
 		estado.ahorroDeEnergia(this);
 	}
 
+	//Devuelve si esta encendido
 	public Boolean estasEncendido() {
 		return this.estadoDispositivo;
 	}
+	
+	//Devuelve si esta apagado
 	public Boolean estasApagado() {
 		return this.estadoDispositivo;
 	}
 
+	//Agrega un estado a la lista de estados
 	public void agregarEstado(Estado e) {
 		listaDeEstados.add(e);
 	}
@@ -165,13 +172,15 @@ public class DispositivoInteligente extends IDispositivo{
 	public double consumoEnKw() {
 		return consumidoComprendidoEntre(this.inicioPeriodo, LocalDateTime.now());		
 	}
-			
+	
+	//Devuelve lo consumido en las N horas
 	public double consumidoUltimasNhoras (int cantHoras) {
 		LocalDateTime fechaInicio = LocalDateTime.now().minusHours(cantHoras);
 		LocalDateTime fechaFin = LocalDateTime.now();
 		return this.consumidoComprendidoEntre(fechaInicio, fechaFin);
 	}
 	
+	//Devuelve lo que consumio el Dispotivo entre dos fechas
 	public double consumidoComprendidoEntre(LocalDateTime fechaInicio , LocalDateTime fechaFin) {
 		double totalConsumo ;
 		float totalHoras ;
@@ -192,6 +201,7 @@ public class DispositivoInteligente extends IDispositivo{
 		
 	}
 	
+	//Devuelve una lista de los estados que cumplan con cumpleCondicion y el nombre del estado sea igual a tipoDeEstado
 	public List<Estado> listaDeEstadosSegun(LocalDateTime fechaInicio , LocalDateTime fechaFin, String tipoDeEstado) {
 		List<Estado> lstEstadosSegun;
 		lstEstadosSegun = listaDeEstados.stream().filter(e -> (cumpleCondicion(e,fechaInicio,fechaFin)) 
@@ -208,10 +218,12 @@ public class DispositivoInteligente extends IDispositivo{
 		return totalConsumo;
 	}*/
 		
+	//Verifica que la fecha de inicio de un estados sea antes de fechaFin y que la fecha de inicio del estado sea despues de fechaInicio
 	public boolean cumpleCondicion(Estado e, LocalDateTime fechaInicio, LocalDateTime fechaFin) {
 		return (e.getFechaInicio().isBefore(fechaFin) && e.getFechaFin().isAfter(fechaInicio));
 	}
 	
+	//
 	public float totalDeHoras (List<Estado> lstEstados,  LocalDateTime fechaInicio, LocalDateTime fechaFin) {		
 		LocalDateTime fechaMinima;
 		LocalDateTime fechaMaxima;
@@ -334,6 +346,5 @@ public class DispositivoInteligente extends IDispositivo{
 		this.kwPorHora = kwPorHora;
 	}
 	
-
 
 }

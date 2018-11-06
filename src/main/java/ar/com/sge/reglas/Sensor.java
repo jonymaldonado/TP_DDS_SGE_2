@@ -57,9 +57,9 @@ public class Sensor {
 		//observadores.forEach(r -> r.verificarRegla(valor));
 		observadores.forEach(r -> r.verificarRegla(valor,inteligente));
 	}
-	public void notificarALosObservadores(float valor) {
+	public void notificarALosObservadores(double valor) {
 		//this.getObservadores().forEach(r -> r.verificarRegla(valor));
-		this.getObservadores().forEach(r -> r.verificarRegla(valor,inteligente));
+		this.observadores.forEach(r -> r.verificarRegla(valor,inteligente));
 		
 	}
 	
@@ -80,7 +80,7 @@ public class Sensor {
 	public void agregarObservador(Regla regla){
 		observadores.add(regla);
 	}
-	public void setValor(float unValor) {
+	public void setValor(double unValor) {
 		this.notificarALosObservadores(unValor);
 	}
 	public List<Regla> getObservadores() {

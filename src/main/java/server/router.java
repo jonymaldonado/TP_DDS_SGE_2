@@ -2,6 +2,8 @@ package server;
 
 
 import controllers.EmpresaController;
+import controllers.HogarController;
+import controllers.Registro;
 import controllers.indicadorController;
 import controllers.inicio;
 import controllers.inicioEmpresa;
@@ -26,11 +28,23 @@ public class router {
 		EmpresaController inteligenteController = new EmpresaController();
 		indicadorController indicadorController=new indicadorController();
 		metodologiaController metodologiacontroller=new metodologiaController();
+		Registro registro = new Registro();
+		HogarController hogar = new HogarController();
 		
 		Spark.get("/", inicio::inicio, engine);
 		Spark.post("/usuario", inicio::inicioUsuario, engine);
+<<<<<<< HEAD
 	//	Spark.get("/usuario/", inicioController::inicio, engine);
 		/*Spark.post("/usuario/periodos", empresaController::listarPeriodos, engine);
+=======
+		Spark.get("/registro",registro::index,engine);
+		Spark.post("/usuario/create",registro::create,engine);
+		Spark.get("/registroHogar",hogar::index,engine);
+		Spark.post("/hogar/create",hogar::create,engine);
+		Spark.get("/hogar/listarDispositivos/:id",hogar::listarDispositivos,engine);
+		/*Spark.get("/usuario/empresas_indicadores", inicioController::inicio, engine);
+		Spark.post("/usuario/periodos", empresaController::listarPeriodos, engine);
+>>>>>>> d4e89853323217c06dff1ab9937bdb95e065bbae
 		Spark.post("/usuario/indicadores", indicadorController::mostrarformula, engine);
 		Spark.post("/usuario/resultado", indicadorController::mostrarResultado, engine);
 		//Spark.post("/taxativaconsulta", metodologiacontroller::mostrarConsulta, engine);

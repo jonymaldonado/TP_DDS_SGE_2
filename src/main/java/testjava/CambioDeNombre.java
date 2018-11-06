@@ -61,7 +61,7 @@ public class CambioDeNombre {
 		tv.setSensor(sensor1);
 		lavarropa.setSensor(sensor2);
 		categoria1=new Categoria("residencial",12,1);
-		cliente1=new Cliente("tomas","perez","dni",123212,482122,categoria1,0,41,42);
+		cliente1=new Cliente("tomas","perez","dni",123212,482122,categoria1,41,42);
 		cliente1.agregarDispositivosInteligentes(tv);
 		cliente1.agregarDispositivosInteligentes(lavarropa);
 		cliente1.setNombre_usuario("tomi");

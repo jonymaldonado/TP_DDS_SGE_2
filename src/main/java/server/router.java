@@ -33,10 +33,6 @@ public class router {
 		
 		Spark.get("/", inicio::inicio, engine);
 		Spark.post("/usuario", inicio::inicioUsuario, engine);
-<<<<<<< HEAD
-	//	Spark.get("/usuario/", inicioController::inicio, engine);
-		/*Spark.post("/usuario/periodos", empresaController::listarPeriodos, engine);
-=======
 		Spark.get("/registro",registro::index,engine);
 		Spark.post("/usuario/create",registro::create,engine);
 		Spark.get("/registroHogar",hogar::index,engine);
@@ -44,7 +40,6 @@ public class router {
 		Spark.get("/hogar/listarDispositivos/:id",hogar::listarDispositivos,engine);
 		/*Spark.get("/usuario/empresas_indicadores", inicioController::inicio, engine);
 		Spark.post("/usuario/periodos", empresaController::listarPeriodos, engine);
->>>>>>> d4e89853323217c06dff1ab9937bdb95e065bbae
 		Spark.post("/usuario/indicadores", indicadorController::mostrarformula, engine);
 		Spark.post("/usuario/resultado", indicadorController::mostrarResultado, engine);
 		//Spark.post("/taxativaconsulta", metodologiacontroller::mostrarConsulta, engine);

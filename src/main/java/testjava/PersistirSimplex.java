@@ -43,7 +43,7 @@ public class PersistirSimplex {
 			EntityTransaction transaction = entityManager.getTransaction();
 			transaction.begin();
 			categoria1=new Categoria("residencial",12,1);
-			cliente1=new Cliente("tomas","perez","dni",123212,482122,categoria1,0,41,42);
+			cliente1=new Cliente("tomas","perez","dni",123212,482122,categoria1,41,42);
 			tv =new DispositivoInteligente("LCD 40", 0.18);
 			tv.setMinimoconsumo(90);
 			tv.setMaximoconsumo(370);
@@ -59,7 +59,7 @@ public class PersistirSimplex {
 			entityManager.persist(cliente1);
 			
 			//prototype
-			clientenuevo=new Cliente("lucas", "lopez", "dni",4232342,4321432, categoria1, 0, 42, 21);
+			clientenuevo=new Cliente("lucas", "lopez", "dni",4232342,4321432, categoria1, 42, 21);
 			repositorio=new repositorioDispositivo();
 			Aire2200=new DispositivoInteligente("aire2200",1.013); 
 			tv32=new DispositivoInteligente("tv32", 0.055);

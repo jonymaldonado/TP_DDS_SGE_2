@@ -216,13 +216,8 @@ public class TestPersistenciaCliente {
 		//entityManager.persist(cliente1);//guardar registro en base de datos
 		entityManager.persist(cliente2);
 		*/
-<<<<<<< HEAD
 		
 		/*Query query=entityManager.createQuery("select t from Transformador t ");
-=======
-		/*
-		Query query=entityManager.createQuery("select t from Transformador t ");
->>>>>>> d4e89853323217c06dff1ab9937bdb95e065bbae
 		List<Transformador> listaclientesbase=(List<Transformador>)query.getResultList();
 		String apellido="lope";
 
@@ -234,8 +229,6 @@ public class TestPersistenciaCliente {
 		//termina la transaccion
 	}*/
 	
-<<<<<<< HEAD
-	
 	@Test
 	public void TestPersistirRepo() {
 		EntityTransaction transaction = entityManager.getTransaction();
@@ -245,7 +238,8 @@ public class TestPersistenciaCliente {
 		repo.agregar(aire);
 		entityManager.persist(repo);
 		transaction.commit();
-=======
+	}
+
 	@Test
 	public void TestPersistirCliente() {
 		EntityTransaction transaction = entityManager.getTransaction();
@@ -268,6 +262,5 @@ public class TestPersistenciaCliente {
 		
 		transaction.commit();
 		//termina la transaccion
->>>>>>> d4e89853323217c06dff1ab9937bdb95e065bbae
 	}
 }

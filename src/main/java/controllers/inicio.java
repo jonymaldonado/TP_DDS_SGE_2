@@ -29,24 +29,6 @@ private Map<String,T> model=new HashMap<String,T>();
 	}
 	
 	public ModelAndView inicioUsuario(Request req, Response res)throws IOException{
-<<<<<<< HEAD
-		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
-		EntityTransaction transaction = entityManager.getTransaction();
-		//transaction.begin();
-
-		String usuarioBuscado = req.queryParams("usuario");
-		String contraseñaBuscado = req.queryParams("clave");
-
-		List<Cliente> listaclientesbase=(List<Cliente>) entityManager.createQuery("from Usuario where contrasenia='"+contraseñaBuscado+"'").getResultList(); 
-		Cliente clientebase=listaclientesbase.get(0);
-		
-		
-		model.put("usuario", clientebase);
-		model.put("listainteligentes", clientebase.getLstDispositivosInteligentes());
-		model.put("listaestandar", clientebase.getLstDispositivosEstandares());
-	
-		return new ModelAndView(model, "usuario.hbs");
-=======
 		
 		try {
 			EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
@@ -86,8 +68,6 @@ private Map<String,T> model=new HashMap<String,T>();
 			return new ModelAndView(model,"inicio.hbs");
 		}
 		
-		
->>>>>>> d4e89853323217c06dff1ab9937bdb95e065bbae
 	}
 
 }

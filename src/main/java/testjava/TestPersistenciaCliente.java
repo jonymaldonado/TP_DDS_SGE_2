@@ -68,13 +68,13 @@ public class TestPersistenciaCliente {
 		cliente1.agregarDispositivosInteligentes(lavarropa);
 		cliente1.setNombre_usuario("tomi");
 		cliente1.setContrasenia("1234");
-		aire =new DispositivoInteligente("bgh ", 0.18);
+		aire =new DispositivoInteligente("bgh", 0.18);
 		aire.setMinimoconsumo(90);
 		aire.setMaximoconsumo(370);
 		repo=new repositorioDispositivo();
-		/*repo.agregar(lavarropa);
-		repo.agregar(tv);
-		repo.agregar(aire);*/
+		//repo.agregar(lavarropa);
+		//repo.agregar(tv);
+		repo.agregar(aire);
 		
 		//cliente1.agregarDispositivosEstandares(ventilador);
 		
@@ -132,8 +132,8 @@ public class TestPersistenciaCliente {
 		
 		
 		transaction.commit();
-	}*/
-	/*
+	}
+	
 	@Test
 	public void TestRecuperar() {
 		EntityTransaction transaction = entityManager.getTransaction();
@@ -159,8 +159,8 @@ public class TestPersistenciaCliente {
 		transaction.commit();
 		
 		
-	}*/
-	/*
+	}
+	
 	@Test
 	public void cambioDeAccion() {
 		EntityTransaction transaction = entityManager.getTransaction();
@@ -185,15 +185,15 @@ public class TestPersistenciaCliente {
 		
 		
 		
-	}*/
+	}
 	
-	/*
+	
 	@SuppressWarnings({ "unused", "unchecked" })
 	@Test
 	public void TestPersistirCliente() {
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
-	/*	Zona unazona =new Zona();
+		Zona unazona =new Zona();
 		unazona.setNombreDeLaZona("boedo");
 		unazona.setRadioEnMetros(24);
 		Coordenada coordenada1=new Coordenada(45.2, 48.2);
@@ -215,7 +215,7 @@ public class TestPersistenciaCliente {
 		 
 		//entityManager.persist(cliente1);//guardar registro en base de datos
 		entityManager.persist(cliente2);
-		*/
+		
 		
 		/*Query query=entityManager.createQuery("select t from Transformador t ");
 		List<Transformador> listaclientesbase=(List<Transformador>)query.getResultList();
@@ -227,8 +227,8 @@ public class TestPersistenciaCliente {
 		//entityManager.createQuery("from usuario").executeUpdate();
 		transaction.commit();
 		//termina la transaccion
-	}*/
-	
+	}
+	*//*
 	@Test
 	public void TestPersistirRepo() {
 		EntityTransaction transaction = entityManager.getTransaction();
@@ -238,8 +238,8 @@ public class TestPersistenciaCliente {
 		repo.agregar(aire);
 		entityManager.persist(repo);
 		transaction.commit();
-	}
-
+	}*/
+/*
 	@Test
 	public void TestPersistirCliente() {
 		EntityTransaction transaction = entityManager.getTransaction();
@@ -262,5 +262,32 @@ public class TestPersistenciaCliente {
 		
 		transaction.commit();
 		//termina la transaccion
+	}*/
+	/*
+	@Test
+	public void TestPersistirDispo() {
+		EntityTransaction transaction = entityManager.getTransaction();
+		transaction.begin();
+		DispositivoInteligente b = new DispositivoInteligente("CTMR", 0.875);
+		entityManager.persist(b);
+		transaction.commit();
+	}*/
+	
+	@Test
+	public void TestPersistirDispo() throws CloneNotSupportedException {
+		EntityTransaction transaction = entityManager.getTransaction();
+		transaction.begin();
+		Cliente clientebase = entityManager.find(Cliente.class,1);
+		DispositivoInteligente dispo = (DispositivoInteligente) entityManager.createNativeQuery("select * from dispositivo where nombre = 'bgh'",DispositivoInteligente.class).getResultList().get(0);
+		//repositorioDispositivo repobase=entityManager.find(repositorioDispositivo.class,2);
+		//DispositivoInteligente dispo = repobase.
+		System.out.println(dispo.getNombre()+" "+dispo.getId_Dispositivo());
+		//DispositivoInteligente dispositivo = (DispositivoInteligente) dispo.clone();
+		DispositivoInteligente dispositivo = new DispositivoInteligente(dispo.getNombre(),dispo.getKwPorHora());
+		//dispositivo.setId_Dispositivo(15);
+		//entityManager.persist(dispositivo);
+		System.out.println("soy el nuevo "+dispositivo.getNombre()+" "+dispositivo.getId_Dispositivo());
+		clientebase.agregarDispositivosInteligentes(dispositivo);
+		transaction.commit();
 	}
 }

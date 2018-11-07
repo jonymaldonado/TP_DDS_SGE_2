@@ -1,5 +1,5 @@
 {{#partial "contenido"}}
-<<<<<<< HEAD
+
 <header>
 
 	<nav class="navbar navbar-default navbar-light bg-light">
@@ -74,42 +74,5 @@
 	</div>
 </div>
 	
-=======
-<script>
-	var a = document.querySelector('#test');
-	a.innerHTML = "Bienvenido "+'{{cliente}}';
-</script>
-	
-<div class="container">
-  <h2>Lista de Usuarios</h2>          
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-      	<th>Nombre Usuario</th>
-        <th>Nombre</th>
-        <th>Apellido</th>
-        <th>Tipo Documento</th>
-        <th>Numero Documento</th>
-        <th>Telefono</th>
-        <th>Puntos</th>
-      </tr>
-    </thead>
-    <tbody>
-    {{#each lista}}
-    	<tr>
-    	<td>{{nombre_usuario}}</td>
-        <td>{{nombre}}</td>
-		<td>{{apellido}}</td>
-		<td>{{tipoDoc}}</td>
-		<td>{{numeroDoc}}</td>
-		<td>{{telefono}}</td>
-		<td>{{puntos}}</td>
-		</tr>
-     {{/each}}
-    </tbody>
-  </table>
-</div>
-	
->>>>>>> d4e89853323217c06dff1ab9937bdb95e065bbae
 {{/partial}}
 {{>base.hbs}}

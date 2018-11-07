@@ -80,7 +80,7 @@ public class Cliente extends Usuario {
 		this.numeroDoc = numeroDoc;
 		this.telefono = telefono;
 		this.puntos = 0;
-		this.tipo_usuario = "cliente";
+		//this.tipo_usuario = "cliente";
 		this.hogares = new ArrayList<>();
 	}
 	

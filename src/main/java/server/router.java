@@ -3,6 +3,7 @@ package server;
 
 import controllers.EmpresaController;
 import controllers.HogarController;
+import controllers.MapaController;
 import controllers.Registro;
 import controllers.indicadorController;
 import controllers.inicio;
@@ -30,7 +31,9 @@ public class router {
 		metodologiaController metodologiacontroller=new metodologiaController();
 		Registro registro = new Registro();
 		HogarController hogar = new HogarController();
+		MapaController mapa = new MapaController();
 		
+		Spark.get("/Mapa", mapa::verMapa, engine);
 		Spark.get("/", inicio::inicio, engine);
 		Spark.post("/usuario", inicio::inicioUsuario, engine);
 		Spark.get("/registro",registro::index,engine);

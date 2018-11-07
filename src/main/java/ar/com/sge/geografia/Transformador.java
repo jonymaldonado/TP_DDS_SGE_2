@@ -53,6 +53,14 @@ public class Transformador {
 
 		this.listaDeclientesConectados = new ArrayList <>(); 
 	}//constructor
+	public Coordenada getCoordenada() {
+		return coordenada;
+	}
+
+	public void setCoordenada(Coordenada coordenada) {
+		this.coordenada = coordenada;
+	}
+
 	public Transformador(int id,double lat,double longitud,Zona unazona){
 		this.setIdtransformador(id);
 		this.setZona(unazona);

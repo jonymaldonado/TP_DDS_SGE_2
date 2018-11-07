@@ -37,6 +37,11 @@ public class Sensor {
 		this.observadores = new ArrayList<>();
 	}
 	
+	public Sensor(String comparador,float valor,String accion) {
+		this.observadores = new ArrayList<>();
+		this.agregarObservador(new Regla(comparador,valor,accion));
+	}
+	
 	public void activate(DispositivoInteligente dispositivo,int horas){
 		programarTarea(dispositivo, horas);
 	}

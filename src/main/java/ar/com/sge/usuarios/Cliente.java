@@ -325,5 +325,20 @@ public class Cliente extends Usuario {
 		this.transformador = transformador;
 	}
 	
-
+	public List<Double> ResultadoSimplex() {
+		PointValuePair solucion = this.consultarASimplex();
+		List<Double> resultado = new ArrayList<>();
+		for(int a = this.getLstDispositivosInteligentes().size() - 1; a>=0; a--) {
+		resultado.add(solucion.getPoint()[a]);
+	}
+		return resultado;
+	}	
+	
+	public List<Double> ConsumoActualDispositivos(){
+		List<Double> consumoActual = new ArrayList();
+		for (DispositivoInteligente inteligente : this.getLstDispositivosInteligentes()) {
+			consumoActual.add(inteligente.consumoEnKw());
+		}
+		return consumoActual;
+	}
 }

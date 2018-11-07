@@ -170,7 +170,9 @@ public class DispositivoInteligente extends IDispositivo{
 	
 	//consumo en lo que va del mes
 	public double consumoEnKw() {
-		return consumidoComprendidoEntre(this.inicioPeriodo, LocalDateTime.now());		
+		LocalDateTime inicio = LocalDateTime.now();
+		LocalDateTime inicioMes = inicio.minusDays(inicio.getDayOfMonth() - 1);
+		return consumidoComprendidoEntre(inicioMes, LocalDateTime.now());		
 	}
 	
 	//Devuelve lo consumido en las N horas

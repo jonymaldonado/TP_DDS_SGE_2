@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -167,10 +168,15 @@ public ModelAndView verResultado(Request req, Response res)throws  Exception{
 
 		List<Cliente> listaclientesbase=(List<Cliente>) entityManager.createQuery("from Usuario where nombre_usuario='"+usuarioBuscado+"'").getResultList(); 
 		Cliente clientebase=listaclientesbase.get(0);
-		clientebase.consultarASimplex();
+		//clientebase.consultarASimplex();
+		System.out.println("valor simplex" + clientebase.ResultadoSimplex().get(0));
+		System.out.println("valor simplex" + clientebase.ResultadoSimplex().get(1));
+		List<Double> listaDeConsumoActual = new ArrayList<>();
 		model.clear();
+		model.put("consumo", clientebase.ConsumoActualDispositivos());
 		model.put("usuario", clientebase);
-		model.put("listaestandar", clientebase.getLstDispositivosEstandares());
+		model.put("resultado", clientebase.ResultadoSimplex());
+		model.put("listainteligente", clientebase.getLstDispositivosInteligentes());
 	//	Empresa empresa = repo.getEmpresa(empresaBuscado);
 		
 		//Periodo periodo=empresa.getPeriodoByName(inicio, fin,anio);
@@ -178,7 +184,7 @@ public ModelAndView verResultado(Request req, Response res)throws  Exception{
 		
 		//model.put("periodo", periodo);
 		//model.put("cuentas", periodo.getCuentas());
-		return new ModelAndView(model, "detallePeriodo.hbs");
+		return new ModelAndView(model, "resultadoSimplex.hbs");
 }
 
 

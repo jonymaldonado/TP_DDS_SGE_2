@@ -48,6 +48,7 @@ public class router {
 		Spark.get("/usuario/cargarMetodologia/:usuario", metodologiacontroller::cargarMetodologia, engine);*/
 		Spark.get("/usuario/:usuario/inteligentes",inteligenteController::verdetalleInteligente,engine);
 		Spark.get("/usuario/:usuario/standar",inteligenteController::verdetalleStandar,engine);
+		Spark.get("/usuario/:usuario/resultado",inteligenteController::verResultado,engine);
 		//Spark.get("/usuario/periodoDetalle/:empresa/:mesinicio/:mesfin/:anio", empresaController::verdetalleVenta2,engine);
 		//Spark.post("/periodoDetalle", empresaController::verdetalleVenta, engine);
 	}

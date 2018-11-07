@@ -31,7 +31,7 @@ import ar.com.sge.usuarios.Usuario;
 public class TestPersistenciaCliente {
 	
 	private EntityManager entityManager ;
-	private DispositivoInteligente tv , lavarropa,aire;
+	private DispositivoInteligente tv , lavarropa,aire2;
 	private DispositivoEstandar ventilador;
 	private Categoria categoria1;
 	private Cliente cliente1,clientenuevo;
@@ -68,9 +68,9 @@ public class TestPersistenciaCliente {
 		cliente1.agregarDispositivosInteligentes(lavarropa);
 		cliente1.setNombre_usuario("tomi");
 		cliente1.setContrasenia("1234");
-		aire =new DispositivoInteligente("bgh ", 0.18);
-		aire.setMinimoconsumo(90);
-		aire.setMaximoconsumo(370);
+		aire2 =new DispositivoInteligente("lg", 0.18);
+		aire2.setMinimoconsumo(90);
+		aire2.setMaximoconsumo(370);
 		repo=new repositorioDispositivo();
 		/*repo.agregar(lavarropa);
 		repo.agregar(tv);
@@ -235,12 +235,12 @@ public class TestPersistenciaCliente {
 		transaction.begin();
 		//repo.agregar(lavarropa);
 		//repo.agregar(tv);
-		repo.agregar(aire);
+		repo.agregar(aire2);
 		entityManager.persist(repo);
 		transaction.commit();
 	}
 
-	@Test
+	/*@Test
 	public void TestPersistirCliente() {
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
@@ -262,5 +262,5 @@ public class TestPersistenciaCliente {
 		
 		transaction.commit();
 		//termina la transaccion
-	}
+	}*/
 }

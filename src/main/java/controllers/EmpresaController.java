@@ -82,7 +82,7 @@ public class EmpresaController {
 		
 		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
 		EntityTransaction transaction = entityManager.getTransaction();
-		//transaction.begin();
+		transaction.begin();
 
 		//String usuarioBuscado = req.queryParams("usuario");
 		//String contraseñaBuscado = req.queryParams("clave");
@@ -92,7 +92,7 @@ public class EmpresaController {
 		String nombreinteligente = req.queryParams("nombreinteligente");
 		String regla = req.queryParams("regla");
 		String valor = req.queryParams("valor");
-		repositorioDispositivo repobase=entityManager.find(repositorioDispositivo.class,2);
+		repositorioDispositivo repobase=entityManager.find(repositorioDispositivo.class,3);
 		
 		List<Cliente> listaclientesbase=(List<Cliente>) entityManager.createQuery("from Usuario where nombre_usuario='"+usuarioBuscado+"'").getResultList(); 
 		Cliente clientebase=listaclientesbase.get(0);
@@ -100,7 +100,10 @@ public class EmpresaController {
 			
 			System.out.println("nombre "+nombreinteligente+repobase.getListaActualInteligentes().get(0).getNombre());
 		repobase.seleccionarInteligente(clientebase, nombreinteligente);
+		//transaction.commit();
 		}
+		//transaction.commit();
+		
 		model.clear();
 		model.put("usuario", clientebase);
 		model.put("listainteligentes", clientebase.getLstDispositivosInteligentes());
@@ -110,9 +113,7 @@ public class EmpresaController {
 		
 		//Periodo periodo=empresa.getPeriodoByName(inicio, fin,anio);
 		
-		
-		//model.put("periodo", periodo);
-		//model.put("cuentas", periodo.getCuentas());
+		transaction.commit();
 		return new ModelAndView(model, "detallePeriodo.hbs");
 	}
 	

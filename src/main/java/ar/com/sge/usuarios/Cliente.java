@@ -64,8 +64,8 @@ public class Cliente extends Usuario {
 	@JoinColumn(name = "id_Transfomador")
 	private Transformador transformador;
 	private static servicioSimplex servicio;
-	@OneToMany(cascade = {CascadeType.PERSIST})
-	private List<Hogar> hogares;
+	/*@OneToMany(cascade = {CascadeType.PERSIST})
+	private List<Hogar> hogares;*/
 	
 	
 	public Cliente() {
@@ -81,7 +81,7 @@ public class Cliente extends Usuario {
 		this.telefono = telefono;
 		this.puntos = 0;
 		//this.tipo_usuario = "cliente";
-		this.hogares = new ArrayList<>();
+		//this.hogares = new ArrayList<>();
 	}
 	
 	public Cliente(String _nombre, String _apellido, String tipoDoc, int numeroDoc, int telefono, Categoria categoria,float latitud,float longitud ) {
@@ -309,13 +309,13 @@ public class Cliente extends Usuario {
 		return servicio;
 	}
 	
-	public void agregarHogar(Hogar hogar) {
+	/*public void agregarHogar(Hogar hogar) {
 		this.hogares.add(hogar);
 	}
 	
 	public List<Hogar> getListaHogares(){
 		return this.hogares;
-	}
+	}*/
 	
 	public Transformador getTransformador() {
 		return transformador;

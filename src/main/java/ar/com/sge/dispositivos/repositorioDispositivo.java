@@ -90,10 +90,11 @@ public class repositorioDispositivo {
 	}
 	
 	public void seleccionarInteligente(Cliente cliente,String dispositivoSeleccionado) throws CloneNotSupportedException{
-		List<DispositivoInteligente> lstDispEnc;
-		lstDispEnc = listaActualInteligentes.stream().filter(a-> a.getNombre().equals(dispositivoSeleccionado)).collect(Collectors.toList());
-		System.out.println("nombre "+dispositivoSeleccionado+" tamaño "+listaActualInteligentes.get(0).getNombre());
-		cliente.agregarDispositivosInteligentes((DispositivoInteligente)lstDispEnc.get(0).clone());
+		List<DispositivoInteligente> listainteligente=new ArrayList<>();
+		listainteligente = this.listaActualInteligentes.stream().filter(a-> a.getNombre().equals(dispositivoSeleccionado)).collect(Collectors.toList());
+		//System.out.println("nombre "+dispositivoSeleccionado+" tamaño "+listaActualInteligentes.get(0).getNombre());
+		//System.out.println("tamaño lista" +listainteligente.size());
+		cliente.agregarDispositivosInteligentes((DispositivoInteligente)listainteligente.get(0).clone());
 		
 	}
 	

@@ -69,8 +69,8 @@ public class DispositivoInteligente extends IDispositivo{
 	/*@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "idAdministrador")	
 	private Administrador administrador;*/
-	@ManyToMany(mappedBy = "listaDispositivos")
-    private List<Hogar> hogares;
+	/*@ManyToMany(mappedBy = "listaDispositivos")
+    private List<Hogar> hogares;*/
  
 
 	public DispositivoInteligente(String nombre, double kw) {
@@ -80,7 +80,7 @@ public class DispositivoInteligente extends IDispositivo{
 		listaDeEstados = new ArrayList<Estado>();
 		this.setEstado(new Apagado());
 		//this.estado = new Apagado();
-		this.hogares = new ArrayList<>();
+		//this.hogares = new ArrayList<>();
 	}
 	
 	public DispositivoInteligente() {

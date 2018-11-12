@@ -54,7 +54,7 @@ public class Transformador {
 		this.listaDeclientesConectados = new ArrayList <>(); 
 	}//constructor
 	public Coordenada getCoordenada() {
-		return coordenada;
+		return this.coordenada;
 	}
 
 	public void setCoordenada(Coordenada coordenada) {
@@ -70,6 +70,7 @@ public class Transformador {
 	}//constructor
 	
 	public float totalDeConsumoDelTransformadores() {
+		
 		float totalDeConsumoDeCadaCliente=0;
 		for(Cliente unCliente : listaDeclientesConectados) {
 			totalDeConsumoDeCadaCliente += unCliente.consumoDeEnergia();

@@ -22,20 +22,29 @@
 		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	    attribution: ''}).addTo(mapa);
 	    {{#each listacoordenada}}
-		var marker = L.marker([{{latitud}}, {{longitud}}]).addTo(mapa)
+	    
+		//var marker = L.marker([{{latitud}}, {{longitud}}]).addTo(mapa);
+		var marker = L.marker([{{coordenada.latitud}}, {{coordenada.longitud}}]).addTo(mapa).bindPopup("<button class='btn btn-info' onclick='mostrarConsumo(\"{{idtransformador}}\")'>Ver Consumo</button>");
+		
 		{{/each}}
 		
-		function onMapClick(e) {
-		    alert("Latitud y Longitud: " + e.latlng);
+		function onMapClick(latitud) {
+		    alert(latitud);
 		}
 	});
-	function onClick(e){
-		var r = confirm("Ir a medrano?");
-		if (r == true) {
-			mapa.setView(new L.LatLng((-34.598494), (-58.420186)), parseInt(17));
-		} else {
-		    
-		}
+	function mostrarConsumo(id){
+	
+		var parametros={
+						"transformador_id": id
+						};
+		$.ajax({
+				data:parametros,
+				url:"/transformador",
+				type:"GET",
+				success:function(data){
+					alert("El consumo del transformador "+id+" es: "+data);
+				}
+		});
 	}
 </script>
 

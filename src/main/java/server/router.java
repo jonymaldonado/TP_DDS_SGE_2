@@ -5,6 +5,7 @@ import controllers.EmpresaController;
 import controllers.HogarController;
 import controllers.MapaController;
 import controllers.Registro;
+import controllers.TransformadoController;
 import controllers.indicadorController;
 import controllers.inicio;
 import controllers.inicioEmpresa;
@@ -32,6 +33,7 @@ public class router {
 		Registro registro = new Registro();
 		HogarController hogar = new HogarController();
 		MapaController mapa = new MapaController();
+		TransformadoController trans = new TransformadoController();
 		
 		Spark.get("/Mapa", mapa::verMapa, engine);
 		Spark.get("/", inicio::inicio, engine);
@@ -55,6 +57,8 @@ public class router {
 		Spark.get("/usuario/:usuario/resultado",inteligenteController::verResultado,engine);
 		//Spark.get("/usuario/periodoDetalle/:empresa/:mesinicio/:mesfin/:anio", empresaController::verdetalleVenta2,engine);
 		//Spark.post("/periodoDetalle", empresaController::verdetalleVenta, engine);
+		Spark.get("/transformador",trans::mostrarConsumo);
+		
 	}
 
 }

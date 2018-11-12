@@ -81,7 +81,7 @@ public class TestPersistenciaCliente {
 		//EntityTransaction transaction = entityManager.getTransaction();
 		
 	}
-
+/*
 
 	@Test
 	public void TestPersistirCliente() {
@@ -112,7 +112,7 @@ public class TestPersistenciaCliente {
 		
 		transaction.commit();
 		//termina la transaccion
-	}
+	}*/
 	/*
 	@Test
 	public void TestRecuperarCliente() {
@@ -186,8 +186,8 @@ public class TestPersistenciaCliente {
 		
 		
 	}
-	
-	
+	*/
+	/*
 	@SuppressWarnings({ "unused", "unchecked" })
 	@Test
 	public void TestPersistirCliente() {
@@ -217,7 +217,7 @@ public class TestPersistenciaCliente {
 		entityManager.persist(cliente2);
 		
 		
-		/*Query query=entityManager.createQuery("select t from Transformador t ");
+		Query query=entityManager.createQuery("select t from Transformador t ");
 		List<Transformador> listaclientesbase=(List<Transformador>)query.getResultList();
 		String apellido="lope";
 
@@ -227,8 +227,8 @@ public class TestPersistenciaCliente {
 		//entityManager.createQuery("from usuario").executeUpdate();
 		transaction.commit();
 		//termina la transaccion
-	}*/
-	
+	}
+	*/
 	/*@Test
 	public void TestPersistirRepo() {
 		EntityTransaction transaction = entityManager.getTransaction();

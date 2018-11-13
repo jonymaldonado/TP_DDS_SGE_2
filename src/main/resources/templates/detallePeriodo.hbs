@@ -66,7 +66,7 @@
 						}
 		$.ajax({
 				data:parametros,
-				url:"usuario/{{nombre_usuario}}/inteligentes?nombreinteligente="+$("#nombreinteligente").val()+
+				url:"usuario/{{usuario.nombre_usuario}}/inteligentes?nombreinteligente="+$("#nombreinteligente").val()+
 				"&regla="+$("#regla").val()+"&valor="+$("#valor").val()+"&accion="+$("#accion").val(),
 				type:"GET",
 				success:function(a){

@@ -58,6 +58,7 @@ public class router {
 		//Spark.get("/usuario/periodoDetalle/:empresa/:mesinicio/:mesfin/:anio", empresaController::verdetalleVenta2,engine);
 		//Spark.post("/periodoDetalle", empresaController::verdetalleVenta, engine);
 		Spark.get("/transformador",trans::mostrarConsumo);
+		Spark.get("/agregarEstandar/:usuario",inteligenteController::agregarEstandar);
 		
 	}
 

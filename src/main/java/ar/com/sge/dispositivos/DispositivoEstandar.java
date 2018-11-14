@@ -13,7 +13,7 @@ import ar.com.sge.usuarios.Cliente;
 public class DispositivoEstandar extends IDispositivo{
 	
 	private String nombre;
-	protected double kwPorHora;
+	private double kwPorHora;
 	private int horasDeUso;
 	@ManyToOne(fetch=FetchType.LAZY)
 	//@ManyToOne()

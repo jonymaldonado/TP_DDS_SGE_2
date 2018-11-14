@@ -11,6 +11,7 @@ import javax.persistence.EntityTransaction;
 
 import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 
+import ar.com.sge.dispositivos.DispositivoEstandar;
 import ar.com.sge.dispositivos.DispositivoInteligente;
 import ar.com.sge.dispositivos.repositorioDispositivo;
 import ar.com.sge.reglas.Regla;
@@ -75,9 +76,10 @@ public class EmpresaController {
 		model.put("cuentas", periodo.getCuentas());
 		return new ModelAndView(model, "detallePeriodo.hbs");
 	}*/
-public ModelAndView verdetalleInteligente(Request req, Response res)throws  Exception{
+	public ModelAndView verdetalleInteligente(Request req, Response res)throws  Exception{
 		
-		String usuarioBuscado = req.params(":usuario");	
+		String usuarioBuscado = req.params(":usuario");
+		
 		entityManager = PerThreadEntityManagers.getEntityManager();
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
@@ -108,45 +110,26 @@ public ModelAndView verdetalleInteligente(Request req, Response res)throws  Exce
 		model.put("inteligente", inteligentes);
 		model.put("listainteligentes", clientebase.getLstDispositivosInteligentes());
 		model.put("inteligentesbase", repobase.getListaActualInteligentes());
-		//model.put("listaestandar", clientebase.getLstDispositivosEstandares());
-	//	Empresa empresa = repo.getEmpresa(empresaBuscado);
 		
-		//Periodo periodo=empresa.getPeriodoByName(inicio, fin,anio);
-		
-		
-		//model.put("periodo", periodo);
-		//model.put("cuentas", periodo.getCuentas());
 		return new ModelAndView(model, "detallePeriodo.hbs");
 	}
 	
 	public ModelAndView verdetalleStandar(Request req, Response res)throws  Exception{
 		
-		String usuarioBuscado = req.params(":usuario");	
-		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
-		EntityTransaction transaction = entityManager.getTransaction();
-		//transaction.begin();
-
+		String usuarioBuscado = req.params(":usuario");
 		
-		//String contraseñaBuscado = req.queryParams("clave");
-
-		List<Cliente> listaclientesbase=(List<Cliente>) entityManager.createQuery("from Usuario where nombre_usuario='"+usuarioBuscado+"'").getResultList(); 
-		Cliente clientebase=listaclientesbase.get(0);
-		List<Integer> inteligentes=new ArrayList<>();
-		for(DispositivoInteligente inteligente:clientebase.getLstDispositivosInteligentes() ) {
-			inteligentes.add(inteligente.getId_Dispositivo());
-		}
+		entityManager = PerThreadEntityManagers.getEntityManager();
+		EntityTransaction transaction = entityManager.getTransaction();
+		
+		Cliente clientebase=(Cliente) entityManager.createNativeQuery("select * from usuario where nombre_usuario = '"+usuarioBuscado+"'", Cliente.class).getResultList().get(0);
+		
+		repositorioDispositivo repobase = entityManager.find(repositorioDispositivo.class,4);
+		
 		model.clear();
 		model.put("usuario", clientebase);
-		model.put("inteligente", inteligentes);
-		model.put("listaestandar", clientebase.getLstDispositivosEstandares());
-	//	Empresa empresa = repo.getEmpresa(empresaBuscado);
-		
-		//Periodo periodo=empresa.getPeriodoByName(inicio, fin,anio);
-		
-		
-		//model.put("periodo", periodo);
-		//model.put("cuentas", periodo.getCuentas());
-		return new ModelAndView(model, "detallePeriodo.hbs");
+		model.put("listaEstandar", clientebase.getLstDispositivosEstandares());
+		model.put("listaEstandarRepo",repobase.getListaActualEstandar());
+		return new ModelAndView(model, "dispositivoEstandar.hbs");
 	}
 
 	public ModelAndView verResultado(Request req, Response res)throws  Exception{
@@ -164,7 +147,7 @@ public ModelAndView verdetalleInteligente(Request req, Response res)throws  Exce
 		//transaction.begin();
 		
 		
-		//String contraseñaBuscado = req.queryParams("clave");
+		//String contraseï¿½aBuscado = req.queryParams("clave");
 
 		List<Cliente> listaclientesbase=(List<Cliente>) entityManager.createQuery("from Usuario where nombre_usuario='"+usuarioBuscado+"'").getResultList(); 
 		Cliente clientebase=listaclientesbase.get(0);
@@ -185,6 +168,7 @@ public ModelAndView verdetalleInteligente(Request req, Response res)throws  Exce
 		//model.put("periodo", periodo);
 		//model.put("cuentas", periodo.getCuentas());
 		return new ModelAndView(model, "resultadoSimplex.hbs");
+		
 }
 	public ModelAndView verRegla(Request req, Response res)throws  Exception{
 		
@@ -210,7 +194,7 @@ public ModelAndView verdetalleInteligente(Request req, Response res)throws  Exce
 		Cliente clientebase=(Cliente) entityManager.createNativeQuery("select * from usuario where nombre_usuario = '"+usuarioBuscado+"'", Cliente.class).getResultList().get(0);
 		//List<Integer> inteligentes=new ArrayList<>();
 		
-		//String contraseñaBuscado = req.queryParams("clave");
+		//String contraseï¿½aBuscado = req.queryParams("clave");
 
 		List<DispositivoInteligente> listaclientesbase= entityManager.createNativeQuery("select * from Dispositivo where Id_Dispositivo="+inteligenteBuscado,DispositivoInteligente.class).getResultList(); 
 		DispositivoInteligente inteligentebase=listaclientesbase.get(0);
@@ -231,6 +215,29 @@ public ModelAndView verdetalleInteligente(Request req, Response res)throws  Exce
 		//model.put("periodo", periodo);
 		//model.put("cuentas", periodo.getCuentas());
 		return new ModelAndView(model, "dispositivos.hbs");
+		
+	}
+	
+	public int agregarEstandar(Request req, Response res)throws  Exception{
+		
+		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
+		EntityTransaction transaction = entityManager.getTransaction();
+		
+		transaction.begin();
+		
+		String usuarioBuscado = req.params(":usuario");
+		
+		String nombre_dispositivo = req.queryParams("nombre_dispositivo");
+		System.out.println(nombre_dispositivo);
+		repositorioDispositivo repobase=entityManager.find(repositorioDispositivo.class,4);
+		
+		Cliente clientebase=(Cliente) entityManager.createNativeQuery("select * from usuario where nombre_usuario = '"+usuarioBuscado+"'", Cliente.class).getResultList().get(0);
+		
+		repobase.seleccionarStandar(clientebase,nombre_dispositivo);
+		
+		transaction.commit();
+		
+		return 1;
 	}
 
 }

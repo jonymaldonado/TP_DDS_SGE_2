@@ -54,7 +54,7 @@ public class Transformador {
 		this.listaDeclientesConectados = new ArrayList <>(); 
 	}//constructor
 	public Coordenada getCoordenada() {
-		return coordenada;
+		return this.coordenada;
 	}
 
 	public void setCoordenada(Coordenada coordenada) {

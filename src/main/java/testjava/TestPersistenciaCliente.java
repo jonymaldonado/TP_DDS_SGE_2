@@ -74,14 +74,14 @@ public class TestPersistenciaCliente {
 		repo=new repositorioDispositivo();
 		//repo.agregar(lavarropa);
 		//repo.agregar(tv);
-		repo.agregar(aire2);
+		//repo.agregar(aire2);
 		
 		//cliente1.agregarDispositivosEstandares(ventilador);
 		
 		//EntityTransaction transaction = entityManager.getTransaction();
 		
 	}
-
+/*
 
 	@Test
 	public void TestPersistirCliente() {
@@ -112,7 +112,7 @@ public class TestPersistenciaCliente {
 		
 		transaction.commit();
 		//termina la transaccion
-	}
+	}*/
 	/*
 	@Test
 	public void TestRecuperarCliente() {
@@ -186,8 +186,8 @@ public class TestPersistenciaCliente {
 		
 		
 	}
-	
-	
+	*/
+	/*
 	@SuppressWarnings({ "unused", "unchecked" })
 	@Test
 	public void TestPersistirCliente() {
@@ -217,7 +217,7 @@ public class TestPersistenciaCliente {
 		entityManager.persist(cliente2);
 		
 		
-		/*Query query=entityManager.createQuery("select t from Transformador t ");
+		Query query=entityManager.createQuery("select t from Transformador t ");
 		List<Transformador> listaclientesbase=(List<Transformador>)query.getResultList();
 		String apellido="lope";
 
@@ -227,8 +227,8 @@ public class TestPersistenciaCliente {
 		//entityManager.createQuery("from usuario").executeUpdate();
 		transaction.commit();
 		//termina la transaccion
-	}*/
-	
+	}
+	*/
 	/*@Test
 	public void TestPersistirRepo() {
 		EntityTransaction transaction = entityManager.getTransaction();
@@ -272,7 +272,7 @@ public class TestPersistenciaCliente {
 		entityManager.persist(b);
 		transaction.commit();
 	}*/
-	
+	/*
 	@Test
 	public void TestPersistirDispo() throws CloneNotSupportedException {
 		EntityTransaction transaction = entityManager.getTransaction();
@@ -288,6 +288,22 @@ public class TestPersistenciaCliente {
 		//entityManager.persist(dispositivo);
 		System.out.println("soy el nuevo "+dispositivo.getNombre()+" "+dispositivo.getId_Dispositivo());
 		clientebase.agregarDispositivosInteligentes(dispositivo);
+		transaction.commit();
+	}*/
+	
+	@Test
+	public void insertDispositivosEstandarRepo() {
+		EntityTransaction transaction = entityManager.getTransaction();
+		transaction.begin();
+		DispositivoEstandar pc =new DispositivoEstandar("pc", 0.25);
+		DispositivoEstandar televisor =new DispositivoEstandar("televisor", 0.20);
+		DispositivoEstandar plancha =new DispositivoEstandar("plancha", 0.40);
+		//DispositivoEstandar lampara =new DispositivoEstandar("Lámpara", 0.35);
+		//repo.agregarStandar(lampara);
+		repo.agregarStandar(pc);
+		repo.agregarStandar(televisor);
+		repo.agregarStandar(plancha);
+		entityManager.persist(repo);
 		transaction.commit();
 	}
 }

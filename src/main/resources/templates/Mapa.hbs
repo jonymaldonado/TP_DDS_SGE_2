@@ -1,0 +1,56 @@
+{{#partial "contenido"}}
+
+<header>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
+
+</header>
+
+	<div>
+		<button style="float:right" type="button" onclick="window.history.back()" class="btn btn-danger"><i class="fa fa-arrow-left"></i> Volver</button>
+	</div>
+	</br></br>
+	 <div id="mapa" style="height: 500px">	
+	 </div>
+	 
+<script type="text/javascript">
+	$( document ).ready(function() {
+		mapa = L.map('mapa', {
+	    center: [-34.598313, -58.463745],
+	    zoom: 10,  
+	    minZoom: 4,
+	    maxZoom:17,
+	    zoomControl:true 
+		});
+		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	    attribution: ''}).addTo(mapa);
+	    {{#each listacoordenada}}
+	    
+		//var marker = L.marker([{{latitud}}, {{longitud}}]).addTo(mapa);
+		var marker = L.marker([{{coordenada.latitud}}, {{coordenada.longitud}}]).addTo(mapa).bindPopup("<button class='btn btn-info' onclick='mostrarConsumo(\"{{idtransformador}}\")'>Ver Consumo</button>");
+		
+		{{/each}}
+		
+		function onMapClick(latitud) {
+		    alert(latitud);
+		}
+	});
+	function mostrarConsumo(id){
+	
+		var parametros={
+						"transformador_id": id
+						};
+		$.ajax({
+				data:parametros,
+				url:"/transformador",
+				type:"GET",
+				success:function(data){
+					alert("El consumo del transformador "+id+" es: "+data);
+				}
+		});
+	}
+</script>
+
+{{/partial}}
+{{>base.hbs}}

@@ -8,50 +8,84 @@ import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import ar.com.sge.estados.Apagado;
 import ar.com.sge.estados.Estado;
+import ar.com.sge.reglas.Actuador;
 import ar.com.sge.reglas.Sensor;
 import ar.com.sge.usuarios.Administrador;
+import ar.com.sge.usuarios.Cliente;
+import ar.com.sge.usuarios.Hogar;
+
 
 @Entity
-@Table(name ="Inteligentes")
+@DiscriminatorValue("inteligente")
 
-public class DispositivoInteligente implements IDispositivo{
+public class DispositivoInteligente extends IDispositivo{
 
-	@Id
+	/*@Id
 	@GeneratedValue
-	private int id_inteligente;
-	@Column(name="Nombre",nullable=false,length=50)
+	private int id_inteligente;*/
+	//@Column(name="Nombre",nullable=false,length=50)
 	private String nombre;
 	private double kwPorHora;
+	@Column(nullable=true)
 	private Boolean encendido ;
+	@OneToOne(cascade={CascadeType.ALL})
+	//@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY)
+	@JoinColumn(name="id_estado1")
+	//@OneToOne(cascade={CascadeType.ALL},fetch=FetchType.LAZY,mappedBy="inteligente")
 	private Estado estado;
-	@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY,mappedBy="inteligente")
-	private List<Estado> listaDeEstados = new ArrayList<Estado>();
-	private static final float coeficienteAhorroEnergia = (float) 0.6;
+	//@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY,mappedBy="inteligente")
+	@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY)
+	@JoinColumn(name="id_estado")
+	private List<Estado> listaDeEstados;
+	//private static final float coeficienteAhorroEnergia = (float) 0.6;
+	private double coeficienteAhorroEnergia;
 	private LocalDateTime inicioPeriodo;
 	private double maximoconsumo;
 	private double minimoconsumo;
+	@OneToOne(cascade={CascadeType.ALL},fetch=FetchType.LAZY,mappedBy="inteligente")
 	private Sensor sensor;
+	@OneToOne(cascade={CascadeType.ALL},fetch=FetchType.LAZY,mappedBy="inteligente")
+	private Actuador actuador;
 	private boolean apagarPorSimplex;
 	private boolean estadoDispositivo;
 	@ManyToOne(fetch=FetchType.LAZY)
+	//@ManyToOne()
+	@JoinColumn(name = "id_Usuario")
+	private Cliente cliente;
+	/*@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "idAdministrador")	
-	private Administrador administrador;
+	private Administrador administrador;*/
+	/*@ManyToMany(mappedBy = "listaDispositivos")
+    private List<Hogar> hogares;*/
+ 
 
 	public DispositivoInteligente(String nombre, double kw) {
 		this.nombre = nombre;
 		this.kwPorHora = kw;
-		this.estado = new Apagado();
+		coeficienteAhorroEnergia=0.6;
+		listaDeEstados = new ArrayList<Estado>();
+		this.setEstado(new Apagado());
+		//this.estado = new Apagado();
+		//this.hogares = new ArrayList<>();
+	}
+	
+	public DispositivoInteligente() {
+		listaDeEstados = new ArrayList<>();
+		this.setEstado(new Apagado());
 	}
 	@Override
 	public IDispositivo clone() throws CloneNotSupportedException{
@@ -75,6 +109,7 @@ public class DispositivoInteligente implements IDispositivo{
 	public double getMaximoconsumo() {
 		return maximoconsumo;
 	}
+	
 	public void setMaximoconsumo(double maximoconsumo) {
 		this.maximoconsumo = maximoconsumo;
 	}
@@ -86,42 +121,43 @@ public class DispositivoInteligente implements IDispositivo{
 	}
 	public void setEstado(Estado e) {
 		this.estado = e;
+		//e.setInteligente(this);
 	}
 	
 	public List<Estado> getEstados(){
 		return this.listaDeEstados;
 	}
-	/*
-	public void getEstados(){
-		//return this.listaDeEstados;
-		for(Estado e: listaDeEstados) {
-			System.out.println(e.getNombre());
-		}
-	}*/
 	
 	public Estado getEstado() {
 		return estado;
 	}
 
+	//Enciende el Dispositivo
 	public void encender() {
 		estado.encender(this);
 	}
 
+	//Apaga el Dispositivo
 	public void apagar() {
 		estado.apagar(this);
 	}
 
+	//Pone el Dispositivo en Modo Ahorro de Energia
 	public void ahorroDeEnergia() {
 		estado.ahorroDeEnergia(this);
 	}
 
+	//Devuelve si esta encendido
 	public Boolean estasEncendido() {
 		return this.estadoDispositivo;
 	}
+	
+	//Devuelve si esta apagado
 	public Boolean estasApagado() {
 		return this.estadoDispositivo;
 	}
 
+	//Agrega un estado a la lista de estados
 	public void agregarEstado(Estado e) {
 		listaDeEstados.add(e);
 	}
@@ -136,15 +172,19 @@ public class DispositivoInteligente implements IDispositivo{
 	
 	//consumo en lo que va del mes
 	public double consumoEnKw() {
-		return consumidoComprendidoEntre(this.inicioPeriodo, LocalDateTime.now());		
+		LocalDateTime inicio = LocalDateTime.now();
+		LocalDateTime inicioMes = inicio.minusDays(inicio.getDayOfMonth() - 1);
+		return consumidoComprendidoEntre(inicioMes, LocalDateTime.now());		
 	}
-			
+	
+	//Devuelve lo consumido en las N horas
 	public double consumidoUltimasNhoras (int cantHoras) {
 		LocalDateTime fechaInicio = LocalDateTime.now().minusHours(cantHoras);
 		LocalDateTime fechaFin = LocalDateTime.now();
 		return this.consumidoComprendidoEntre(fechaInicio, fechaFin);
 	}
 	
+	//Devuelve lo que consumio el Dispotivo entre dos fechas
 	public double consumidoComprendidoEntre(LocalDateTime fechaInicio , LocalDateTime fechaFin) {
 		double totalConsumo ;
 		float totalHoras ;
@@ -165,6 +205,7 @@ public class DispositivoInteligente implements IDispositivo{
 		
 	}
 	
+	//Devuelve una lista de los estados que cumplan con cumpleCondicion y el nombre del estado sea igual a tipoDeEstado
 	public List<Estado> listaDeEstadosSegun(LocalDateTime fechaInicio , LocalDateTime fechaFin, String tipoDeEstado) {
 		List<Estado> lstEstadosSegun;
 		lstEstadosSegun = listaDeEstados.stream().filter(e -> (cumpleCondicion(e,fechaInicio,fechaFin)) 
@@ -181,10 +222,12 @@ public class DispositivoInteligente implements IDispositivo{
 		return totalConsumo;
 	}*/
 		
+	//Verifica que la fecha de inicio de un estados sea antes de fechaFin y que la fecha de inicio del estado sea despues de fechaInicio
 	public boolean cumpleCondicion(Estado e, LocalDateTime fechaInicio, LocalDateTime fechaFin) {
 		return (e.getFechaInicio().isBefore(fechaFin) && e.getFechaFin().isAfter(fechaInicio));
 	}
 	
+	//
 	public float totalDeHoras (List<Estado> lstEstados,  LocalDateTime fechaInicio, LocalDateTime fechaFin) {		
 		LocalDateTime fechaMinima;
 		LocalDateTime fechaMaxima;
@@ -224,6 +267,7 @@ public class DispositivoInteligente implements IDispositivo{
 	
 	public void setSensor(Sensor sensor) {
 		this.sensor = sensor;
+		sensor.setInteligente(this);
 	}
 
 	//activo el sensor y como parametro le indico las cada cuantas horas se va a ejecutar
@@ -232,7 +276,7 @@ public class DispositivoInteligente implements IDispositivo{
 	}
 	
 	public void desactivarSensor() {
-		sensor.desactivate();
+		//sensor.desactivate();
 	}
 	
 	public void activarApagadoAutomaticoSimplex() {
@@ -250,6 +294,61 @@ public class DispositivoInteligente implements IDispositivo{
 	public void setEstadoDipositivo(boolean valor) {
 		this.estadoDispositivo = valor;
 	}
-
+	public Actuador getActuador() {
+		return actuador;
+	}
+	public void setActuador(Actuador acuador) {
+		this.actuador = acuador;
+		actuador.setInteligente(this);
+	}
+	public boolean isEstadoDispositivo() {
+		return estadoDispositivo;
+	}
+	public void setEstadoDispositivo(boolean estadoDispositivo) {
+		this.estadoDispositivo = estadoDispositivo;
+	}
+	public Sensor getSensor() {
+		return sensor;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public Boolean getEncendido() {
+		return encendido;
+	}
+	public void setEncendido(Boolean encendido) {
+		this.encendido = encendido;
+	}
+	public List<Estado> getListaDeEstados() {
+		return listaDeEstados;
+	}
+	public void setListaDeEstados(List<Estado> listaDeEstados) {
+		this.listaDeEstados = listaDeEstados;
+	}
+	public boolean isApagarPorSimplex() {
+		return apagarPorSimplex;
+	}
+	public void setApagarPorSimplex(boolean apagarPorSimplex) {
+		this.apagarPorSimplex = apagarPorSimplex;
+	}
+	public Cliente getCliente() {
+		return cliente;
+	}
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+	/*public Administrador getAdministrador() {
+		return administrador;
+	}
+	public void setAdministrador(Administrador administrador) {
+		this.administrador = administrador;
+	}*/
+	public double getCoeficienteahorroenergia() {
+		return coeficienteAhorroEnergia;
+	}
+	public void setKwPorHora(double kwPorHora) {
+		this.kwPorHora = kwPorHora;
+	}
+	
 
 }

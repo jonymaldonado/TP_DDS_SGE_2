@@ -1,0 +1,25 @@
+{{#partial "contenido"}}
+	<h2> consulta {{metodologiataxativa.nombre}} en  {{empresa.nombre}} </h2>
+	
+
+	<div class="table-responsive">
+	<table class="table">
+		<tr>
+			<th>nombreMetodologia</th>
+			<th>nombreEmpresa</th>
+			<th>invertir?</th>
+			
+		</tr>
+		
+		<tr>
+			<td>{{metodologiataxativa.nombre}}</td>
+			<td>{{empresa.nombre}}</td>
+			<td>{{respuesta}}</td>
+			
+			
+		</tr>
+		
+	</table>
+	</div>
+{{/partial}}
+{{>base.hbs}}

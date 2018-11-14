@@ -1,21 +1,30 @@
 package ar.com.sge.comandos;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 import ar.com.sge.dispositivos.DispositivoInteligente;
 
-public class ComandoApagar implements Comando {
+
+@Entity
+@DiscriminatorValue("apagar")
+public class ComandoApagar extends Comando {
 
 	private String nombreComando;
-	private DispositivoInteligente dispositivo;
+	//private DispositivoInteligente dispositivo;
 	
 	
 	
 	public ComandoApagar(String nombreComando, DispositivoInteligente dispositivo) {
 		
 		this.nombreComando = nombreComando;
-		this.dispositivo = dispositivo;
+		//this.dispositivo = dispositivo;
 	}
 
-	public void ejecutar() {
+	public ComandoApagar() {
+		
+	}
+	public void ejecutar(DispositivoInteligente dispositivo) {
 		dispositivo.apagar();
 	}
 

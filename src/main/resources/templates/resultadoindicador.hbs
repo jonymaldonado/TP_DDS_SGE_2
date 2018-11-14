@@ -1,0 +1,23 @@
+{{#partial "contenido"}}
+	<h2>{{indicador.nombre}} aplicado a {{empresa.nombre}}</h2>
+
+<div >
+		<table class="table">
+		<tr>
+			<th>empresa</th>
+			<th>indicador</th>
+			<th>resultado</th>
+			
+		</tr>
+		
+		<tr>
+			<td>{{empresa.nombre}}</td>
+			<td>{{indicador.expresion}}</td>
+			<td>{{resultado}}</td>
+		</tr>
+		
+		</table>
+</div>
+		
+{{/partial}}
+{{>base.hbs}}

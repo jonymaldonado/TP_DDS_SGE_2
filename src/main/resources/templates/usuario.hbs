@@ -1,0 +1,78 @@
+{{#partial "contenido"}}
+
+<header>
+
+	<nav class="navbar navbar-default navbar-light bg-light">
+ 
+
+ 		<div class="container-fluid">
+ 			<div class="collapse navbar-collapse">
+    		<ul class="nav navbar-nav navbar-right ">
+      
+      			<li class="nav-item">
+        			<a class="nav-link" href="#">Simple</a>
+      			</li>
+      			<li class="nav-item">
+        			<a class="nav-link" href="/Mapa">Mapa</a>
+      			</li>
+      			<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" > Inteligentes <span class="caret"></span></a>
+        			<ul class="dropdown-menu" >
+          				<li><a href="#">Editar</a></li>
+          				<li><a href="#">Agregar</a></li>
+          				<li><a href="#">Eliminar</a></li>
+          
+        			</ul>
+	    		</li>
+	    		
+	    		<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" > dispositivo <span class="caret"></span></a>
+        			<ul class="dropdown-menu" >
+          				<li><a href="usuario/{{usuario.nombre_usuario}}/inteligentes">Inteligente</a></li>
+          				<li><a href="usuario/{{usuario.nombre_usuario}}/standar">Standar</a></li>
+          			
+          
+        			</ul>
+	    		</li>
+    		</ul>
+    		</div>
+  		</div>
+	</nav>
+</header>
+<div>
+	<h1>Bienvenido {{usuario.nombre}}</h1>
+	<h3>consumo periodo  </h3>
+	<h3>Puntos  {{usuario.puntos}}</h3>
+	<div class="table-responsive">
+	<table class="table">
+	<tr>
+	<td>
+	<table class="table">
+		<tr>
+			<th>Nombre</th>
+			<th>Estado</th>
+			<th>Inicio</th>
+			<th>Regla</th>
+		</tr>
+		{{#each listainteligentes}}
+		<tr>
+			<td>{{nombre}}</td>
+			<td>{{estado.nombre}}</td>
+			<td>{{estado.fechaInicio}}</td>
+			<td>{{kwPorHora}}</td>
+			
+		</tr>
+		{{/each}}
+	</table>
+		</td>
+	</tr>
+	</table>
+	</div>
+	
+	
+	<div class="form-group">
+	
+		<a class="btn btn-primary" href="usuario/{{usuario.nombre_usuario}}/resultado">consultarSimplex</a>
+	</div>
+</div>
+	
+{{/partial}}
+{{>base.hbs}}

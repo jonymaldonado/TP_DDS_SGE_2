@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -14,65 +15,76 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.apache.commons.math3.optim.PointValuePair;
 
 import ar.com.sge.dispositivos.DispositivoEstandar;
 import ar.com.sge.dispositivos.DispositivoInteligente;
+import ar.com.sge.dispositivos.IDispositivo;
 //import ar.com.sge.dispositivos.IDispositivo;
 import ar.com.sge.dispositivos.Modulo;
+import ar.com.sge.geografia.Coordenada;
 import ar.com.sge.geografia.Transformador;
 import ar.com.sge.util.servicioSimplex;
 //import ar.com.sge.geografia.Coordenada;
 
 @Entity
-@Table(name ="Clientes")
+@DiscriminatorValue("cliente")
+//@Table(name ="Clientes")
 public class Cliente extends Usuario {
 
 
-	@Id
+	/*@Id
 	@GeneratedValue
 	@Column(nullable=false,unique=true)
-	private int idCliente;	
+	private int idCliente;*/	
 	private String tipoDoc;
 	private int numeroDoc;
-//	private Coordenada domicilio;
+	/*@OneToOne(cascade={CascadeType.ALL})
+	@JoinColumn(name = "id_coordenada")
+	private Coordenada coordenada;*/
 	private int telefono;
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "idAdministrador")	
 	private Administrador administrador;
-	@OneToMany(cascade={CascadeType.REMOVE},fetch=FetchType.LAZY,mappedBy="cliente")
+	@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY,mappedBy="cliente")
 	private List<DispositivoInteligente> lstDispositivosInteligentes ;
-	//@OneToMany(cascade={CascadeType.REMOVE},fetch=FetchType.LAZY,mappedBy="cliente")
+	//private List<IDispositivo> lstDispositivosInteligentes ;
+	@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY,mappedBy="cliente")
 	private List<DispositivoEstandar> lstDispositivosEstandares ;
-	@OneToMany(fetch=FetchType.LAZY)
+	//private List<IDispositivo> lstDispositivosEstandares ;
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "idCategoria")
 	private Categoria categoria;
 	private int puntos;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name = "id_Transfomador")
+	private Transformador transformador;
 	private static servicioSimplex servicio;
-	//private int idTransformadorCorrespondiente;//despues se vera si vale la pena poner este atributo
-	//private Transformador transformador;
-
-	/*public Cliente(String _nombre, String _apellido,String _tipoDoc,int _numeroDoc,float latitud,float longitud) {		
-=======
-	public Cliente(String _nombre, String _apellido,String _tipoDoc,int _numeroDoc,float latitud,float longitud) {		
->>>>>>> 55d6153bb164c64abe9f3fcdd29e944e114d8019
-		super(_nombre,_apellido,latitud,longitud);
-		this.tipoDoc = _tipoDoc;
-		this.numeroDoc = _numeroDoc;
-		lstDispositivosInteligentes = new ArrayList<>();
-		lstDispositivosEstandares = new ArrayList<>();
-	}*/
+	/*@OneToMany(cascade = {CascadeType.PERSIST})
+	private List<Hogar> hogares;*/
 	
-	/*public Transformador getTransformador() {
-		return transformador;
+	
+	public Cliente() {
+		this.lstDispositivosInteligentes  = new ArrayList<>();
+		this.lstDispositivosEstandares  = new ArrayList<>();
+		
 	}
-	public void setTransformador(Transformador transformador) {
-		this.transformador = transformador;
-	}*/
-
-	public Cliente(String _nombre, String _apellido, String tipoDoc, int numeroDoc, int telefono, Categoria categoria,int puntos,float latitud,float longitud ) {
+	
+	public Cliente(String nombre_usuario, String contrasenia,String _nombre, String _apellido, String tipoDoc, int numeroDoc, int telefono) {
+		super(nombre_usuario,contrasenia,_nombre,_apellido);
+		this.tipoDoc = tipoDoc;
+		this.numeroDoc = numeroDoc;
+		this.telefono = telefono;
+		this.puntos = 0;
+		//this.tipo_usuario = "cliente";
+		//this.hogares = new ArrayList<>();
+	}
+	
+	public Cliente(String _nombre, String _apellido, String tipoDoc, int numeroDoc, int telefono, Categoria categoria,float latitud,float longitud ) {
 		super(_nombre,_apellido,latitud,longitud);
 		this.tipoDoc = tipoDoc;
 		this.numeroDoc = numeroDoc;
@@ -83,7 +95,7 @@ public class Cliente extends Usuario {
 		this.puntos = 0;
 	//	this.idTransformadorCorrespondiente = 0;
 	}
-	public Cliente(String _nombre, String _apellido, String tipoDoc, int numeroDoc, int telefono,float latitud,float longitud ) {
+	public Cliente(String _nombre, String _apellido, String tipoDoc, int numeroDoc, int telefono,double latitud,double longitud ) {
 		super(_nombre,_apellido,latitud,longitud);
 		this.tipoDoc = tipoDoc;
 		this.numeroDoc = numeroDoc;
@@ -111,8 +123,9 @@ public class Cliente extends Usuario {
 		return telefono;
 	}
 	
-	public void setCategoria(Categoria _categoria) {
-		this.categoria = _categoria;
+	public void setCategoria(Categoria categoria1) {
+		this.categoria = categoria1;
+		categoria1.agregarCliente(this);
 	}
 	public String getCategoria() {
 		return categoria.getNombre();		
@@ -127,9 +140,12 @@ public class Cliente extends Usuario {
 		
 	public void agregarDispositivosEstandares(DispositivoEstandar unDispositivoEstandar) {
 		lstDispositivosEstandares.add(unDispositivoEstandar);
+		unDispositivoEstandar.setCliente(this);
+		
 	}
 	public void agregarDispositivosInteligentes(DispositivoInteligente unDispositivoInteligente) {
 		lstDispositivosInteligentes.add(unDispositivoInteligente);
+		unDispositivoInteligente.setCliente(this);
 		puntos += 15;
 	}
 	/*public void agregarDispositivosInteligentes(IDispositivo unDispositivoInteligente) {
@@ -224,7 +240,7 @@ public class Cliente extends Usuario {
 		PointValuePair solucion = this.getServicioSimplex().consultarSimplex(getLstDispositivosInteligentes());
 		return solucion;
 	}
-
+	
 	public List<DispositivoInteligente> getLstDispositivosInteligentes() {
 		return lstDispositivosInteligentes;
 	}
@@ -292,5 +308,37 @@ public class Cliente extends Usuario {
 		}
 		return servicio;
 	}
-
+	
+	/*public void agregarHogar(Hogar hogar) {
+		this.hogares.add(hogar);
+	}
+	
+	public List<Hogar> getListaHogares(){
+		return this.hogares;
+	}*/
+	
+	public Transformador getTransformador() {
+		return transformador;
+	}
+	
+	public void setTransformador(Transformador transformador) {
+		this.transformador = transformador;
+	}
+	
+	public List<Double> ResultadoSimplex() {
+		PointValuePair solucion = this.consultarASimplex();
+		List<Double> resultado = new ArrayList<>();
+		for(int a = this.getLstDispositivosInteligentes().size() - 1; a>=0; a--) {
+		resultado.add(solucion.getPoint()[a]);
+	}
+		return resultado;
+	}	
+	
+	public List<Double> ConsumoActualDispositivos(){
+		List<Double> consumoActual = new ArrayList();
+		for (DispositivoInteligente inteligente : this.getLstDispositivosInteligentes()) {
+			consumoActual.add(inteligente.consumoEnKw());
+		}
+		return consumoActual;
+	}
 }

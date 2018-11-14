@@ -3,22 +3,40 @@ package ar.com.sge.geografia;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import ar.com.sge.usuarios.Administrador;
 
+
+@Entity
+@Table(name ="Zona")
 public class Zona {
+	@Id
+	//@GeneratedValue
 	private int idZona;
 	private String nombreDeLaZona;
-	private Coordenada posZonaCentral;
+	@OneToOne(cascade={CascadeType.ALL})
+	@JoinColumn(name = "id_coordenada")
+	private Coordenada coordenada;
 	private int radioEnMetros;
+	@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY,mappedBy="zona")	
 	private List<Transformador> listaDeTransformadores; 
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "idAdministrador")	
 	private Administrador administrador;
 	
+/*	public Zona() {
+		
+	}*/
 	public Zona() {
 		this.listaDeTransformadores=new ArrayList<>();
 	}//constructor
@@ -50,11 +68,11 @@ public class Zona {
 	}
 
 	public Coordenada getPosZonaCentral() {
-		return posZonaCentral;
+		return coordenada;
 	}
 
 	public void setPosZonaCentral(Coordenada posZonaCentral) {
-		this.posZonaCentral = posZonaCentral;
+		this.coordenada = posZonaCentral;
 	}
 
 	public int getRadioEnMetros() {
@@ -74,6 +92,7 @@ public class Zona {
 	}
 	public void agregarTransformador(Transformador transformador) {
 		listaDeTransformadores.add(transformador);
+		transformador.setZona(this);
 	}
 	
 	

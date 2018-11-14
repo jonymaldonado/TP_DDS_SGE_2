@@ -1,0 +1,56 @@
+{{#partial "contenido"}}
+	<h2>{{indicador.nombre}} Resultado Simplex {{empresa.nombre}}</h2>
+
+<div >
+		<table class="table">
+	<tr>
+	<td>
+		<table class="table">
+		<tr>
+			<th>inteligente</th>
+		</tr>
+		
+		{{#each listainteligente}}
+		<tr>
+			<td>{{nombre}}</td>
+		</tr>
+		{{/each}}
+		
+		</table>
+		</td>
+		<td>
+		<table class="table">
+		<tr>
+			<th>consumoActual</th>
+			
+		</tr>
+		
+				{{#each consumo}}
+		<tr>
+			<td>{{this}}</td>
+		</tr>
+		{{/each}}
+
+		</table>
+		</td>
+		<td>
+		<table class="table">
+		<tr>
+			<th>resultado</th>
+			
+		</tr>
+		
+				{{#each resultado}}
+		<tr>
+			<td>{{this}}</td>
+		</tr>
+		{{/each}}
+
+		</table>
+		</td>
+		</tr>
+		</table>
+</div>
+		
+{{/partial}}
+{{>base.hbs}}

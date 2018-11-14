@@ -1,0 +1,29 @@
+{{#partial "contenido"}}
+	<h2>Metodologias de usuario: {{usuario.nombre}}</h2>
+	
+
+	<div class="table-responsive">
+	<table class="table">
+		<tr>
+			<th>metodologia</th>
+			<th>editar</th>
+		</tr>
+		{{#each metodologias}}
+		<tr>
+			<td>{{nombre}}</td>
+			
+			<td>
+				<a class="btn btn-secondary" href="periodoDetalle/{{empresa.nombre}}/{{startRange}}/{{endRange}}/{{anio}}">modificar</a>
+			</td>
+			
+		</tr>
+		{{/each}}
+	</table>
+	</div>
+	<div class="form-group">
+	
+		<a class="btn btn-primary" href="/usuario">volver</a>
+	</div>
+	
+{{/partial}}
+{{>base.hbs}}

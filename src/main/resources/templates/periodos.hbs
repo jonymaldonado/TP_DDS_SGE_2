@@ -1,0 +1,33 @@
+{{#partial "contenido"}}
+	<h2>Empresa {{empresa.nombre}}</h2>
+	<h3 style="text-align:center">periodo</h3>
+
+	<div >
+	<table class="table">
+	<tr>
+	<td>
+	<table class="table">
+		<tr>
+			<th>mesinicio</th>
+			<th>mesfin</th>
+			<th>anio</th>
+			<th>Detalle</th>
+		</tr>
+		{{#each periodos}}
+		<tr>
+			<td>{{startRange}}</td>
+			<td>{{endRange}}</td>
+			<td>{{anio}}</td>
+			<td>
+				<a class="btn btn-secondary" href="periodoDetalle/{{empresa.nombre}}/{{startRange}}/{{endRange}}/{{anio}}">Ver cuenta</a>
+			</td>
+			
+		</tr>
+		{{/each}}
+		</table>
+		</td>
+	</tr>
+	</table>
+	</div>
+{{/partial}}
+{{>base.hbs}}

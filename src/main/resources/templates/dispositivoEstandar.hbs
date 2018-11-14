@@ -1,0 +1,75 @@
+{{#partial "contenido"}}
+
+	<h3 style="text-align:center">Detalle Estandar</h3>
+	<div class="table-responsive">
+	<table class="table">
+	<tr>
+	<td>
+	<table class="table">
+		<tr>
+			<th>Nombre</th>
+			<th>kw por hora</th>
+		</tr>
+		{{#each listaEstandar}}
+		<tr>
+			<td>{{nombre}}</td>
+			<td>{{kwPorHora}}</td>
+			
+		</tr>
+		{{/each}}
+	</table>
+		</td>
+	</tr>
+	</table>
+	</div>
+	
+	
+	
+	<div class="container">
+  <h3>Agregar Estandar</h3>          
+  <table class="table table-bordered">
+    <thead>
+     <tr>
+			<th>Nombre</th>
+			<th>kw por hora</th>
+			<th>Accion</th>
+		</tr>
+    </thead>
+    <tbody>
+    {{#each listaEstandarRepo}}
+		<tr>
+			<td>{{nombre}}</td>
+			<td>{{kwPorHora}}</td>
+			<td>
+			<button onclick="agregarEstandar('{{nombre}}')" style="width:42px!important;height:42px!important" class="btn btn-success btn-xs" title="Agregar {{nombre}}"><i class="fa fa-plus" style="font-size:24px;"></i></button>
+			</td>
+		</tr>
+		{{/each}}
+    </tbody>
+  </table>
+</div>
+	
+	
+	<script type="text/javascript">
+	
+	function agregarEstandar(nombre){
+	
+	console.log(nombre);
+		var parametros={
+						"nombre_dispositivo": nombre
+						};
+		$.ajax({
+				data:parametros,
+				url:"/agregarEstandar/{{usuario.nombre_usuario}}",
+				type:"GET",
+				success: function (data) {
+					location.reload();
+				}
+				
+				});
+	
+	}
+	</script>
+
+{{/partial}}
+{{>base.hbs}}

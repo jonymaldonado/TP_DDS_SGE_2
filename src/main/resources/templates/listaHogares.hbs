@@ -1,0 +1,33 @@
+{{#partial "contenido"}}
+
+<h2>Lista de Hogares</h2> 
+<div class="container">
+           
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+      	<th>Calle</th>
+        <th>Numero</th>
+        <th>Piso</th>
+        <th>Departamento</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+    {{#each lista}}
+    	<tr>
+    	<td>{{calle}}</td>
+        <td>{{numero}}</td>
+		<td>{{piso}}</td>
+		<td>{{departamento}}</td>
+		<td>
+			<a class="btn btn-primary" href="hogar/listarDispositivos/{{id}}"><i class="fa fa-list-ul"></i> Dispositivos</a>
+		</td>
+		</tr>
+     {{/each}}
+    </tbody>
+  </table>
+</div>
+	
+{{/partial}}
+{{>base.hbs}}

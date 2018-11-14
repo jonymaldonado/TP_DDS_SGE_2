@@ -1,0 +1,105 @@
+{{#partial "contenido"}}
+
+	<h3 style="text-align:center">Detalle Inteligentes</h3>
+	<div class="table-responsive">
+	<table class="table">
+	<tr>
+	<td>
+	<table class="table">
+		<tr>
+			<th>Nombre</th>
+			<th>Estado</th>
+			<th>Inicio</th>
+			<th>Regla</th>
+			
+		</tr>
+		{{#each listainteligentes}}
+		<tr>
+			<td>{{nombre}}</td>
+			<td>{{estado.nombre}}</td>
+			<td>{{estado.fechaInicio}}</td>
+			<td>{{kwPorHora}}</td>
+			
+			
+			
+		</tr>
+		{{/each}}
+	</table>
+		</td>
+		
+	<td>
+		<table class="table">
+		<tr>
+			
+		</tr>
+		
+		{{#each inteligente}}
+		
+		<tr>
+			<td>
+				<a class="btn btn-secondary" href="inteligentes/{{this}}/regla">editar</a>
+			</td>
+		</tr>
+		{{/each}}
+		
+		</table>
+		</td>
+		
+		
+	</tr>
+	</table>
+	</div>
+	
+	
+	<h3>Agregar inteligente</h3>
+	<div class="form-group">
+	<form role="form" action="" method="GET">
+		<div class="form-group">
+		<div class="col-sm-12 pull-left">
+		<div class="col-sm-3">
+		<input type="text" class="form-control" name="regla" id="regla" placeholder="mayor menor igual">
+        </div>
+        <div class="col-sm-3">
+		<input type="numeric" min="0" class="form-control" name="valor" id="valor"  placeholder="numero">
+        </div>   
+        <div class="col-sm-3">
+        <input type="text" class="form-control" name="accion" id="accion" placeholder="accion">
+        </div>
+        <div class="col-sm-3">
+        <select name="nombreinteligente" id="nombreinteligente" class="custom-select">
+			<option value="-1">Seleccionar</option>
+			{{#each inteligentesbase}}
+			<option value= {{nombre}}> {{nombre}}</option>
+			{{/each}}
+		</select>
+        </div>
+        </div>
+        </br></br>
+		<button onclick="agregarinteligentes" class="btn btn-primary">Agregar</button>
+	</form>
+	</div>
+	
+	
+	<script>
+	function agregarinteligentes(){
+		var parametros={
+						"nombreInteligente":$("#nombreinteligente").val(),
+						"regla":$("#regla").val(),
+						"accion":$("#accion").val()
+						}
+		$.ajax({
+				data:parametros,
+				url:"usuario/{{usuario.nombre_usuario}}/inteligentes?nombreinteligente="+$("#nombreinteligente").val()+
+				"&regla="+$("#regla").val()+"&valor="+$("#valor").val()+"&accion="+$("#accion").val(),
+				type:"GET",
+				success:function(a){
+									alert("Se ha agregado un inteligente");
+									}
+				
+				});
+	
+	}
+	</script>
+
+{{/partial}}
+{{>base.hbs}}

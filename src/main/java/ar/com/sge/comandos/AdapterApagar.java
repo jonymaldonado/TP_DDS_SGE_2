@@ -13,7 +13,7 @@ public class AdapterApagar extends ComandoApagar {
 	}
 	
 	@Override
-	public void ejecutar() {
+	public void ejecutar(DispositivoInteligente dispositivo) {
 		dispositivo.apagar();
 	}
 	

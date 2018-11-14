@@ -2,59 +2,19 @@
   {
     "idZona": 5,
     "nombreDeLaZona": "CapitalFederal",
-    "posZonaCentral": {
-      "latitud": 15.4,
-      "longitud": 20.8
-    },
     "radioEnMetros": 50,
     "listaDeTransformadores": []
   },
   {
     "idZona": 4,
     "nombreDeLaZona": "Lugano",
-    "posZonaCentral": {
-      "latitud": 20.0,
-      "longitud": 10.6
-    },
-    "radioEnMetros": 35,
-    "listaDeTransformadores": [
-      {
-        "idtransformador": 1,
-        "posTransformador": {
-          "latitud": 24.0,
-          "longitud": 45.0
-        },
-        "idZonaCorrespondiente": 4,
-        "listaDeclientesConectados": []
-      },
-      {
-        "idtransformador": 2,
-        "posTransformador": {
-          "latitud": 30.0,
-          "longitud": 40.0
-        },
-        "idZonaCorrespondiente": 4,
-        "listaDeclientesConectados": []
-      },
-      {
-        "idtransformador": 3,
-        "posTransformador": {
-          "latitud": 10.0,
-          "longitud": 15.0
-        },
-        "idZonaCorrespondiente": 4,
-        "listaDeclientesConectados": []
-      }
-    ]
+    "radioEnMetros": 50,
+    "listaDeTransformadores": []
   },
   {
     "idZona": 2,
     "nombreDeLaZona": "La Boca",
-    "posZonaCentral": {
-      "latitud": 40.3,
-      "longitud": 10.2
-    },
-    "radioEnMetros": 45,
+    "radioEnMetros": 50,
     "listaDeTransformadores": []
   }
 ]

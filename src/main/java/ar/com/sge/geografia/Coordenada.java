@@ -3,13 +3,20 @@ package ar.com.sge.geografia;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
+
 @Entity
+@Table(name ="Coordenada")
 public class Coordenada {
 	@Id
 	@GeneratedValue
-	private long id_coordenada;
+	private int id_coordenada;
 	private double latitud;
 	private double longitud;
+	
+	public Coordenada() {
+		
+	}
 	
 	public Coordenada(double unLatitud,double unLongitud) {
 
@@ -39,6 +46,16 @@ public class Coordenada {
 
 		return distancia;
 	}
+
+	public void setLatitud(double latitud) {
+		this.latitud = latitud;
+	}
+
+	public void setLongitud(double longitud) {
+		this.longitud = longitud;
+	}
+	
+	
 	
 	
 

@@ -1,0 +1,55 @@
+{{#partial "contenidos"}}
+	<h3>Usuario Nuevo</h3>
+
+<form class="form-horizontal" role="form"  action="/usuario/create"  method="POST">
+  <div class="form-group">
+  
+  	<labe class="col-lg-2 control-label">Nombre Usuario</label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" name="nombre_usuario" placeholder="Ingrese el nombre de usuario" required>
+    </div>
+  
+  	<labe class="col-lg-2 control-label">Contrase&ntildea</label>
+    <div class="col-lg-10">
+      <input type="password" class="form-control" name="contrasenia" placeholder="Ingrese su contrasenia" required>
+    </div>
+  
+    <labe class="col-lg-2 control-label">Nombre</label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" name="nombre" placeholder="Nombre" required>
+    </div>
+    
+    <label class="col-lg-2 control-label">Apellido</label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" name="apellido" placeholder="Apellido" required>
+   	</div>
+   	
+   	<label class="col-lg-2 control-label">Tipo Documento</label>
+    <div class="col-lg-10">
+      <select class="form-control" name="tipo_documento" placeholder="Seleccione el tipo de documento">
+      	<option value="dni">DNI</option> 
+  		<option value="pasaporte">Pasaporte</option>
+      </select>
+   	</div>
+    
+    <label class="col-lg-2 control-label">Numero Documento</label>
+    <div class="col-lg-10">
+      <input type="number" class="form-control" name="numero_documento" placeholder="Ingrese el numero del documento" required>
+   	</div>
+   	
+   	<label class="col-lg-2 control-label">Telefono</label>
+    <div class="col-lg-10">
+      <input type="number" class="form-control" name="telefono" placeholder="Ingrese su numero telefonico">
+   	</div>
+   	
+  </div>
+  
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <button type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+  </div>
+</form>
+
+{{/partial}}
+{{>baseDos.hbs}}

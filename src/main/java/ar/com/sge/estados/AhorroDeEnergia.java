@@ -3,6 +3,7 @@ package ar.com.sge.estados;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,12 +13,13 @@ import ar.com.sge.dispositivos.DispositivoInteligente;
 
 
 @Entity
-@Table(name ="AhorroEnergia")
+@DiscriminatorValue("ahorro")
+//@Table(name ="AhorroEnergia")
 public class AhorroDeEnergia extends Estado {
 
-	@Id
+	/*@Id
 	@GeneratedValue
-	private int id;
+	private int Id;*/
 	
 	public AhorroDeEnergia() {
 		this.nombre = "modo ahorro";
@@ -41,8 +43,4 @@ public class AhorroDeEnergia extends Estado {
 
 
 	}
-	public int getId() {
-		return id;
-	}
-
 }

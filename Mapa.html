@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
+
+	 <div id="mapa" style="height: 500px">	
+	 </div>
+
+</html>
+	 
+<script type="text/javascript">
+	$( document ).ready(function() {
+		mapa = L.map('mapa', {
+	    center: [-34.598313, -58.463745],
+	    zoom: 10,  
+	    minZoom: 4,
+	    maxZoom:17,
+	    zoomControl:true 
+		});
+		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	    attribution: ''}).addTo(mapa);
+		var marker = L.marker([-34.598494, -58.420186]).addTo(mapa).bindPopup("<button class='btn btn-info' onclick='alert(\"Soy medrano\")'>No me toques(o Si)</button>");
+		
+		var marker2 = L.marker([-34.659438,-58.4704135]).addTo(mapa).on('click', onClick);
+		
+		function onMapClick(e) {
+		    alert("Latitud y Longitud: " + e.latlng);
+		}
+	});
+	function onClick(e){
+		var r = confirm("Ir a medrano?");
+		if (r == true) {
+			mapa.setView(new L.LatLng((-34.598494), (-58.420186)), parseInt(17));
+		} else {
+		    
+		}
+	}
+</script>

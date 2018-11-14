@@ -109,6 +109,7 @@ public class DispositivoInteligente extends IDispositivo{
 	public double getMaximoconsumo() {
 		return maximoconsumo;
 	}
+	
 	public void setMaximoconsumo(double maximoconsumo) {
 		this.maximoconsumo = maximoconsumo;
 	}

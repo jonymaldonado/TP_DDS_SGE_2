@@ -51,6 +51,7 @@ public class router {
 		Spark.post("/usuario/ordenamientoconsulta/:usuario", metodologiacontroller::mostrarlista, engine);
 		Spark.get("/usuario/cargarMetodologia/:usuario", metodologiacontroller::cargarMetodologia, engine);*/
 		Spark.get("/usuario/:usuario/inteligentes",inteligenteController::verdetalleInteligente,engine);
+		Spark.get("/usuario/:usuario/inteligentes/:Id_Dispositivo/regla",inteligenteController::verRegla,engine);
 		Spark.get("/usuario/:usuario/standar",inteligenteController::verdetalleStandar,engine);
 		Spark.get("/usuario/:usuario/resultado",inteligenteController::verResultado,engine);
 		//Spark.get("/usuario/periodoDetalle/:empresa/:mesinicio/:mesfin/:anio", empresaController::verdetalleVenta2,engine);

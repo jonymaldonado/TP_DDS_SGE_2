@@ -13,6 +13,7 @@ import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 
 import ar.com.sge.dispositivos.DispositivoInteligente;
 import ar.com.sge.dispositivos.repositorioDispositivo;
+import ar.com.sge.reglas.Regla;
 import ar.com.sge.usuarios.Cliente;
 
 import spark.ModelAndView;
@@ -76,12 +77,7 @@ public class EmpresaController {
 	}*/
 public ModelAndView verdetalleInteligente(Request req, Response res)throws  Exception{
 		
-		String usuarioBuscado = req.params(":usuario");
-		/*int inicio = Integer.parseInt(req.params(":mesinicio"));
-		int fin = Integer.parseInt(req.params(":mesfin"));
-		int anio = Integer.parseInt(req.params(":anio"));*/
-		
-		
+		String usuarioBuscado = req.params(":usuario");	
 		entityManager = PerThreadEntityManagers.getEntityManager();
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
@@ -94,7 +90,10 @@ public ModelAndView verdetalleInteligente(Request req, Response res)throws  Exce
 		
 		repositorioDispositivo repobase=entityManager.find(repositorioDispositivo.class,2);
 		Cliente clientebase=(Cliente) entityManager.createNativeQuery("select * from usuario where nombre_usuario = '"+usuarioBuscado+"'", Cliente.class).getResultList().get(0);
-		
+		List<Integer> inteligentes=new ArrayList<>();
+		for(DispositivoInteligente inteligente:clientebase.getLstDispositivosInteligentes() ) {
+			inteligentes.add(inteligente.getId_Dispositivo());
+		}
 		
 		if(nombreinteligente!=null) {
 				
@@ -106,6 +105,7 @@ public ModelAndView verdetalleInteligente(Request req, Response res)throws  Exce
 		
 		model.clear();
 		model.put("usuario", clientebase);
+		model.put("inteligente", inteligentes);
 		model.put("listainteligentes", clientebase.getLstDispositivosInteligentes());
 		model.put("inteligentesbase", repobase.getListaActualInteligentes());
 		//model.put("listaestandar", clientebase.getLstDispositivosEstandares());
@@ -121,12 +121,7 @@ public ModelAndView verdetalleInteligente(Request req, Response res)throws  Exce
 	
 	public ModelAndView verdetalleStandar(Request req, Response res)throws  Exception{
 		
-		String usuarioBuscado = req.params(":usuario");
-		/*int inicio = Integer.parseInt(req.params(":mesinicio"));
-		int fin = Integer.parseInt(req.params(":mesfin"));
-		int anio = Integer.parseInt(req.params(":anio"));*/
-		
-		
+		String usuarioBuscado = req.params(":usuario");	
 		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
 		EntityTransaction transaction = entityManager.getTransaction();
 		//transaction.begin();
@@ -136,9 +131,13 @@ public ModelAndView verdetalleInteligente(Request req, Response res)throws  Exce
 
 		List<Cliente> listaclientesbase=(List<Cliente>) entityManager.createQuery("from Usuario where nombre_usuario='"+usuarioBuscado+"'").getResultList(); 
 		Cliente clientebase=listaclientesbase.get(0);
-		
+		List<Integer> inteligentes=new ArrayList<>();
+		for(DispositivoInteligente inteligente:clientebase.getLstDispositivosInteligentes() ) {
+			inteligentes.add(inteligente.getId_Dispositivo());
+		}
 		model.clear();
 		model.put("usuario", clientebase);
+		model.put("inteligente", inteligentes);
 		model.put("listaestandar", clientebase.getLstDispositivosEstandares());
 	//	Empresa empresa = repo.getEmpresa(empresaBuscado);
 		
@@ -163,7 +162,7 @@ public ModelAndView verdetalleInteligente(Request req, Response res)throws  Exce
 		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
 		EntityTransaction transaction = entityManager.getTransaction();
 		//transaction.begin();
-
+		
 		
 		//String contraseñaBuscado = req.queryParams("clave");
 
@@ -187,5 +186,51 @@ public ModelAndView verdetalleInteligente(Request req, Response res)throws  Exce
 		//model.put("cuentas", periodo.getCuentas());
 		return new ModelAndView(model, "resultadoSimplex.hbs");
 }
+	public ModelAndView verRegla(Request req, Response res)throws  Exception{
+		
+		String inteligenteBuscado = req.params(":Id_Dispositivo");
+		/*int inicio = Integer.parseInt(req.params(":mesinicio"));
+		int fin = Integer.parseInt(req.params(":mesfin"));
+		int anio = Integer.parseInt(req.params(":anio"));*/
+		
+		
+		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
+		EntityTransaction transaction = entityManager.getTransaction();
+		//transaction.begin();
+		String usuarioBuscado = req.params(":usuario");	
+		transaction.begin();
+
+		//String nombreinteligente = req.queryParams("nombreinteligente");
+		String regla = req.queryParams("regla");
+		String valor = req.queryParams("valor");
+		String accion = req.queryParams("accion");
+		
+		
+		//repositorioDispositivo repobase=entityManager.find(repositorioDispositivo.class,2);
+		Cliente clientebase=(Cliente) entityManager.createNativeQuery("select * from usuario where nombre_usuario = '"+usuarioBuscado+"'", Cliente.class).getResultList().get(0);
+		//List<Integer> inteligentes=new ArrayList<>();
+		
+		//String contraseñaBuscado = req.queryParams("clave");
+
+		List<DispositivoInteligente> listaclientesbase= entityManager.createNativeQuery("select * from Dispositivo where Id_Dispositivo="+inteligenteBuscado,DispositivoInteligente.class).getResultList(); 
+		DispositivoInteligente inteligentebase=listaclientesbase.get(0);
+		List<Regla> reglas=inteligentebase.getSensor().getObservadores();
+		if(regla!=null) {
+			Regla reglanueva=new Regla(regla,Integer.parseInt(valor),accion);
+			inteligentebase.getSensor().agregarObservador(reglanueva);
+			
+			//transaction.commit();
+			}
+		transaction.commit();
+		
+		model.clear();
+		model.put("usuario", clientebase);
+		model.put("inteligente", inteligentebase);
+		model.put("listareglas", reglas);
+		
+		//model.put("periodo", periodo);
+		//model.put("cuentas", periodo.getCuentas());
+		return new ModelAndView(model, "dispositivos.hbs");
+	}
 
 }

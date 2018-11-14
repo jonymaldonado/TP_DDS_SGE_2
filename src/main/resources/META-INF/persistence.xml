@@ -18,8 +18,9 @@
          
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" /> 
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/tp1" /> 
-            <property name="hibernate.connection.username" value="root" /> 
+            <property name="hibernate.connection.username" value="root" 
             <property name="hibernate.connection.password" value="cuervo=24" /> 
+
 
 <!-- 
             <property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver" /> 

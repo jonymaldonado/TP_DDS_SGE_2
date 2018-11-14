@@ -24,12 +24,12 @@ public ModelAndView verMapa(Request req, Response res)throws  Exception{
 	    EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
 	    EntityTransaction transaction = entityManager.getTransaction();
 		List<Transformador> listatransformadorbase= entityManager.createNativeQuery("select * from transformador", Transformador.class).getResultList(); 
-		List<Coordenada> listaCoordenada = new ArrayList<>();
+		/*List<Coordenada> listaCoordenada = new ArrayList<>();
 		for(Transformador t : listatransformadorbase) {
 			listaCoordenada.add(t.getCoordenada());
-		}
+		}*/
 		model.clear();
-		model.put("listacoordenada", listaCoordenada);
+		model.put("listacoordenada", listatransformadorbase);
 	//	Empresa empresa = repo.getEmpresa(empresaBuscado);
 		
 		//Periodo periodo=empresa.getPeriodoByName(inicio, fin,anio);

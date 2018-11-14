@@ -106,7 +106,9 @@ public class repositorioDispositivo {
 	public void seleccionarStandar(Cliente cliente,String dispositivoSeleccionado) throws CloneNotSupportedException{
 		List<DispositivoEstandar> lstDispEnc;
 		lstDispEnc = listaActualEstandar.stream().filter(a-> a.getNombre().equalsIgnoreCase(dispositivoSeleccionado)).collect(Collectors.toList());
-		cliente.agregarDispositivosEstandares((DispositivoEstandar)lstDispEnc.get(0).clone());
+		System.out.print(lstDispEnc.get(0).getNombre());
+		DispositivoEstandar dispositivo1 = this.retornarNuevoDispositivoEstandar(lstDispEnc.get(0));
+		cliente.agregarDispositivosEstandares(dispositivo1);
 	}
 	
 	/*
@@ -127,6 +129,13 @@ public class repositorioDispositivo {
 		dispo2.setKwPorHora(dispo.getKwPorHora());
 		dispo2.setMinimoconsumo(dispo.getMinimoconsumo());
 		dispo2.setMaximoconsumo(dispo.getMaximoconsumo());
+		return dispo2;
+	}
+	
+	public DispositivoEstandar retornarNuevoDispositivoEstandar(DispositivoEstandar dispo) {
+		DispositivoEstandar dispo2 = new DispositivoEstandar();
+		dispo2.setNombre(dispo.getNombre());
+		dispo2.setKwPorHora(dispo.getKwPorHora());
 		return dispo2;
 	}
 

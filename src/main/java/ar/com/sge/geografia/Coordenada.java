@@ -10,7 +10,7 @@ import javax.persistence.Table;
 public class Coordenada {
 	@Id
 	@GeneratedValue
-	private int id_coordenada;
+	private int Id_Coordenada;
 	private double latitud;
 	private double longitud;
 	

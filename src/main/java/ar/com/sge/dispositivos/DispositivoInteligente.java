@@ -44,12 +44,12 @@ public class DispositivoInteligente extends IDispositivo{
 	private Boolean encendido ;
 	@OneToOne(cascade={CascadeType.ALL})
 	//@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY)
-	@JoinColumn(name="id_estado1")
+	@JoinColumn(name="Id_EstadoDispositivo")
 	//@OneToOne(cascade={CascadeType.ALL},fetch=FetchType.LAZY,mappedBy="inteligente")
 	private Estado estado;
 	//@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY,mappedBy="inteligente")
 	@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY)
-	@JoinColumn(name="id_estado")
+	@JoinColumn(name="Id_Estado")
 	private List<Estado> listaDeEstados;
 	//private static final float coeficienteAhorroEnergia = (float) 0.6;
 	private double coeficienteAhorroEnergia;
@@ -64,7 +64,7 @@ public class DispositivoInteligente extends IDispositivo{
 	private boolean estadoDispositivo;
 	@ManyToOne(fetch=FetchType.LAZY)
 	//@ManyToOne()
-	@JoinColumn(name = "id_Usuario")
+	@JoinColumn(name = "Id_Usuario")
 	private Cliente cliente;
 	/*@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "idAdministrador")	

@@ -24,12 +24,12 @@ public class repositorioDispositivo {
 	@Id
 	@GeneratedValue
 	@Column(nullable=false,unique=true)
-	private int idRepositorio;
+	private int Id_Repositorio;
 	@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY)
-	@JoinColumn(name="id_int")
+	@JoinColumn(name="Id_Int")
 	List<DispositivoInteligente> listaActualInteligentes;
 	@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY)
-	@JoinColumn(name="id_stan")
+	@JoinColumn(name="Id_Stan")
 	List<DispositivoEstandar> listaActualEstandar;
 	
 	
@@ -42,13 +42,13 @@ public class repositorioDispositivo {
 	
 
 	public int getIdRepositorio() {
-		return idRepositorio;
+		return Id_Repositorio;
 	}
 
 
 
 	public void setIdRepositorio(int idRepositorio) {
-		this.idRepositorio = idRepositorio;
+		this.Id_Repositorio = idRepositorio;
 	}
 
 

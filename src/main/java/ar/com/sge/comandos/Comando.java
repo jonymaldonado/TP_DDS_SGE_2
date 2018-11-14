@@ -18,7 +18,7 @@ public abstract class Comando {
 
 	@Id
 	@GeneratedValue
-	private int Idcomando;
+	private int Id_Comando;
 	public abstract void ejecutar(DispositivoInteligente dispositivo);
 	public abstract String getNombre();
 	

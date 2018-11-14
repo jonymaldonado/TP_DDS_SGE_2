@@ -56,7 +56,7 @@ public class Encendido extends Estado {
 
 	}
 	public int getIdPeriodo() {
-		return IdPeriodo;
+		return Id_Periodo;
 	}
 	
 }

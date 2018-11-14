@@ -22,16 +22,16 @@ import ar.com.sge.usuarios.Administrador;
 public class Zona {
 	@Id
 	//@GeneratedValue
-	private int idZona;
+	private int Id_Zona;
 	private String nombreDeLaZona;
 	@OneToOne(cascade={CascadeType.ALL})
-	@JoinColumn(name = "id_coordenada")
+	@JoinColumn(name = "Id_Coordenada")
 	private Coordenada coordenada;
 	private int radioEnMetros;
 	@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY,mappedBy="zona")	
 	private List<Transformador> listaDeTransformadores; 
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "idAdministrador")	
+	@JoinColumn(name = "Id_Administrador")	
 	private Administrador administrador;
 	
 /*	public Zona() {
@@ -52,11 +52,11 @@ public class Zona {
 	}
 
 	public int getIdZona() {
-		return idZona;
+		return Id_Zona;
 	}
 
 	public void setIdZona(int idZona) {
-		this.idZona = idZona;
+		this.Id_Zona = idZona;
 	}
 
 	public String getNombreDeLaZona() {

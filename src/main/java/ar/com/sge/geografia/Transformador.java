@@ -25,19 +25,19 @@ import ar.com.sge.usuarios.Cliente;
 public class Transformador {
 	@Id
 	//@GeneratedValue
-	private int idtransformador; //por ahora va int, despues vemos se vera si queda asi o String
+	private int Id_Transformador; //por ahora va int, despues vemos se vera si queda asi o String
 	@OneToOne(cascade={CascadeType.ALL})
-	@JoinColumn(name = "id_coordenada")
+	@JoinColumn(name = "Id_Coordenada")
 	private Coordenada coordenada;
 
 	@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY,mappedBy="transformador")	
 	private List<Cliente> listaDeclientesConectados;
 	//public Enum<Enum<E>> estado;  no si si vale la oena podner el atributo
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "idAdministrador")	
+	@JoinColumn(name = "Id_Administrador")	
 	private Administrador administrador;
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "id_Zona")
+	@JoinColumn(name = "Id_Zona")
 	private Zona zona;
 	private boolean activo;
 	
@@ -78,10 +78,10 @@ public class Transformador {
 	}
 
 	public int getIdtransformador() {
-		return idtransformador;
+		return Id_Transformador;
 	}
 	public void setIdtransformador(int idtransformador) {
-		this.idtransformador = idtransformador;
+		this.Id_Transformador = idtransformador;
 	}
 	public Coordenada getPosTransformador() {
 		return coordenada;

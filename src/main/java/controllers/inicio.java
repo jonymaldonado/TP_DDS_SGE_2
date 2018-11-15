@@ -77,37 +77,35 @@ public ModelAndView inicioUsuario(Request req, Response res)throws IOException{
 			EntityTransaction transaction = entityManager.getTransaction();
 			String usuario = req.queryParams("usuario");
 			String contrasenia = req.queryParams("clave");
+			System.out.println(usuario);
+			System.out.println(contrasenia);
 			Cliente clientebase=(Cliente) entityManager.createNativeQuery("select * from usuario where contrasenia = "+contrasenia+" and nombre_usuario = '"+usuario+"'", Cliente.class).getResultList().get(0);
+			System.out.println("usuario cliente"+clientebase.getNombre());
+			model.clear();
+			String vista = null;
 			
-		//	Session session = new Session(clientebase.getId_Usuario(),clientebase.getNombre_usuario(),clientebase.getTipoUsuario());
-			
-			//model.put("session", (T) usuario);
-			//String vista;
-			/*if(clientebase.getTipoUsuario().equalsIgnoreCase("administrador")) {
+			if(clientebase.getTipoUsuario().equalsIgnoreCase("administrador")) {
 				
-				List<Cliente> lista = entityManager.createNativeQuery(
-						"select * from usuario where tipo_usuario='cliente'", Cliente.class).getResultList();
+				List<Cliente> lista = entityManager.createNativeQuery("select * from usuario where tipo_usuario='cliente'", Cliente.class).getResultList();
 				
 				model.put("lista", (T) lista);
-				
-				vista = "usuario.hbs";
+				vista = "listaHogares.hbs";
 				
 			}
 			else {
-				List<Hogar> lista = entityManager.createNativeQuery("select h.* from hogares h join usuario_hogares uh on uh.hogares_id = h.id where uh.Usuario_id_Usuario = "+session.getId(),Hogar.class).getResultList();
-								
-				model.put("lista", (T) lista);
 				
-				vista = "listaHogares.hbs";
+				model.put("listainteligentes", clientebase.getLstDispositivosInteligentes());
+				model.put("listaEstandar", clientebase.getLstDispositivosEstandares());
+				vista = "usuario.hbs";
+			
 			}
-			model.put("tipo", (T) clientebase.getTipoUsuario());*/
-			model.clear();
+			
 			model.put("usuario", clientebase);
-			model.put("listainteligentes", clientebase.getLstDispositivosInteligentes());
-			return new ModelAndView(model,"usuario.hbs");
 			
+			return new ModelAndView(model,vista);
 			
-		}
+		}	
+		
 		catch(Exception e){
 			String mensaje = "El usuario ingresado no existe";	
 			model.put("mensaje", (T) mensaje);

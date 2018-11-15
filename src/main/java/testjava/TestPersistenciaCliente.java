@@ -81,8 +81,8 @@ public class TestPersistenciaCliente {
 		//EntityTransaction transaction = entityManager.getTransaction();
 		
 	}
-/*
 
+/*
 	@Test
 	public void TestPersistirCliente() {
 		EntityTransaction transaction = entityManager.getTransaction();
@@ -229,7 +229,7 @@ public class TestPersistenciaCliente {
 		//termina la transaccion
 	}
 	*/
-	/*@Test
+	@Test
 	public void TestPersistirRepo() {
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
@@ -238,7 +238,7 @@ public class TestPersistenciaCliente {
 		repo.agregar(aire2);
 		entityManager.persist(repo);
 		transaction.commit();
-	}*/
+	}
 /*
 	@Test
 	public void TestPersistirCliente() {

@@ -64,8 +64,9 @@ public class Cliente extends Usuario {
 	@JoinColumn(name = "id_Transfomador")
 	private Transformador transformador;
 	private static servicioSimplex servicio;
-	/*@OneToMany(cascade = {CascadeType.PERSIST})
-	private List<Hogar> hogares;*/
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_hogar",referencedColumnName="id")
+	private Hogar hogar;
 	
 	
 	public Cliente() {
@@ -107,6 +108,15 @@ public class Cliente extends Usuario {
 		
 	}
 
+	public void setHogar(Hogar hogar) {
+		this.hogar = hogar;
+		
+	}
+	
+	public Hogar getHogar() {
+		return this.hogar;
+	}
+	
 	public String getTipoDoc() {
 		return tipoDoc;
 	}

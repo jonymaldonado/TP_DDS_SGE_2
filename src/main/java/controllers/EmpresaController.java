@@ -123,7 +123,7 @@ public class EmpresaController {
 		
 		Cliente clientebase=(Cliente) entityManager.createNativeQuery("select * from usuario where nombre_usuario = '"+usuarioBuscado+"'", Cliente.class).getResultList().get(0);
 		
-		repositorioDispositivo repobase = entityManager.find(repositorioDispositivo.class,4);
+		repositorioDispositivo repobase = entityManager.find(repositorioDispositivo.class,1);
 		
 		model.clear();
 		model.put("usuario", clientebase);
@@ -229,7 +229,7 @@ public class EmpresaController {
 		
 		String nombre_dispositivo = req.queryParams("nombre_dispositivo");
 		System.out.println(nombre_dispositivo);
-		repositorioDispositivo repobase=entityManager.find(repositorioDispositivo.class,4);
+		repositorioDispositivo repobase=entityManager.find(repositorioDispositivo.class,1);
 		
 		Cliente clientebase=(Cliente) entityManager.createNativeQuery("select * from usuario where nombre_usuario = '"+usuarioBuscado+"'", Cliente.class).getResultList().get(0);
 		

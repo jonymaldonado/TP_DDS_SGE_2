@@ -88,7 +88,8 @@ public class PersistirCliente {
 		unazona.agregarTransformador(unTransformador);
 		entityManager.persist(unazona);
 		entityManager.persist(categoria1);
-		Cliente cliente2=new Cliente("luca", "lope", "dni", 2493, 1521, 42.2, 42.1);
+		//Cliente cliente2=new Cliente("luca", "lope", "dni", 2493, 1521, 42.2, 42.1);
+		Cliente cliente2 = entityManager.find(Cliente.class,1);
 		tv.encender();
 		cliente2.agregarDispositivosInteligentes(tv);
 		cliente2.agregarDispositivosInteligentes(lavarropa);

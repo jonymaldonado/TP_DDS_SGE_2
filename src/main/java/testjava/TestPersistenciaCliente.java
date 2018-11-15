@@ -24,6 +24,7 @@ import ar.com.sge.geografia.Zona;
 import ar.com.sge.reglas.Actuador;
 import ar.com.sge.reglas.Regla;
 import ar.com.sge.reglas.Sensor;
+import ar.com.sge.usuarios.Administrador;
 import ar.com.sge.usuarios.Categoria;
 import ar.com.sge.usuarios.Cliente;
 import ar.com.sge.usuarios.Usuario;
@@ -229,6 +230,7 @@ public class TestPersistenciaCliente {
 		//termina la transaccion
 	}
 	*/
+	/*
 	@Test
 	public void TestPersistirRepo() {
 		EntityTransaction transaction = entityManager.getTransaction();
@@ -239,30 +241,24 @@ public class TestPersistenciaCliente {
 		entityManager.persist(repo);
 		transaction.commit();
 	}
-/*
+		*/
 	@Test
 	public void TestPersistirCliente() {
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
 		
-		Cliente cliente2=new Cliente("jorge", "lope", "dni", 2493, 1521, 42.2, 42.1);
-		Cliente cliente3=new Cliente("pepe", "lope", "dni", 2493, 1521, 42.2, 42.1);
-		Cliente cliente4=new Cliente("maria", "lope", "dni", 2493, 1521, 42.2, 42.1);
-		Cliente cliente5=new Cliente("ana", "lope", "dni", 2493, 1521, 42.2, 42.1);
-		Cliente cliente6=new Cliente("marcos", "lope", "dni", 2493, 1521, 42.2, 42.1);
-		Cliente cliente7=new Cliente("jony", "lope", "dni", 2493, 1521, 42.2, 42.1);
-		Cliente cliente8=new Cliente("juany", "lope", "dni", 2493, 1521, 42.2, 42.1);
+		Cliente cliente2=new Cliente("juan1234","1234","juan", "lopez", "dni", 654321,1111111);
+		Cliente cliente3=new Cliente("pepe321","1234","pepe", "garcia", "dni", 23123213,576435675);
+		Cliente cliente4=new Cliente("luis12","1234","luis", "perez", "dni", 4123213,2222222);
+		Administrador cliente5=new Administrador("pier23","1234","pier", "chero");
 		entityManager.persist(cliente2);
 		entityManager.persist(cliente3);
 		entityManager.persist(cliente4);
 		entityManager.persist(cliente5);
-		entityManager.persist(cliente6);
-		entityManager.persist(cliente7);
-		entityManager.persist(cliente8);
 		
 		transaction.commit();
 		//termina la transaccion
-	}*/
+	}
 	/*
 	@Test
 	public void TestPersistirDispo() {
@@ -290,7 +286,7 @@ public class TestPersistenciaCliente {
 		clientebase.agregarDispositivosInteligentes(dispositivo);
 		transaction.commit();
 	}*/
-	
+	/*
 	@Test
 	public void insertDispositivosEstandarRepo() {
 		EntityTransaction transaction = entityManager.getTransaction();
@@ -305,5 +301,5 @@ public class TestPersistenciaCliente {
 		repo.agregarStandar(plancha);
 		entityManager.persist(repo);
 		transaction.commit();
-	}
+	}*/
 }

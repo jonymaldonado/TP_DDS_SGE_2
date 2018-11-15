@@ -60,6 +60,7 @@ public class router {
 		//Spark.post("/periodoDetalle", empresaController::verdetalleVenta, engine);
 		Spark.get("/transformador",trans::mostrarConsumo);
 		Spark.get("/agregarEstandar/:usuario",inteligenteController::agregarEstandar);
+		Spark.get("/consumo",inicio::calcularConsumo);
 		
 	}
 

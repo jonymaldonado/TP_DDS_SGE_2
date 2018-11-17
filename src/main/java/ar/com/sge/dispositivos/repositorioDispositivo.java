@@ -27,10 +27,10 @@ public class repositorioDispositivo {
 	private int idRepositorio;
 	@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY)
 	@JoinColumn(name="id_int")
-	List<DispositivoInteligente> listaActualInteligentes;
+	List<modeloInteligente> listaActualInteligentes;
 	@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY)
 	@JoinColumn(name="id_stan")
-	List<DispositivoEstandar> listaActualEstandar;
+	List<modeloStandar> listaActualEstandar;
 	
 	
 	
@@ -53,45 +53,45 @@ public class repositorioDispositivo {
 
 
 
-	public List<DispositivoInteligente> getListaActualInteligentes() {
+	public List<modeloInteligente> getListaActualInteligentes() {
 		return listaActualInteligentes;
 	}
 
 
 
-	public void setListaActualInteligentes(List<DispositivoInteligente> listaActualInteligentes) {
+	public void setListaActualInteligentes(List<modeloInteligente> listaActualInteligentes) {
 		this.listaActualInteligentes = listaActualInteligentes;
 	}
 
 
 
-	public List<DispositivoEstandar> getListaActualEstandar() {
+	public List<modeloStandar> getListaActualEstandar() {
 		return listaActualEstandar;
 	}
 
 
 
-	public void setListaActualEstandar(List<DispositivoEstandar> listaActualEstandar) {
+	public void setListaActualEstandar(List<modeloStandar> listaActualEstandar) {
 		this.listaActualEstandar = listaActualEstandar;
 	}
 
 
 
-	public void agregar(DispositivoInteligente dispositivo) {
+	public void agregar(modeloInteligente dispositivo) {
 		if (listaActualInteligentes==null) {
 			listaActualInteligentes=new ArrayList<>();
 		}
 		listaActualInteligentes.add(dispositivo);
 	}
 	
-	public void agregarStandar(DispositivoEstandar dispositivo) {
+	public void agregarStandar(modeloStandar dispositivo) {
 		if (listaActualEstandar==null) {
 			listaActualEstandar=new ArrayList<>();
 		}
 		listaActualEstandar.add(dispositivo);
 	}
 	public void seleccionarInteligente(Cliente cliente,String dispositivoSeleccionado,String regla,float valor, String accion) throws CloneNotSupportedException{
-		List<DispositivoInteligente> lstDispEnc;
+		List<modeloInteligente> lstDispEnc;
 		lstDispEnc = listaActualInteligentes.stream().filter(a-> a.getNombre().equals(dispositivoSeleccionado)).collect(Collectors.toList());
 		System.out.println("nombre "+dispositivoSeleccionado+" tamaño "+listaActualInteligentes.get(0).getNombre());
 		DispositivoInteligente dispositivo1 = this.retornarNuevoDispositivo(lstDispEnc.get(0));
@@ -104,7 +104,7 @@ public class repositorioDispositivo {
 	}
 	
 	public void seleccionarStandar(Cliente cliente,String dispositivoSeleccionado) throws CloneNotSupportedException{
-		List<DispositivoEstandar> lstDispEnc;
+		List<modeloStandar> lstDispEnc;
 		lstDispEnc = listaActualEstandar.stream().filter(a-> a.getNombre().equalsIgnoreCase(dispositivoSeleccionado)).collect(Collectors.toList());
 		System.out.print(lstDispEnc.get(0).getNombre());
 		DispositivoEstandar dispositivo1 = this.retornarNuevoDispositivoEstandar(lstDispEnc.get(0));
@@ -123,7 +123,7 @@ public class repositorioDispositivo {
 		return dispo;
 	}*/
 	
-	public DispositivoInteligente retornarNuevoDispositivo(DispositivoInteligente dispo) {
+	public DispositivoInteligente retornarNuevoDispositivo(modeloInteligente dispo) {
 		DispositivoInteligente dispo2 = new DispositivoInteligente();
 		dispo2.setNombre(dispo.getNombre());
 		dispo2.setKwPorHora(dispo.getKwPorHora());
@@ -132,7 +132,7 @@ public class repositorioDispositivo {
 		return dispo2;
 	}
 	
-	public DispositivoEstandar retornarNuevoDispositivoEstandar(DispositivoEstandar dispo) {
+	public DispositivoEstandar retornarNuevoDispositivoEstandar(modeloStandar dispo) {
 		DispositivoEstandar dispo2 = new DispositivoEstandar();
 		dispo2.setNombre(dispo.getNombre());
 		dispo2.setKwPorHora(dispo.getKwPorHora());

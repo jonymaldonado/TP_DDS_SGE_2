@@ -17,6 +17,8 @@ import ar.com.sge.comandos.Comando;
 import ar.com.sge.comandos.ComandoApagar;
 import ar.com.sge.dispositivos.DispositivoEstandar;
 import ar.com.sge.dispositivos.DispositivoInteligente;
+import ar.com.sge.dispositivos.modeloInteligente;
+import ar.com.sge.dispositivos.modeloStandar;
 import ar.com.sge.dispositivos.repositorioDispositivo;
 import ar.com.sge.geografia.Coordenada;
 import ar.com.sge.geografia.Transformador;
@@ -32,6 +34,8 @@ public class TestPersistenciaCliente {
 	
 	private EntityManager entityManager ;
 	private DispositivoInteligente tv , lavarropa,aire2;
+	private modeloInteligente tv1,lavarropa1,aire1;
+	private modeloStandar foco ;
 	private DispositivoEstandar ventilador;
 	private Categoria categoria1;
 	private Cliente cliente1,clientenuevo;
@@ -75,6 +79,10 @@ public class TestPersistenciaCliente {
 		//repo.agregar(lavarropa);
 		//repo.agregar(tv);
 		//repo.agregar(aire2);
+		tv1 =new modeloInteligente("smart 40", 0.18,0.2,120,100);
+		aire1 =new modeloInteligente("lg", 0.18,0.2,200,180);
+		lavarropa1=new modeloInteligente("lavarropalg", 0.20, 0.2, 140, 70);
+		foco=new modeloStandar("foco", 0.1);
 		
 		//cliente1.agregarDispositivosEstandares(ventilador);
 		
@@ -295,14 +303,15 @@ public class TestPersistenciaCliente {
 	public void insertDispositivosEstandarRepo() {
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
-		DispositivoEstandar pc =new DispositivoEstandar("pc", 0.25);
+		/*DispositivoEstandar pc =new DispositivoEstandar("pc", 0.25);
 		DispositivoEstandar televisor =new DispositivoEstandar("televisor", 0.20);
-		DispositivoEstandar plancha =new DispositivoEstandar("plancha", 0.40);
+		DispositivoEstandar plancha =new DispositivoEstandar("plancha", 0.40);*/
 		//DispositivoEstandar lampara =new DispositivoEstandar("Lámpara", 0.35);
 		//repo.agregarStandar(lampara);
-		repo.agregarStandar(pc);
-		repo.agregarStandar(televisor);
-		repo.agregarStandar(plancha);
+		repo.agregarStandar(foco);
+		repo.agregar(tv1);
+		repo.agregar(aire1);
+		repo.agregar(lavarropa1);
 		entityManager.persist(repo);
 		transaction.commit();
 	}

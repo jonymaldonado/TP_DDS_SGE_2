@@ -91,13 +91,14 @@ public class EmpresaController {
 		String accion = req.queryParams("accion");
 		
 		
-		repositorioDispositivo repobase=entityManager.find(repositorioDispositivo.class,2);
+		repositorioDispositivo repobase=entityManager.find(repositorioDispositivo.class,1);
 		Cliente clientebase=(Cliente) entityManager.createNativeQuery("select * from usuario where nombre_usuario = '"+usuarioBuscado+"'", Cliente.class).getResultList().get(0);
 		List<Integer> inteligentes=new ArrayList<>();
+		if(clientebase.getLstDispositivosInteligentes().size()!=0) {
 		for(DispositivoInteligente inteligente:clientebase.getLstDispositivosInteligentes() ) {
 			inteligentes.add(inteligente.getId_Dispositivo());
 		}
-		
+		}
 		if(nombreinteligente!=null) {
 				
 		System.out.println("nombre "+nombreinteligente+repobase.getListaActualInteligentes().get(0).getNombre());
@@ -182,7 +183,7 @@ public class EmpresaController {
 		int anio = Integer.parseInt(req.params(":anio"));*/
 		
 		
-		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
+		entityManager = PerThreadEntityManagers.getEntityManager();
 		EntityTransaction transaction = entityManager.getTransaction();
 		//transaction.begin();
 		String usuarioBuscado = req.params(":usuario");	

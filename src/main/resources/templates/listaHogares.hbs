@@ -1,5 +1,32 @@
 {{#partial "contenido"}}
 
+<header>
+
+	<nav class="navbar navbar-default navbar-light bg-light">
+ 
+
+ 		<div class="container-fluid">
+ 			<div class="collapse navbar-collapse">
+    		<ul class="nav navbar-nav navbar-right ">
+      
+      			<li class="nav-item">
+        			<a class="nav-link" href="/Mapa">Mapa</a>
+      			</li>
+      			
+      			<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" > Dispositivos <span class="caret"></span></a>
+        			<ul class="dropdown-menu" >
+          				<li><a href="/modeloInteligente">Lista Inteligente</a></li>
+          				<li><a href="/modeloEstandar">Lista Estandar</a></li>
+        			</ul>
+	    		</li>
+	    		
+    		</ul>
+    		</div>
+  		</div>
+	</nav>
+</header>
+
+<div>
 <h1>Bienvenido {{usuario.nombre}}</h1>
 	<h3>Lista de hogares </h3>
 	<div class="table-responsive">
@@ -33,7 +60,7 @@
 	</tr>
 	</table>
 	</div>
-	
+</div>	
 	<div class="modal fade" id="mensaje" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
         <div class="modal-content">

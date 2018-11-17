@@ -13,9 +13,12 @@ import javax.persistence.EntityTransaction;
 import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 
 import ar.com.sge.dispositivos.IDispositivo;
+import ar.com.sge.geografia.Transformador;
+import ar.com.sge.usuarios.Administrador;
 import ar.com.sge.usuarios.Cliente;
 import ar.com.sge.usuarios.Hogar;
 import ar.com.sge.usuarios.Session;
+import ar.com.sge.usuarios.Usuario;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -77,37 +80,39 @@ public ModelAndView inicioUsuario(Request req, Response res)throws IOException{
 			EntityTransaction transaction = entityManager.getTransaction();
 			String usuario = req.queryParams("usuario");
 			String contrasenia = req.queryParams("clave");
-			Cliente clientebase=(Cliente) entityManager.createNativeQuery("select * from usuario where contrasenia = "+contrasenia+" and nombre_usuario = '"+usuario+"'", Cliente.class).getResultList().get(0);
+			String tipo_usuario = req.queryParams("tipo_usuario");
 			
-		//	Session session = new Session(clientebase.getId_Usuario(),clientebase.getNombre_usuario(),clientebase.getTipoUsuario());
+			model.clear();
+			String vista = null;
 			
-			//model.put("session", (T) usuario);
-			//String vista;
-			/*if(clientebase.getTipoUsuario().equalsIgnoreCase("administrador")) {
+			if(tipo_usuario.equalsIgnoreCase("administrador")) {
 				
-				List<Cliente> lista = entityManager.createNativeQuery(
-						"select * from usuario where tipo_usuario='cliente'", Cliente.class).getResultList();
+				Administrador clientebase=(Administrador) entityManager.createNativeQuery("select * from usuario where contrasenia = "+contrasenia+" and nombre_usuario = '"+usuario+"'and tipo_usuario = '"+tipo_usuario+"'", Administrador.class).getResultList().get(0);
 				
-				model.put("lista", (T) lista);
+				List<Cliente> lista = entityManager.createNativeQuery("select u.* from usuario u "
+						+ "join hogares h on u.id_hogar = h.id where u.tipo_usuario='cliente'", Cliente.class).getResultList();
 				
-				vista = "usuario.hbs";
+				model.put("listaClientes", (T) lista);
+				model.put("usuario", clientebase);
+				vista = "listaHogares.hbs";
 				
 			}
 			else {
-				List<Hogar> lista = entityManager.createNativeQuery("select h.* from hogares h join usuario_hogares uh on uh.hogares_id = h.id where uh.Usuario_id_Usuario = "+session.getId(),Hogar.class).getResultList();
-								
-				model.put("lista", (T) lista);
+				Cliente clientebase=(Cliente) entityManager.createNativeQuery("select * from usuario where contrasenia = "+contrasenia+" and nombre_usuario = '"+usuario+"'and tipo_usuario = '"+tipo_usuario+"'", Cliente.class).getResultList().get(0);
 				
-				vista = "listaHogares.hbs";
+				model.put("listainteligentes", clientebase.getLstDispositivosInteligentes());
+				model.put("listaEstandar", clientebase.getLstDispositivosEstandares());
+				model.put("usuario", clientebase);
+				vista = "usuario.hbs";
+			
 			}
-			model.put("tipo", (T) clientebase.getTipoUsuario());*/
-			model.clear();
-			model.put("usuario", clientebase);
-			model.put("listainteligentes", clientebase.getLstDispositivosInteligentes());
-			return new ModelAndView(model,"usuario.hbs");
 			
 			
-		}
+			
+			return new ModelAndView(model,vista);
+			
+		}	
+		
 		catch(Exception e){
 			String mensaje = "El usuario ingresado no existe";	
 			model.put("mensaje", (T) mensaje);
@@ -115,5 +120,19 @@ public ModelAndView inicioUsuario(Request req, Response res)throws IOException{
 		}
 		
 	}
+
+	public float calcularConsumo(Request req, Response res)throws  Exception{
+	
+	EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
+    EntityTransaction transaction = entityManager.getTransaction();
+    
+	int usuario_id = Integer.parseInt(req.queryParams("usuario_id"));
+	
+	Cliente cliente = entityManager.find(Cliente.class,usuario_id);
+	
+	float consumo = cliente.consumoDeEnergia();
+	
+	return consumo;
+}
 
 }

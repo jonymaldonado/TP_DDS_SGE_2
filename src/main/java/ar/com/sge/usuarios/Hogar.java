@@ -8,12 +8,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import ar.com.sge.dispositivos.DispositivoInteligente;
@@ -25,8 +27,8 @@ import ar.com.sge.dispositivos.DispositivoInteligente;
 public class Hogar {
 
 	@Id
-	@GeneratedValue
-	@Column(nullable = false, unique = true)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id")
 	private int id;
 	private String calle;
 	private int numero;
@@ -38,17 +40,21 @@ public class Hogar {
 	private String coordenada_x;
 	@Column(nullable = true)
 	private String corrdenada_y;
+	/*
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name = "id_Usuario")
+	private Cliente cliente;*/
+	/*
 	@ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
         name = "Hogar_Dispositivo", 
         joinColumns = { @JoinColumn(name = "id") }, 
         inverseJoinColumns = { @JoinColumn(name = "Id_Dispositivo") }
     )
-	private List<DispositivoInteligente> listaDispositivos;
+	private List<DispositivoInteligente> listaDispositivos;*/
 	
 	
 	public Hogar() {
-		this.listaDispositivos  = new ArrayList<>();
 	}
 
 	public Hogar(int id, String calle, int numero, int piso, String departamento) {
@@ -57,7 +63,6 @@ public class Hogar {
 		this.numero = numero;
 		this.piso = piso;
 		this.departamento = departamento;
-		this.listaDispositivos  = new ArrayList<>();
 	}
 
 	public Hogar( String calle, int numero, int piso, String departamento) {
@@ -65,8 +70,8 @@ public class Hogar {
 		this.numero = numero;
 		this.piso = piso;
 		this.departamento = departamento;
-		this.listaDispositivos  = new ArrayList<>();
 	}
+	
 	public int getId() {
 		return id;
 	}
@@ -122,14 +127,14 @@ public class Hogar {
 	public void setCorrdenada_y(String corrdenada_y) {
 		this.corrdenada_y = corrdenada_y;
 	}
-	
+	/*
 	public void agregarDispositivo(DispositivoInteligente dispositivo) {
 		this.listaDispositivos.add(dispositivo);
 	}
 	
 	public List<DispositivoInteligente> getListaDispositivos(){
 		return this.listaDispositivos;
-	}
+	}*/
 	/*
 	public void setDispositivo(DispositivoInteligente dispositivo) {
 		this.dispositivo = dispositivo;

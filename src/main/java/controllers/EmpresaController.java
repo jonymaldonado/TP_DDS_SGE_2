@@ -78,9 +78,8 @@ public class EmpresaController {
 	}*/
 	public ModelAndView verdetalleInteligente(Request req, Response res)throws  Exception{
 		
-
-		String usuarioBuscado = req.params(":usuario");	
-
+		String usuarioBuscado = req.params(":usuario");
+		
 		entityManager = PerThreadEntityManagers.getEntityManager();
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
@@ -94,6 +93,7 @@ public class EmpresaController {
 		repositorioDispositivo repobase=entityManager.find(repositorioDispositivo.class,1);
 		Cliente clientebase=(Cliente) entityManager.createNativeQuery("select * from usuario where nombre_usuario = '"+usuarioBuscado+"'", Cliente.class).getResultList().get(0);
 		List<Integer> inteligentes=new ArrayList<>();
+		
 		if(clientebase.getLstDispositivosInteligentes().size()!=0) {
 		for(DispositivoInteligente inteligente:clientebase.getLstDispositivosInteligentes() ) {
 			inteligentes.add(inteligente.getId_Dispositivo());
@@ -118,24 +118,20 @@ public class EmpresaController {
 	
 	public ModelAndView verdetalleStandar(Request req, Response res)throws  Exception{
 		
-
 		String usuarioBuscado = req.params(":usuario");
 		
 		entityManager = PerThreadEntityManagers.getEntityManager();
-
 		EntityTransaction transaction = entityManager.getTransaction();
 		
-
 		Cliente clientebase=(Cliente) entityManager.createNativeQuery("select * from usuario where nombre_usuario = '"+usuarioBuscado+"'", Cliente.class).getResultList().get(0);
 		
-		repositorioDispositivo repobase = entityManager.find(repositorioDispositivo.class,4);
+		repositorioDispositivo repobase = entityManager.find(repositorioDispositivo.class,1);
 		
 		model.clear();
 		model.put("usuario", clientebase);
 		model.put("listaEstandar", clientebase.getLstDispositivosEstandares());
 		model.put("listaEstandarRepo",repobase.getListaActualEstandar());
 		return new ModelAndView(model, "dispositivoEstandar.hbs");
-
 	}
 
 	public ModelAndView verResultado(Request req, Response res)throws  Exception{
@@ -153,7 +149,7 @@ public class EmpresaController {
 		//transaction.begin();
 		
 		
-		//String contraseñaBuscado = req.queryParams("clave");
+		//String contraseï¿½aBuscado = req.queryParams("clave");
 
 		List<Cliente> listaclientesbase=(List<Cliente>) entityManager.createQuery("from Usuario where nombre_usuario='"+usuarioBuscado+"'").getResultList(); 
 		Cliente clientebase=listaclientesbase.get(0);
@@ -199,7 +195,7 @@ public class EmpresaController {
 		Cliente clientebase=(Cliente) entityManager.createNativeQuery("select * from usuario where nombre_usuario = '"+usuarioBuscado+"'", Cliente.class).getResultList().get(0);
 		//List<Integer> inteligentes=new ArrayList<>();
 		
-		//String contraseñaBuscado = req.queryParams("clave");
+		//String contraseï¿½aBuscado = req.queryParams("clave");
 
 		List<DispositivoInteligente> listaclientesbase= entityManager.createNativeQuery("select * from Dispositivo where Id_Dispositivo="+inteligenteBuscado,DispositivoInteligente.class).getResultList(); 
 		DispositivoInteligente inteligentebase=listaclientesbase.get(0);
@@ -220,10 +216,9 @@ public class EmpresaController {
 		//model.put("periodo", periodo);
 		//model.put("cuentas", periodo.getCuentas());
 		return new ModelAndView(model, "dispositivos.hbs");
-
 	}
 	
-	public String agregarEstandar(Request req, Response res)throws  Exception{
+	public int agregarEstandar(Request req, Response res)throws  Exception{
 		
 		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
 		EntityTransaction transaction = entityManager.getTransaction();
@@ -234,6 +229,7 @@ public class EmpresaController {
 		
 		String nombre_dispositivo = req.queryParams("nombre_dispositivo");
 		System.out.println(nombre_dispositivo);
+		
 		repositorioDispositivo repobase=entityManager.find(repositorioDispositivo.class,4);
 		
 		Cliente clientebase=(Cliente) entityManager.createNativeQuery("select * from usuario where nombre_usuario = '"+usuarioBuscado+"'", Cliente.class).getResultList().get(0);
@@ -242,9 +238,7 @@ public class EmpresaController {
 		
 		transaction.commit();
 		
-		return "hola";
-		
-
+		return 1;
 	}
 
 }

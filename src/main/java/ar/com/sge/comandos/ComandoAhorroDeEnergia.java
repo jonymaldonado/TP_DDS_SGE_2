@@ -42,4 +42,10 @@ public class ComandoAhorroDeEnergia extends Comando {
 	public void setNombreComando(String nombrecomando) {
 		this.nombreComando = nombrecomando;
 	}
+	public DispositivoInteligente getDispositivo() {
+		return dispositivo;
+	}
+	public void setDispositivo(DispositivoInteligente dispositivo) {
+		this.dispositivo = dispositivo;
+	}
 }

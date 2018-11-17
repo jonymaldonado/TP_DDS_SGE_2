@@ -1,33 +1,100 @@
 {{#partial "contenido"}}
 
-<h2>Lista de Hogares</h2> 
-<div class="container">
-           
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-      	<th>Calle</th>
-        <th>Numero</th>
-        <th>Piso</th>
-        <th>Departamento</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-    {{#each lista}}
-    	<tr>
-    	<td>{{calle}}</td>
-        <td>{{numero}}</td>
-		<td>{{piso}}</td>
-		<td>{{departamento}}</td>
-		<td>
-			<a class="btn btn-primary" href="hogar/listarDispositivos/{{id}}"><i class="fa fa-list-ul"></i> Dispositivos</a>
-		</td>
+<header>
+
+	<nav class="navbar navbar-default navbar-light bg-light">
+ 
+
+ 		<div class="container-fluid">
+ 			<div class="collapse navbar-collapse">
+    		<ul class="nav navbar-nav navbar-right ">
+      
+      			<li class="nav-item">
+        			<a class="nav-link" href="/Mapa">Mapa</a>
+      			</li>
+      			
+      			<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" > Dispositivos <span class="caret"></span></a>
+        			<ul class="dropdown-menu" >
+          				<li><a href="/modeloInteligente">Lista Inteligente</a></li>
+          				<li><a href="/modeloEstandar">Lista Estandar</a></li>
+        			</ul>
+	    		</li>
+	    		
+    		</ul>
+    		</div>
+  		</div>
+	</nav>
+</header>
+
+<div>
+<h1>Bienvenido {{usuario.nombre}}</h1>
+	<h3>Lista de hogares </h3>
+	<div class="table-responsive">
+	<table class="table">
+	<tr>
+	<td>
+	<table class="table">
+		<tr>
+			<th>Calle</th>
+			<th>Numero</th>
+			<th>Piso</th>
+			<th>Departamento</th>
+			<th>Consumo</th>
 		</tr>
-     {{/each}}
-    </tbody>
-  </table>
+		{{#each listaClientes}}
+		<tr>
+			<td>{{hogar.calle}}</td>
+			<td>{{hogar.numero}}</td>
+			<td>{{hogar.piso}}</td>
+			<td>{{hogar.departamento}}</td>
+			<td>
+				<a onclick="mostrar('{{id_Usuario}}')" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Calcular consumo">
+                <i class="fa fa-bolt" style="width:18px"></i>
+            </a>
+			</td>
+			
+		</tr>
+		{{/each}}
+	</table>
+		</td>
+	</tr>
+	</table>
+	</div>
+</div>	
+	<div class="modal fade" id="mensaje" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title" id="myModalLabel">Consumo</h3>
+            </div>
+            <div class="modal-body">
+                <p id='lblmensaje'></p>
+            </div>
+        </div>
+    </div>        
 </div>
+
+<script>
+
+	function mostrar(usuario){
+	console.log(usuario);
+		var parametros={
+						"usuario_id": usuario
+						};
+		$.ajax({
+				data:parametros,
+				url:"/consumo",
+				type:"GET",
+				success:function(data){
+					$('#lblmensaje').html('El Consumo es '+data);
+                    $("#mensaje").modal('show');
+				}
+		});
+		
+	};
+	
+</script>
 	
 {{/partial}}
 {{>base.hbs}}

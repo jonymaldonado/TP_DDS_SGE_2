@@ -26,8 +26,8 @@ public class TestHogarPersist {
 	public void init() throws IOException{
 		entityManager = PerThreadEntityManagers.getEntityManager();
 		hogar = new Hogar();
-		cliente = new Cliente("pierchero","1234","jean", "chero", "dni",12345678,1111111111);
-		
+		//cliente = new Cliente("pierchero","1234","jean", "chero", "dni",12345678,11111111);
+		cliente = entityManager.find(Cliente.class,1);
 	}
 	
 	@Test
@@ -37,11 +37,11 @@ public class TestHogarPersist {
 		hogar.setCalle("juni");
 		hogar.setNumero(456);
 		entityManager.persist(hogar);
-		cliente.agregarHogar(hogar);
+		cliente.setHogar(hogar);
 		entityManager.persist(cliente);
 		transaction.commit();
 	}
-	
+	/*
 	@Test
 	public void TestPersistirDispositivoHogar() throws IOException{
 		EntityTransaction transaction = entityManager.getTransaction();
@@ -52,5 +52,5 @@ public class TestHogarPersist {
 		hogar.agregarDispositivo(dispositivo);
 		entityManager.persist(hogar);
 		transaction.commit();
-	}
+	}*/
 }

@@ -49,12 +49,22 @@ public class Administrador extends Usuario{
 		
 	}
 	
+	public Administrador(String nombre_usuario, String contrasenia,String _nombre, String _apellido) {
+		super(nombre_usuario,contrasenia,_nombre,_apellido);
+		//this.idAdministrador = _numeroId;
+		this.listaDeClientes= new ArrayList<>();
+		this.listaDeTransformadoresActivos= new ArrayList<>();
+		this.listaDeZonas= new ArrayList<>();
+		this.tipo_usuario = "administrador";
+	}
+	
 	public Administrador(String _nombre, String _apellido, int _numeroId) {
 		super(_nombre,_apellido);
 		//this.idAdministrador = _numeroId;
 		this.listaDeClientes= new ArrayList<>();
 		this.listaDeTransformadoresActivos= new ArrayList<>();
 		this.listaDeZonas= new ArrayList<>();
+		this.tipo_usuario = "administrador";
 	}
 	public List<Transformador> getListaDeTransformadoresActivos() {
 		return listaDeTransformadoresActivos;

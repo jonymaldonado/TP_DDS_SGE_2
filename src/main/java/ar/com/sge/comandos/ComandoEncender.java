@@ -33,5 +33,14 @@ public class ComandoEncender extends Comando{
 	public void setNombrecomando(String nombrecomando) {
 		this.nombreComando = nombrecomando;
 	}
+	
+	public DispositivoInteligente getDispositivo() {
+		return dispositivo;
+	}
+	public void setDispositivo(DispositivoInteligente dispositivo) {
+		this.dispositivo = dispositivo;
+	}
+
+	
 
 }

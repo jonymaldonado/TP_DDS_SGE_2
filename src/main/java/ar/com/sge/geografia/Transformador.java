@@ -69,7 +69,7 @@ public class Transformador {
 		this.listaDeclientesConectados = new ArrayList <>(); 
 	}//constructor
 	
-	public float totalDeConsumoDelTransformadores() {
+	public double totalDeConsumoDelTransformadores() {
 		float totalDeConsumoDeCadaCliente=0;
 		for(Cliente unCliente : listaDeclientesConectados) {
 			totalDeConsumoDeCadaCliente += unCliente.consumoDeEnergia();

@@ -38,7 +38,7 @@
 			<th>Estado</th>
 			<th>Inicio</th>
 			<th>Regla</th>
-			
+			<th>Acciones</th>
 		</tr>
 		{{#each listainteligentes}}
 		<tr>
@@ -46,33 +46,13 @@
 			<td>{{estado.nombre}}</td>
 			<td>{{estado.fechaInicio}}</td>
 			<td>{{kwPorHora}}</td>
-			
-			
-			
-		</tr>
-		{{/each}}
-	</table>
-		</td>
-		
-	<td>
-		<table class="table">
-		<tr>
-			
-		</tr>
-		
-		{{#each inteligente}}
-		
-		<tr>
 			<td>
 				<a class="btn btn-secondary" href="inteligentes/{{this}}/regla">editar</a>
 			</td>
 		</tr>
 		{{/each}}
-		
-		</table>
-		</td>
-		
-		
+	</table>
+	</td>
 	</tr>
 	</table>
 	</div>

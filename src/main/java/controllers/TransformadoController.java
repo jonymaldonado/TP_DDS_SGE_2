@@ -36,7 +36,7 @@ public class TransformadoController {
 		String transformador_id = req.queryParams("transformador_id");
 		Transformador transformador = (Transformador) entityManager.createNativeQuery("select * from transformador where idtransformador = "+transformador_id,Transformador.class).getResultList().get(0);
 		
-		float consumo = transformador.totalDeConsumoDelTransformadores();
+		float consumo = (float) transformador.totalDeConsumoDelTransformadores();
 		
 		return consumo;
 	}

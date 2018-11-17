@@ -55,5 +55,8 @@ public class Encendido extends Estado {
 		dispositivo.setEstado(new AhorroDeEnergia());
 
 	}
+	public int getIdPeriodo() {
+		return IdPeriodo;
+	}
 	
 }

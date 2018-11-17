@@ -66,6 +66,11 @@ public class router {
 		Spark.get("/consumo",inicio::calcularConsumo);
 		Spark.get("/modeloInteligente",modelo::listarInteligente,engine);
 		Spark.get("/modeloEstandar",modelo::listarEstandar,engine);
+		Spark.get("/deleteInteligente",modelo::deleteInteligente);
+		Spark.get("/deleteEstandar",modelo::deleteEstandar);
+		Spark.get("/addModeloInteligente",modelo::addModeloInteligente);
+		Spark.get("/addModeloEstandar",modelo::addModeloEstandar);
+		
 	}
 
 }

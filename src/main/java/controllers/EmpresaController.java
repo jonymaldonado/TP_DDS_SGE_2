@@ -13,6 +13,7 @@ import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 
 import ar.com.sge.dispositivos.DispositivoEstandar;
 import ar.com.sge.dispositivos.DispositivoInteligente;
+import ar.com.sge.dispositivos.modeloStandar;
 import ar.com.sge.dispositivos.repositorioDispositivo;
 import ar.com.sge.reglas.Regla;
 import ar.com.sge.usuarios.Cliente;
@@ -127,6 +128,8 @@ public class EmpresaController {
 		
 		repositorioDispositivo repobase = entityManager.find(repositorioDispositivo.class,1);
 		
+		//List<modeloStandar> listaEstandar = entityManager.createNativeQuery("select * from modelostandar", modeloStandar.class).getResultList();
+		
 		model.clear();
 		model.put("usuario", clientebase);
 		model.put("listaEstandar", clientebase.getLstDispositivosEstandares());
@@ -230,7 +233,7 @@ public class EmpresaController {
 		String nombre_dispositivo = req.queryParams("nombre_dispositivo");
 		System.out.println(nombre_dispositivo);
 		
-		repositorioDispositivo repobase=entityManager.find(repositorioDispositivo.class,4);
+		repositorioDispositivo repobase=entityManager.find(repositorioDispositivo.class,1);
 		
 		Cliente clientebase=(Cliente) entityManager.createNativeQuery("select * from usuario where nombre_usuario = '"+usuarioBuscado+"'", Cliente.class).getResultList().get(0);
 		

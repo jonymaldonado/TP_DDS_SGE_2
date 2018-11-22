@@ -250,7 +250,7 @@ public class TestPersistenciaCliente {
 		transaction.commit();
 	}
 		*/
-	@Test
+	/*@Test
 	public void TestPersistirCliente() {
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
@@ -294,7 +294,7 @@ public class TestPersistenciaCliente {
 		clientebase.agregarDispositivosInteligentes(dispositivo);
 		transaction.commit();
 	}*/
-	/*
+	
 	@Test
 	public void insertDispositivosEstandarRepo() {
 		EntityTransaction transaction = entityManager.getTransaction();
@@ -310,5 +310,5 @@ public class TestPersistenciaCliente {
 		repo.agregar(lavarropa1);
 		entityManager.persist(repo);
 		transaction.commit();
-	}*/
+	}
 }

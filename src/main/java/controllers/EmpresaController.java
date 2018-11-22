@@ -186,10 +186,11 @@ public class EmpresaController {
 		transaction.begin();
 
 		//String nombreinteligente = req.queryParams("nombreinteligente");
+		String reglabuscada = req.queryParams("id_regla");
 		String regla = req.queryParams("regla");
 		String valor = req.queryParams("valor");
 		String accion = req.queryParams("accion");
-		
+		System.out.println("valor regla" + reglabuscada);
 		
 		//repositorioDispositivo repobase=entityManager.find(repositorioDispositivo.class,2);
 		Cliente clientebase=(Cliente) entityManager.createNativeQuery("select * from usuario where nombre_usuario = '"+usuarioBuscado+"'", Cliente.class).getResultList().get(0);
@@ -199,6 +200,9 @@ public class EmpresaController {
 
 		List<DispositivoInteligente> listaclientesbase= entityManager.createNativeQuery("select * from Dispositivo where Id_Dispositivo="+inteligenteBuscado,DispositivoInteligente.class).getResultList(); 
 		DispositivoInteligente inteligentebase=listaclientesbase.get(0);
+		if(reglabuscada!=null) {
+			
+		}
 		List<Regla> reglas=inteligentebase.getSensor().getObservadores();
 		if(regla!=null) {
 			Regla reglanueva=new Regla(regla,Integer.parseInt(valor),accion);

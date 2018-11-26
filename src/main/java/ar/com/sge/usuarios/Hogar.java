@@ -36,23 +36,6 @@ public class Hogar {
 	private int piso;
 	@Column(nullable = true)
 	private String departamento;
-	@Column(nullable = true)
-	private String coordenada_x;
-	@Column(nullable = true)
-	private String corrdenada_y;
-	/*
-	@OneToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "id_Usuario")
-	private Cliente cliente;*/
-	/*
-	@ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-        name = "Hogar_Dispositivo", 
-        joinColumns = { @JoinColumn(name = "id") }, 
-        inverseJoinColumns = { @JoinColumn(name = "Id_Dispositivo") }
-    )
-	private List<DispositivoInteligente> listaDispositivos;*/
-	
 	
 	public Hogar() {
 	}
@@ -111,38 +94,6 @@ public class Hogar {
 	public void setDepartamento(String departamento) {
 		this.departamento = departamento;
 	}
-
-	public String getCoordenada_x() {
-		return coordenada_x;
-	}
-
-	public void setCoordenada_x(String coordenada_x) {
-		this.coordenada_x = coordenada_x;
-	}
-
-	public String getCorrdenada_y() {
-		return corrdenada_y;
-	}
-
-	public void setCorrdenada_y(String corrdenada_y) {
-		this.corrdenada_y = corrdenada_y;
-	}
-	/*
-	public void agregarDispositivo(DispositivoInteligente dispositivo) {
-		this.listaDispositivos.add(dispositivo);
-	}
-	
-	public List<DispositivoInteligente> getListaDispositivos(){
-		return this.listaDispositivos;
-	}*/
-	/*
-	public void setDispositivo(DispositivoInteligente dispositivo) {
-		this.dispositivo = dispositivo;
-	}
-	
-	public DispositivoInteligente getDispositivo(){
-		return this.dispositivo;
-	}*/
 	
 
 }

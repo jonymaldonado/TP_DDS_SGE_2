@@ -1,5 +1,10 @@
 {{#partial "contenido"}}
-
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.min.js"></script>
+</head>
 <header>
 
 	<nav class="navbar navbar-default navbar-light bg-light">
@@ -84,7 +89,7 @@
 		<input type="text"  class="form-control datepicker" name="fin" id="fin"  >
         </div>   
         <div class="col-sm-3">
-        <input type="text" class="form-control" name="accion" id="accion" >
+        <output type="text" class="form-control" name="resultado" id="resultado" >
         </div>
         </div>
         </br></br>
@@ -94,5 +99,13 @@
 	
 </div>
 	
+	
+<script type="text/javascript">
+	$('.datepicker').datepicker({
+		format: 'dd/mm/yyyy',
+	    language: 'es',
+	    today:'Today',
+	});
+</script>
 {{/partial}}
 {{>base.hbs}}

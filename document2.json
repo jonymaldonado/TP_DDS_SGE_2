@@ -16,7 +16,7 @@
 	{
 		"idtransformador": 2,
 		"coordenada": {
-			"latitud": -34.60321,
+			"latitud": -34.603021,
 			"longitud": -58.424113
 		},
 		"listaDeclientesConectados": [],
@@ -46,8 +46,8 @@
 	{
 		"idtransformador": 4,
 		"coordenada": {
-			"latitud": -34.8042867,
-			"longitud": -58.3440907
+			"latitud": -34.600824,
+			"longitud": -58.420589
 		},
 		"listaDeclientesConectados": [],
 		"zona": {

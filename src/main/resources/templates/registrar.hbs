@@ -150,7 +150,7 @@
 		$('.mapa').hide();
 		
 	});
-	
+	/*
 	$("#calle").on('keyup', function(){
         verificarDomicilio();
     }).keyup();
@@ -158,6 +158,14 @@
 	$("#numero_calle").on('keyup', function(){
         verificarDomicilio();
     }).keyup();
+    */
+    $("#calle").on('change', function(){
+        verificarDomicilio();
+    });
+	
+	$("#numero_calle").on('change', function(){
+        verificarDomicilio();
+    });
     
 	function verificarDomicilio(){
 		var domicilio = $("#calle").val();
@@ -199,8 +207,8 @@
   		              mapa.setZoom(20);
   		              mapa.setView([latres,lngres]);
 					  L.marker([latres, lngres]).addTo(mapa);
-		              var finalText = '<div id="info_window">' + addr + '<br/><strong>Latitud:</strong> ' + Math.round(latres*1000000)/1000000 + ' | <strong>Longitud:</strong> ' + Math.round(lngres*1000000)/1000000 + bookmark() + '</div>';
-		              openBubble({lat:latres, lng:lngres}, finalText);
+		              //var finalText = '<div id="info_window">' + addr + '<br/><strong>Latitud:</strong> ' + Math.round(latres*1000000)/1000000 + ' | <strong>Longitud:</strong> ' + Math.round(lngres*1000000)/1000000 + bookmark() + '</div>';
+		              //openBubble({lat:latres, lng:lngres}, finalText);
 		              
 		              //bookUp(document.getElementById("address").value, latres, lngres);
 		    		  //ddversdms();

@@ -42,7 +42,7 @@ public class Coordenada {
 		double distancia,distLat,distLong;
 		distLat=(double) Math.pow((unPunto.getLatitud() - this.getLatitud()),2);
 		distLong=(double) Math.pow((unPunto.getLongitud() - this.getLongitud()),2);
-		distancia= (double) Math.pow(distLat+distLong, -2);
+		distancia= (double) Math.pow(distLat+distLong, 0.5);
 
 		return distancia;
 	}

@@ -13,6 +13,7 @@ import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 
 import ar.com.sge.dispositivos.modeloInteligente;
 import ar.com.sge.geografia.Coordenada;
+import ar.com.sge.geografia.Transformador;
 import ar.com.sge.usuarios.Cliente;
 import ar.com.sge.usuarios.Hogar;
 import spark.ModelAndView;
@@ -66,6 +67,18 @@ public class Registro {
 		entityManager.persist(hogar);
 		cliente.setHogar(hogar);
 		cliente.setCoordenada(coordenada);
+		
+		List<Transformador> listaTrans = entityManager.createNativeQuery("select * from transformador",Transformador.class).getResultList();
+		double minimo = listaTrans.get(0).getCoordenada().distanciaAlPunto(cliente.getCoordenada());
+		Transformador transformador = null;
+		for(Transformador t: listaTrans) {
+			if(t.getCoordenada().distanciaAlPunto(cliente.getCoordenada()) <= minimo) {
+				minimo = t.getCoordenada().distanciaAlPunto(cliente.getCoordenada());
+				transformador = t;
+			}
+		}
+		
+		transformador.agregarCliente(cliente);
 		entityManager.persist(cliente);
 		transaction.commit();
 		

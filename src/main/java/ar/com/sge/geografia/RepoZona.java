@@ -127,25 +127,27 @@ public class RepoZona {
 		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
-		List<Zona> listaZonabase=(List<Zona>) entityManager.createQuery("from Zona").getResultList(); 
+		List<Zona> listaZonabase=(List<Zona>) entityManager.createNativeQuery("select * from zona", Zona.class).getResultList(); 
 		//entityManager.createQuery("delete from zona").executeUpdate();
 		
 //		transaction.commit();
 		System.out.println(this.listaZona);
 		System.out.println(listaZonabase);
-		for(Zona z: this.listaZona) {
-			for(Zona zonabase: listaZonabase) {
-				if(z.getIdZona()==zonabase.getIdZona()) {
-					comparar(zonabase, z);
+		if (listaZonabase.size()!=0) {
+				
+			for(Zona z: this.listaZona) {
+				for(Zona zonabase: listaZonabase) {
+					if(z.getIdZona()==zonabase.getIdZona()) {
+						comparar(zonabase, z);
+						
+					}
 					
 				}
-				
+				//entityManager.persist(z);
 			}
-			//entityManager.persist(z);
+			transaction.commit();
 		}
-		transaction.commit();
-	}
-	
+	   } 
 	public void comparar(Zona zona1,Zona zona2) {
 		
 

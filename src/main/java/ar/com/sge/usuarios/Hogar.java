@@ -23,12 +23,11 @@ import ar.com.sge.dispositivos.DispositivoInteligente;
 
 
 @Entity
-@Table(name = "Hogares")
+@Table(name = "hogares")
 public class Hogar {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.AUTO)    
 	private int id;
 	private String calle;
 	private int numero;

@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import ar.com.sge.geografia.Transformador;
 
 @Entity
-@Table(name ="Categorias")
+@Table(name ="categorias")
 public class Categoria {
 	
 	@Id

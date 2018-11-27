@@ -33,7 +33,7 @@ public class PersistirZona {
 		DaoJsonZona dao = new DaoJsonZona();
 		DaoJsonTransformadores dao1 = new DaoJsonTransformadores();
 		dao.setFilePath("jsonZona.json");
-		dao1.setFilePath("document.json");
+		dao1.setFilePath("document2.json");
 		repoZona = new RepoZona(dao);
 		listainicial=repoZona.getAllZonas();
 		repoTans = new RepoTransformador(dao1);

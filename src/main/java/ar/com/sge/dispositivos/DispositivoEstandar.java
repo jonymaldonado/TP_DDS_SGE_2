@@ -1,10 +1,12 @@
 package ar.com.sge.dispositivos;
 
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import ar.com.sge.usuarios.Cliente;
 
@@ -17,9 +19,17 @@ public class DispositivoEstandar extends IDispositivo{
 	private int horasDeUso;
 	@ManyToOne(fetch=FetchType.LAZY)
 	//@ManyToOne()
-	@JoinColumn(name = "id_Usuario1")
+	@JoinColumn(name = "id_Usuario_Estandar")
 	private Cliente cliente;
+	@OneToOne(cascade={CascadeType.ALL},fetch=FetchType.LAZY)
+	private Modulo modulo;
 	
+	public Modulo getModulo() {
+		return modulo;
+	}
+	public void setModulo(Modulo modulo) {
+		this.modulo = modulo;
+	}
 	public DispositivoEstandar(String nombre, double kw, int hs) {
 		this.nombre = nombre;
 		this.kwPorHora = kw;

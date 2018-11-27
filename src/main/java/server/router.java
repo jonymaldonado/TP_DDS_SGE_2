@@ -7,10 +7,7 @@ import controllers.MapaController;
 import controllers.ModeloDispositivos;
 import controllers.Registro;
 import controllers.TransformadoController;
-import controllers.indicadorController;
 import controllers.inicio;
-import controllers.inicioEmpresa;
-import controllers.metodologiaController;
 import spark.Spark;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 import spark.utils.BooleanHelper;
@@ -27,10 +24,7 @@ public class router {
 		Spark.staticFiles.location("/public");
 		
 		inicio inicio=new inicio();
-		inicioEmpresa inicioController = new inicioEmpresa();
 		EmpresaController inteligenteController = new EmpresaController();
-		indicadorController indicadorController=new indicadorController();
-		metodologiaController metodologiacontroller=new metodologiaController();
 		Registro registro = new Registro();
 		HogarController hogar = new HogarController();
 		MapaController mapa = new MapaController();

@@ -20,7 +20,7 @@ import ar.com.sge.usuarios.Cliente;
 
 
 @Entity
-@Table(name ="Transformador")
+@Table(name ="transformador")
  
 public class Transformador {
 	@Id

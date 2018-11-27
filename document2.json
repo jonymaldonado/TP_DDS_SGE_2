@@ -1,14 +1,76 @@
-[
-  {
-    "idtransformador": 4,
-    "listaDeclientesConectados": []
-  },
-  {
-    "idtransformador": 5,
-    "listaDeclientesConectados": []
-  },
-  {
-    "idtransformador": 6,
-    "listaDeclientesConectados": []
-  }
+[{
+		"idtransformador": 1,
+		"coordenada": {
+			"latitud": -34.60324,
+			"longitud": -58.420817
+		},
+		"listaDeclientesConectados": [],
+		"zona": {
+			"idZona": 5,
+			"nombreDeLaZona": "Almagro",
+			"radioEnMetros": 50,
+			"listaDeTransformadores": []
+		},
+		"activo": True
+	},
+	{
+		"idtransformador": 2,
+		"coordenada": {
+			"latitud": -34.60321,
+			"longitud": -58.424113
+		},
+		"listaDeclientesConectados": [],
+		"zona": {
+			"idZona": 5,
+			"nombreDeLaZona": "Almagro",
+			"radioEnMetros": 50,
+			"listaDeTransformadores": []
+		},
+		"activo": True
+	},
+	{
+		"idtransformador": 3,
+		"coordenada": {
+			"latitud": -34.598521,
+			"longitud": -58.420589
+		},
+		"listaDeclientesConectados": [],
+		"zona": {
+			"idZona": 5,
+			"nombreDeLaZona": "Almagro",
+			"radioEnMetros": 50,
+			"listaDeTransformadores": []
+		},
+		"activo": True
+	},
+	{
+		"idtransformador": 4,
+		"coordenada": {
+			"latitud": -34.8042867,
+			"longitud": -58.3440907
+		},
+		"listaDeclientesConectados": [],
+		"zona": {
+			"idZona": 5,
+			"nombreDeLaZona": "Almagro",
+			"radioEnMetros": 50,
+			"listaDeTransformadores": []
+		},
+		"activo": True
+	},
+	{
+		"idtransformador": 5,
+		"coordenada": {
+			"latitud": -34.6037561,
+			"longitud": -58.3816139
+		},
+		"listaDeclientesConectados": [],
+		"zona": {
+			"idZona": 4,
+			"nombreDeLaZona": "Once",
+			"radioEnMetros": 50,
+			"listaDeTransformadores": []
+		},
+		"activo": True
+	}
 ]

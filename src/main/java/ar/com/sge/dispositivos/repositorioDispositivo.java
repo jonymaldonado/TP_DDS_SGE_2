@@ -26,10 +26,10 @@ public class repositorioDispositivo {
 	@Column(nullable=false,unique=true)
 	private int idRepositorio;
 	@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY)
-	@JoinColumn(name="id_int")
+	@JoinColumn(name="id_repo")
 	List<modeloInteligente> listaActualInteligentes;
 	@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY)
-	@JoinColumn(name="id_stan")
+	@JoinColumn(name="id_repo")
 	List<modeloStandar> listaActualEstandar;
 	
 	
@@ -93,7 +93,7 @@ public class repositorioDispositivo {
 	public void seleccionarInteligente(Cliente cliente,String dispositivoSeleccionado,String regla,float valor, String accion) throws CloneNotSupportedException{
 		List<modeloInteligente> lstDispEnc;
 		lstDispEnc = listaActualInteligentes.stream().filter(a-> a.getNombre().equals(dispositivoSeleccionado)).collect(Collectors.toList());
-		System.out.println("nombre "+dispositivoSeleccionado+" tamaño "+listaActualInteligentes.get(0).getNombre());
+		System.out.println("nombre "+dispositivoSeleccionado+" tamaï¿½o "+listaActualInteligentes.get(0).getNombre());
 		DispositivoInteligente dispositivo1 = this.retornarNuevoDispositivo(lstDispEnc.get(0));
 		Sensor sensor = new Sensor(regla,valor,accion);
 		Actuador actuador = new Actuador();

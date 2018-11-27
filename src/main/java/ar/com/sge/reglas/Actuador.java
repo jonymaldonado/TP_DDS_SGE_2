@@ -22,7 +22,7 @@ import ar.com.sge.dispositivos.DispositivoInteligente;
 
 
 @Entity
-@Table(name ="Actuador")
+@Table(name ="actuador")
 public class Actuador {
 	@Id
 	@GeneratedValue

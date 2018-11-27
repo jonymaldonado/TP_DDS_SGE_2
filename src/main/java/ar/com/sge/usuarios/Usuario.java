@@ -25,7 +25,7 @@ import ar.com.sge.geografia.Coordenada;
 @Inheritance
 //@DiscriminatorColumn(name="tipo_usuario")
 //@ForceDiscriminator
-@Table(name ="Usuario")
+@Table(name ="usuario")
 public abstract class Usuario {
 
 	@Id

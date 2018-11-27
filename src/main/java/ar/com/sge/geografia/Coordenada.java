@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name ="Coordenada")
+@Table(name ="coordenada")
 public class Coordenada {
 	@Id
 	@GeneratedValue

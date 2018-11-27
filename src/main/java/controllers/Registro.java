@@ -13,7 +13,6 @@ import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 
 import ar.com.sge.dispositivos.modeloInteligente;
 import ar.com.sge.geografia.Coordenada;
-import ar.com.sge.geografia.Provincia;
 import ar.com.sge.usuarios.Cliente;
 import ar.com.sge.usuarios.Hogar;
 import spark.ModelAndView;

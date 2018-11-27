@@ -1,19 +1,19 @@
 [
   {
     "idZona": 5,
-    "nombreDeLaZona": "CapitalFederal",
+    "nombreDeLaZona": "Almagro",
     "radioEnMetros": 50,
     "listaDeTransformadores": []
   },
   {
     "idZona": 4,
-    "nombreDeLaZona": "Lugano",
+    "nombreDeLaZona": "Once",
     "radioEnMetros": 50,
     "listaDeTransformadores": []
   },
   {
     "idZona": 2,
-    "nombreDeLaZona": "La Boca",
+    "nombreDeLaZona": "Claypole",
     "radioEnMetros": 50,
     "listaDeTransformadores": []
   }

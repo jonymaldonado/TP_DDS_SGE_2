@@ -21,12 +21,12 @@ import ar.com.sge.dispositivos.DispositivoInteligente;
 @Inheritance
 @DiscriminatorColumn(name="tipo_Estado")
 //@ForceDiscriminator
-@Table(name ="Estado1")
+@Table(name ="estado_dispositivo")
 public abstract class Estado {
 
 	@Id
 	@GeneratedValue
-	private int IdPeriodo;
+	private int id_estado;
 	
 	protected String nombre;
 	protected LocalDateTime fechaInicio;

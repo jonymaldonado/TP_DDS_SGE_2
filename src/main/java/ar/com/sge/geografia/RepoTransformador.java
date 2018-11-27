@@ -95,7 +95,7 @@ public class RepoTransformador {
 		asignarTransformadores();
 		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
 		EntityTransaction transaction = entityManager.getTransaction();
-		transaction.begin();
+		
 		
 		
 		List<Cliente> listaclientesbase=(List<Cliente>) entityManager.createQuery("from Usuario where tipo_usuario='cliente'").getResultList(); 
@@ -103,7 +103,7 @@ public class RepoTransformador {
 		
 		
 		try {
-			
+			transaction.begin();
 			double distancia;
 			for (Cliente cliente : listaclientesbase) {
 				double transformadorMasCercano = cliente.getDomicilio().distanciaAlPunto(listaTransformadores.get(0).getPosTransformador());
@@ -120,10 +120,11 @@ public class RepoTransformador {
 				//transfElegido=this.buscarTransformador(cliente.getIdTransformadorCorrespondiente());
 				transfElegido.agregarCliente(cliente);
 			};//fin for clientes
+			transaction.commit();
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		transaction.commit();
+		
 	}
 	
 

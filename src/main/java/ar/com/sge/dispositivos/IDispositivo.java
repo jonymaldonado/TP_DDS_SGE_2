@@ -19,7 +19,7 @@ import ar.com.sge.usuarios.Usuario;
 @Inheritance
 @DiscriminatorColumn(name="tipo_Dispositivo")
 //@ForceDiscriminator
-@Table(name ="Dispositivo")
+@Table(name ="dispositivo")
 public abstract class IDispositivo implements Cloneable {
 
 	@Id

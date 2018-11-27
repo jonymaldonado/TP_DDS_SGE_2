@@ -18,7 +18,7 @@ import ar.com.sge.usuarios.Administrador;
 
 
 @Entity
-@Table(name ="Zona")
+@Table(name ="zona")
 public class Zona {
 	@Id
 	//@GeneratedValue

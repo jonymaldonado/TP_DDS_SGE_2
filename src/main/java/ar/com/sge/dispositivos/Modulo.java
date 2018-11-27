@@ -21,7 +21,7 @@ public class Modulo extends DispositivoInteligente {
 	//@OneToOne(cascade={CascadeType.ALL},fetch=FetchType.LAZY,mappedBy="condicion")
 	
 	
-	@OneToOne(cascade={CascadeType.ALL},fetch=FetchType.LAZY)
+	@OneToOne(cascade={CascadeType.ALL},fetch=FetchType.LAZY, mappedBy="modulo")
 	private DispositivoEstandar dispositivoEstandar;
 		
 	
@@ -40,13 +40,7 @@ public class Modulo extends DispositivoInteligente {
 
 	public void setDispositivoEstandar(DispositivoEstandar dispositivoEstandar) {
 		this.dispositivoEstandar = dispositivoEstandar;
+		this.dispositivoEstandar.setModulo(this);
 	}
-
-	public int getId() {
-		return Id;
-	}
-
-
-	
 	
 }

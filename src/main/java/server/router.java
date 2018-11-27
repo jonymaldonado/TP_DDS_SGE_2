@@ -59,6 +59,7 @@ public class router {
 		Spark.get("/usuario/:usuario/inteligentes/:Id_Dispositivo/regla",inteligenteController::verRegla,engine);
 		Spark.get("/usuario/:usuario/standar",inteligenteController::verdetalleStandar,engine);
 		Spark.get("/usuario/:usuario/resultado",inteligenteController::verResultado,engine);
+		Spark.get("/usuario/:usuario/consumo",inteligenteController::verConsumo,engine);
 		//Spark.get("/usuario/periodoDetalle/:empresa/:mesinicio/:mesfin/:anio", empresaController::verdetalleVenta2,engine);
 		//Spark.post("/periodoDetalle", empresaController::verdetalleVenta, engine);
 		Spark.get("/transformador",trans::mostrarConsumo);
@@ -66,6 +67,11 @@ public class router {
 		Spark.get("/consumo",inicio::calcularConsumo);
 		Spark.get("/modeloInteligente",modelo::listarInteligente,engine);
 		Spark.get("/modeloEstandar",modelo::listarEstandar,engine);
+		Spark.get("/deleteInteligente",modelo::deleteInteligente);
+		Spark.get("/deleteEstandar",modelo::deleteEstandar);
+		Spark.get("/addModeloInteligente",modelo::addModeloInteligente);
+		Spark.get("/addModeloEstandar",modelo::addModeloEstandar);
+		
 	}
 
 }

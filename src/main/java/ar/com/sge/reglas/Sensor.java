@@ -68,6 +68,12 @@ public class Sensor {
 		
 	}
 	
+	public void eliminarRegla(int valor) {
+		//this.getObservadores().forEach(r -> r.verificarRegla(valor));
+		this.observadores.removeIf(i->i.getId_regla()==valor);
+		
+	}
+	
 	
 	
 	/*public void desactivate(){

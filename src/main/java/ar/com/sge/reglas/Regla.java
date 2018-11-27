@@ -82,6 +82,18 @@ public class Regla {
 	public String getOperador() {
 		return this.operador;
 	}
+	public int getId_regla() {
+		return id_regla;
+	}
+
+	public void setId_regla(int id_regla) {
+		this.id_regla = id_regla;
+	}
+
+	public float getValorcomparacion() {
+		return valorcomparacion;
+	}
+
 	public String getAccion() {
 		return accion;
 	}

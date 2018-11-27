@@ -250,7 +250,10 @@ public class TestPersistenciaCliente {
 		transaction.commit();
 	}
 		*/
-	/*@Test
+
+	/*
+	@Test
+>>>>>>> 26ea18908592d64404ad1f48f3c6267dc1a3fd12
 	public void TestPersistirCliente() {
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
@@ -266,7 +269,7 @@ public class TestPersistenciaCliente {
 		
 		transaction.commit();
 		//termina la transaccion
-	}
+	}*/
 	/*
 	@Test
 	public void TestPersistirDispo() {

@@ -9,17 +9,21 @@
 		<tr>
 			<th>Nombre</th>
 			<th>kw por hora</th>
+			<th>Consumo Maximo</th>
+			<th>Consumo Minimo</th>
 			<th>Accion</th>
 		</tr>
 		{{#each listaInteligente}}
 		<tr>
 			<td>{{nombre}}</td>
 			<td>{{kwPorHora}}</td>
+			<td>{{maximoconsumo}}</td>
+			<td>{{minimoconsumo}}</td>
 			<td>
-				<a onclick="editar('{{nombre}}')" style="width:42px!important;height:42px!important" class="btn btn-info btn2" data-toggle="tooltip" data-placement="bottom" title="Editar {{nombre}}">
+				<a onclick="editar('{{id_inteligente}}','{{nombre}}','{{kwPorHora}}','{{maximoconsumo}}','{{minimoconsumo}}')" style="width:42px!important;height:42px!important" class="btn btn-info btn2" data-toggle="tooltip" data-placement="bottom" title="Editar {{nombre}}">
                     <i class="fa fa-edit" style="font-size:24px;"></i>
                 </a>
-                <a onclick="editar('{{nombre}}')" style="width:42px!important;height:42px!important" class="btn btn-danger frmEliminar btn2" data-toggle="tooltip" data-placement="bottom" title="Eliminar {{nombre}}">
+                <a onclick="eliminar('{{id_inteligente}}')" style="width:42px!important;height:42px!important" class="btn btn-danger frmEliminar btn2" data-toggle="tooltip" data-placement="bottom" title="Eliminar {{nombre}}">
 					<i class="fa fa-eraser" style="font-size:24px;"></i>
 				</a>
 			</td>
@@ -31,26 +35,134 @@
 	</table>
 	</div>
 	
+	<div class="form-group">
+		<a type="button" onclick="window.history.back()" class="btn btn-danger"><i class="fa fa-arrow-left"></i> Volver</a>
+		<a type="button" onclick="agregar()" class="btn btn-primary"><i class="fa fa-plus"></i> Agregar</a>
+	</div>
+	
+<div class="modal fade" id="mensaje" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content" style="width:800px;height:300px">
+        	<input type="hidden" id="id">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title" id="myModalLabel"></h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">  
+                	<div class="row">
+	                	<div class="col-lg-6">
+						  	<label class="col-lg-3 control-label">Nombre</label>
+						    <div class="col-lg-8">
+						      <input type="text" class="form-control" id="nombre">
+						    </div>
+						</div>
+						<div class="col-lg-6">
+						  	<label class="col-lg-3 control-label">Kw Por Hora</label>
+						    <div class="col-lg-8">
+						      <input type="text" class="form-control" id="kw">
+						    </div>
+						</div>
+					</div>
+					<div class="row">
+	                	<div class="col-lg-6">
+						  	<label class="col-lg-3 control-label">Consumo Maximo</label>
+						    <div class="col-lg-8">
+						      <input type="text" class="form-control" id="max">
+						    </div>
+						</div>
+						<div class="col-lg-6">
+						  	<label class="col-lg-3 control-label">Consumo Minimo</label>
+						    <div class="col-lg-8">
+						      <input type="text" class="form-control" id="min">
+						    </div>
+						</div>
+					</div>
+			    </div>
+			    <div class="paddedRow" style="padding-top:25px">
+                    <div class="col-sm-12">
+                    	<button type="button" class="btn btn-primary pull-right" id="butAgregar"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>        
+</div>
+
 	
 <script type="text/javascript">
 	
-	function editar(nombre){
+	function eliminar(id){
 	
-	console.log(nombre);
 		var parametros={
-						"nombre_dispositivo": nombre
+						"id_inteligente": id
 						};
 		$.ajax({
 				data:parametros,
-				url:"/agregarEstandar/{{usuario.nombre_usuario}}",
+				url:"/deleteInteligente",
 				type:"GET",
 				success: function (data) {
-					location.reload();
+					window.location.href = "/modeloInteligente";
 				}
 				
 				});
 	
 	}
+	
+	function editar(id,nombre,kw,consumomaximo,consumominimo) {
+	
+		$('#myModalLabel').html('Editando '+nombre);
+		$('#butAgregar').html('Modificar');
+	    $('#id').val(id);    
+	    $('#nombre').val(nombre).attr("disabled",true);
+	    $('#kw').val(kw);
+	    $('#max').val(consumomaximo);
+	    $('#min').val(consumominimo);
+	    $('#cargo_chosen').attr("style", "width:160px!important");
+	
+	    $('.chosen-container-multi').attr("style", "width:100%!important");
+	
+	    $('#mensaje').modal('show');
+	}
+	
+	$('#butAgregar').unbind().click(function() {
+        var parametros={
+						"id_inteligente": $('#id').val(),
+						"nombre": $('#nombre').val(),
+						"kw": $('#kw').val(),
+						"max": $('#max').val(),
+						"min": $('#min').val()
+						
+						};
+		$.ajax({
+				data:parametros,
+				url:"/addModeloInteligente",
+				type:"GET",
+				success: function (data) {
+					window.location.href = "/modeloInteligente";
+					
+				}
+				
+				});
+	});
+	
+	function agregar() {
+	
+		$('#myModalLabel').html('Agregar Dispositivo');
+		$('#butAgregar').html('Agregar');
+		
+	    $('#id').val('');    
+	    $('#nombre').val('').attr("disabled",false);
+	    $('#kw').val('');
+	    $('#max').val('');
+	    $('#min').val('');
+	    $('#cargo_chosen').attr("style", "width:160px!important");
+	
+	    $('.chosen-container-multi').attr("style", "width:100%!important");
+	
+	    $('#mensaje').modal('show');
+	}
+	
 	</script>
 
 {{/partial}}

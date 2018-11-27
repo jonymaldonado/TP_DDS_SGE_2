@@ -13,6 +13,7 @@ import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 
 import ar.com.sge.dispositivos.DispositivoEstandar;
 import ar.com.sge.dispositivos.DispositivoInteligente;
+import ar.com.sge.dispositivos.modeloStandar;
 import ar.com.sge.dispositivos.repositorioDispositivo;
 import ar.com.sge.reglas.Regla;
 import ar.com.sge.usuarios.Cliente;
@@ -127,6 +128,8 @@ public class EmpresaController {
 		
 		repositorioDispositivo repobase = entityManager.find(repositorioDispositivo.class,1);
 		
+		//List<modeloStandar> listaEstandar = entityManager.createNativeQuery("select * from modelostandar", modeloStandar.class).getResultList();
+		
 		model.clear();
 		model.put("usuario", clientebase);
 		model.put("listaEstandar", clientebase.getLstDispositivosEstandares());
@@ -171,6 +174,45 @@ public class EmpresaController {
 		//model.put("cuentas", periodo.getCuentas());
 		return new ModelAndView(model, "resultadoSimplex.hbs");
 }
+	
+public ModelAndView verConsumo(Request req, Response res)throws  Exception{
+	
+
+		
+		String usuarioBuscado = req.params(":usuario");
+		/*int inicio = Integer.parseInt(req.params(":mesinicio"));
+		int fin = Integer.parseInt(req.params(":mesfin"));
+		int anio = Integer.parseInt(req.params(":anio"));*/
+		
+		
+		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
+		EntityTransaction transaction = entityManager.getTransaction();
+		//transaction.begin();
+		
+		
+		//String contrase�aBuscado = req.queryParams("clave");
+
+		List<Cliente> listaclientesbase=(List<Cliente>) entityManager.createQuery("from Usuario where nombre_usuario='"+usuarioBuscado+"'").getResultList(); 
+		Cliente clientebase=listaclientesbase.get(0);
+		//clientebase.consultarASimplex();
+		System.out.println("valor simplex" + clientebase.ResultadoSimplex().get(0));
+		System.out.println("valor simplex" + clientebase.ResultadoSimplex().get(1));
+		List<Double> listaDeConsumoActual = new ArrayList<>();
+		model.clear();
+		model.put("consumo", clientebase.ConsumoActualDispositivos());
+		model.put("usuario", clientebase);
+		model.put("resultado", clientebase.ResultadoSimplex());
+		model.put("listainteligente", clientebase.getLstDispositivosInteligentes());
+	//	Empresa empresa = repo.getEmpresa(empresaBuscado);
+		
+		//Periodo periodo=empresa.getPeriodoByName(inicio, fin,anio);
+		
+		
+		//model.put("periodo", periodo);
+		//model.put("cuentas", periodo.getCuentas());
+		return new ModelAndView(model, "resultadoSimplex.hbs");
+}
+
 	public ModelAndView verRegla(Request req, Response res)throws  Exception{
 		
 		String inteligenteBuscado = req.params(":Id_Dispositivo");
@@ -190,7 +232,7 @@ public class EmpresaController {
 		String regla = req.queryParams("regla");
 		String valor = req.queryParams("valor");
 		String accion = req.queryParams("accion");
-		System.out.println("valor regla" + reglabuscada);
+		System.out.println("***********valor regla*********" + reglabuscada);
 		
 		//repositorioDispositivo repobase=entityManager.find(repositorioDispositivo.class,2);
 		Cliente clientebase=(Cliente) entityManager.createNativeQuery("select * from usuario where nombre_usuario = '"+usuarioBuscado+"'", Cliente.class).getResultList().get(0);
@@ -201,6 +243,7 @@ public class EmpresaController {
 		List<DispositivoInteligente> listaclientesbase= entityManager.createNativeQuery("select * from Dispositivo where Id_Dispositivo="+inteligenteBuscado,DispositivoInteligente.class).getResultList(); 
 		DispositivoInteligente inteligentebase=listaclientesbase.get(0);
 		if(reglabuscada!=null) {
+			inteligentebase.eliminarregla(Integer.parseInt(reglabuscada));
 			
 		}
 		List<Regla> reglas=inteligentebase.getSensor().getObservadores();
@@ -234,7 +277,7 @@ public class EmpresaController {
 		String nombre_dispositivo = req.queryParams("nombre_dispositivo");
 		System.out.println(nombre_dispositivo);
 		
-		repositorioDispositivo repobase=entityManager.find(repositorioDispositivo.class,4);
+		repositorioDispositivo repobase=entityManager.find(repositorioDispositivo.class,1);
 		
 		Cliente clientebase=(Cliente) entityManager.createNativeQuery("select * from usuario where nombre_usuario = '"+usuarioBuscado+"'", Cliente.class).getResultList().get(0);
 		

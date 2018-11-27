@@ -44,12 +44,19 @@
 		{{#each listareglas}}
 		<tr>
 			<td>{{operador}} </td>
-			<td>{{valorcomparacion.this}}</td>
-			<td>{{accion}} </td>
+			<td>{{valorcomparacion}}</td>
+			<td>{{accion}}  {{id_regla}} </td>
 			
 			<td>
-				<a class="btn btn-secondary" name="id_regla" id="{{id_regla}}" href="inteligentes/{{nombre}}/{{Id_Dispositivo}}/regla">eliminarr</a>
+				<div class="form-group">
+				<form role="form" action="" method="GET">
+	
+				<button onclick="eliminar" class="btn btn-primary" name="id_regla" id="id_regla" value="{{id_regla}}">eliminar</button>
+				</form>
+				</div>			
 			</td>
+			
+			
 			
 		</tr>
 		{{/each}}
@@ -58,6 +65,8 @@
 	</tr>
 	</table>
 	</div>
+	
+	
 	
 	<h3>Agregar Regla</h3>
 	<div class="form-group">
@@ -98,6 +107,26 @@
 				});
 	
 	}
+	
+	function eliminar(){
+		var parametros={
+						
+						"id_regla":$("#id_regla").val(),
+						
+						}
+		$.ajax({
+				data:parametros,
+				url:"usuario/{{nombre_usuario}}/inteligentes/{{Id_Dispositivo}}/regla?id_regla="+$("#id_regla").val(),
+				type:"GET",
+				success:function(a){
+									alert("Se ha agregado un inteligente");
+									}
+				
+				});
+	
+	}
+	
+	
 	</script>
 	
 {{/partial}}

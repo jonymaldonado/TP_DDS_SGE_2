@@ -349,6 +349,9 @@ public class DispositivoInteligente extends IDispositivo{
 	public void setKwPorHora(double kwPorHora) {
 		this.kwPorHora = kwPorHora;
 	}
+	public void eliminarregla(int valor) {
+		sensor.eliminarRegla(valor);;
+	}
 	
 
 }

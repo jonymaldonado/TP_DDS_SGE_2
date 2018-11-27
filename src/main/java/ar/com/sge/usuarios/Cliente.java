@@ -1,5 +1,6 @@
 package ar.com.sge.usuarios;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -350,5 +351,13 @@ public class Cliente extends Usuario {
 			consumoActual.add(inteligente.consumoEnKw());
 		}
 		return consumoActual;
+	}
+	
+	public float consumoDeEnergiaDeDispositivos(LocalDateTime inicio, LocalDateTime fin) {
+		float sum = 0;
+		for(DispositivoInteligente d: lstDispositivosInteligentes) { 
+			sum += d.consumidoComprendidoEntre(inicio, fin);
+		}
+		return sum;
 	}
 }

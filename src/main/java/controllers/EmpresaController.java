@@ -1,6 +1,9 @@
 package controllers;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -175,42 +178,42 @@ public class EmpresaController {
 		return new ModelAndView(model, "resultadoSimplex.hbs");
 }
 	
-public ModelAndView verConsumo(Request req, Response res)throws  Exception{
+	public double verConsumo(Request req, Response res)throws  Exception{
 	
 
 		
 		String usuarioBuscado = req.params(":usuario");
-		/*int inicio = Integer.parseInt(req.params(":mesinicio"));
-		int fin = Integer.parseInt(req.params(":mesfin"));
-		int anio = Integer.parseInt(req.params(":anio"));*/
+		String inicio = req.queryParams("fecha_inicio");
+		String fin = req.queryParams("fecha_fin");
+		
+		System.out.print("fecha inicio"+inicio+"**** fecha fin "+fin);
 		
 		
+		String ini = inicio+" 00:00";
+		String fi = fin+" 00:00";
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime fechainicio = LocalDateTime.parse(ini, formatter);
+        LocalDateTime fechafin = LocalDateTime.parse(fi, formatter);
+        
+        /*
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDateTime fechainicio = LocalDateTime.parse(inicio, formatter);
+		LocalDateTime fechafin = LocalDateTime.parse(fin, formatter);*/
+		
+		System.out.print("+++++++++++++++++++++++++++++++++++++++++");
+		
+		
+		System.out.print("fecha inicio"+fechainicio+"**** fecha fin "+fechafin);
 		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
 		EntityTransaction transaction = entityManager.getTransaction();
-		//transaction.begin();
-		
-		
-		//String contrase�aBuscado = req.queryParams("clave");
 
 		List<Cliente> listaclientesbase=(List<Cliente>) entityManager.createQuery("from Usuario where nombre_usuario='"+usuarioBuscado+"'").getResultList(); 
 		Cliente clientebase=listaclientesbase.get(0);
-		//clientebase.consultarASimplex();
-		System.out.println("valor simplex" + clientebase.ResultadoSimplex().get(0));
-		System.out.println("valor simplex" + clientebase.ResultadoSimplex().get(1));
-		List<Double> listaDeConsumoActual = new ArrayList<>();
-		model.clear();
-		model.put("consumo", clientebase.ConsumoActualDispositivos());
-		model.put("usuario", clientebase);
-		model.put("resultado", clientebase.ResultadoSimplex());
-		model.put("listainteligente", clientebase.getLstDispositivosInteligentes());
-	//	Empresa empresa = repo.getEmpresa(empresaBuscado);
 		
-		//Periodo periodo=empresa.getPeriodoByName(inicio, fin,anio);
+		Double kw = (double) clientebase.consumoDeEnergiaDeDispositivos(fechainicio, fechafin);
 		
-		
-		//model.put("periodo", periodo);
-		//model.put("cuentas", periodo.getCuentas());
-		return new ModelAndView(model, "resultadoSimplex.hbs");
+		return kw;
 }
 
 	public ModelAndView verRegla(Request req, Response res)throws  Exception{

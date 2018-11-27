@@ -93,7 +93,7 @@
         </div>
         </div>
         </br></br>
-		<button onclick="agregarinteligentes" class="btn btn-primary">consultar</button>
+		<button onclick="consultarConsumo()" class="btn btn-primary">consultar</button>
 	
 	
 	
@@ -102,10 +102,28 @@
 	
 <script type="text/javascript">
 	$('.datepicker').datepicker({
-		format: 'dd/mm/yyyy',
+		format: 'yyyy-mm-dd',
 	    language: 'es',
 	    today:'Today',
 	});
+	
+	function consultarConsumo(){
+		var parametros={
+						"fecha_inicio": $("#inicio").val(),
+						"fecha_fin": $("#fin").val()
+						}
+		$.ajax({
+				data:parametros,
+				url:"/usuario/{{usuario.nombre_usuario}}/consumo",
+				type:"GET",
+				success:function(data){
+						console.log(data);	
+						$("#resultado").val(data);
+				}		
+				
+		});
+	
+	}
 </script>
 {{/partial}}
 {{>base.hbs}}

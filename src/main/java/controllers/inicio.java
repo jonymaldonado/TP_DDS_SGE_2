@@ -87,7 +87,7 @@ public ModelAndView inicioUsuario(Request req, Response res)throws IOException{
 			
 			if(tipo_usuario.equalsIgnoreCase("administrador")) {
 				
-				Administrador clientebase=(Administrador) entityManager.createNativeQuery("select * from usuario where contrasenia = "+contrasenia+" and nombre_usuario = '"+usuario+"'and tipo_usuario = '"+tipo_usuario+"'", Administrador.class).getResultList().get(0);
+				Administrador clientebase=(Administrador) entityManager.createNativeQuery("select * from usuario where contrasenia = '"+contrasenia+"' and nombre_usuario = '"+usuario+"'and tipo_usuario = '"+tipo_usuario+"'", Administrador.class).getResultList().get(0);
 				
 				List<Cliente> lista = entityManager.createNativeQuery("select u.* from usuario u "
 						+ "join hogares h on u.id_hogar = h.id where u.tipo_usuario='cliente'", Cliente.class).getResultList();
@@ -98,7 +98,7 @@ public ModelAndView inicioUsuario(Request req, Response res)throws IOException{
 				
 			}
 			else {
-				Cliente clientebase=(Cliente) entityManager.createNativeQuery("select * from usuario where contrasenia = "+contrasenia+" and nombre_usuario = '"+usuario+"'and tipo_usuario = '"+tipo_usuario+"'", Cliente.class).getResultList().get(0);
+				Cliente clientebase=(Cliente) entityManager.createNativeQuery("select * from usuario where contrasenia = '"+contrasenia+"' and nombre_usuario = '"+usuario+"'and tipo_usuario = '"+tipo_usuario+"'", Cliente.class).getResultList().get(0);
 				
 				model.put("listainteligentes", clientebase.getLstDispositivosInteligentes());
 				model.put("listaEstandar", clientebase.getLstDispositivosEstandares());

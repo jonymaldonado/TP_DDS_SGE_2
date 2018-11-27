@@ -108,8 +108,11 @@ public class EmpresaController {
 		System.out.println("nombre "+nombreinteligente+repobase.getListaActualInteligentes().get(0).getNombre());
 		repobase.seleccionarInteligente(clientebase, nombreinteligente,regla,Integer.parseInt(valor),accion);
 		
-		transaction.commit();
+		//transaction.commit();
+		
 		}
+		
+		transaction.commit();
 		
 		model.clear();
 		model.put("usuario", clientebase);
@@ -243,11 +246,12 @@ public class EmpresaController {
 		
 		//String contrase�aBuscado = req.queryParams("clave");
 
-		List<DispositivoInteligente> listaclientesbase= entityManager.createNativeQuery("select * from Dispositivo where Id_Dispositivo="+inteligenteBuscado,DispositivoInteligente.class).getResultList(); 
+		List<DispositivoInteligente> listaclientesbase= entityManager.createNativeQuery("select * from dispositivo where Id_Dispositivo="+inteligenteBuscado,DispositivoInteligente.class).getResultList(); 
 		DispositivoInteligente inteligentebase=listaclientesbase.get(0);
 		if(reglabuscada!=null) {
 			inteligentebase.eliminarregla(Integer.parseInt(reglabuscada));
-			
+			Regla regla_1 = entityManager.find(Regla.class, Integer.parseInt(reglabuscada));
+			entityManager.remove(regla_1);
 		}
 		List<Regla> reglas=inteligentebase.getSensor().getObservadores();
 		if(regla!=null) {

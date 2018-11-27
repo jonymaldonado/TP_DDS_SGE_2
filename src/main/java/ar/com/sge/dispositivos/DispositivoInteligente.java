@@ -49,7 +49,7 @@ public class DispositivoInteligente extends IDispositivo{
 	private Estado estado;
 	//@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY,mappedBy="inteligente")
 	@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY)
-	@JoinColumn(name="id_estado")
+	@JoinColumn(name="id_estado_inteligente")
 	private List<Estado> listaDeEstados;
 	//private static final float coeficienteAhorroEnergia = (float) 0.6;
 	private double coeficienteAhorroEnergia;

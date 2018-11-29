@@ -16,6 +16,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import ar.com.sge.dispositivos.DispositivoInteligente;
+import ar.com.sge.mqtt.SubscriberMQTTPrueba;
 
 
 @Entity
@@ -32,9 +33,12 @@ public class Sensor {
 	/*@OneToOne(cascade={CascadeType.ALL})
 	@JoinColumn(name = "id_tarea")
 	private TimerTask tarea;*/
+	private SubscriberMQTTPrueba subscriberSensor;
+	
 	
 	public Sensor() {
 		this.observadores = new ArrayList<>();
+		this.subscriberSensor = new SubscriberMQTTPrueba();
 	}
 	
 	public Sensor(String comparador,float valor,String accion) {

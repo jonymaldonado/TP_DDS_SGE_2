@@ -15,7 +15,7 @@
     		<ul class="nav navbar-nav navbar-right ">
       
       			<li class="nav-item">
-        			<a class="nav-link" href="#">Simple</a>
+        			<a class="nav-link" href="usuario/{{usuario.nombre_usuario}}/resultado">ConsultaSimplex</a>
       			</li>
       			<li class="nav-item">
         			<a class="nav-link" href="/Mapa">Mapa</a>
@@ -38,47 +38,9 @@
 	<h1>Bienvenido {{usuario.nombre}}</h1>
 	<h3>consumo periodo  </h3>
 	<h3>Puntos  {{usuario.puntos}}</h3>
-	<div class="table-responsive">
-	<table class="table">
-	<tr>
-	<td>
-	<table class="table">
-		<tr>
-			<th>Nombre</th>
-			<th>Estado</th>
-			<th>Inicio</th>
-			<th>Regla</th>
-		</tr>
-		{{#each listainteligentes}}
-		<tr>
-			<td>{{nombre}}</td>
-			<td>{{estado.nombre}}</td>
-			<td>{{estado.fechaInicio}}</td>
-			<td>{{kwPorHora}}</td>
-			
-		</tr>
-		{{/each}}
-		{{#each listaEstandar}}
-		<tr>
-			<td>{{nombre}}</td>
-			<td></td>
-			<td></td>
-			<td>{{kwPorHora}}</td>
-			
-		</tr>
-		{{/each}}
-	</table>
-		</td>
-	</tr>
-	</table>
-	</div>
 	
 	
-	<div class="form-group">
-	
-		<a class="btn btn-primary" href="usuario/{{usuario.nombre_usuario}}/resultado">consultarSimplex</a>
-	</div>
-	
+	<h3>consulta consumo periodo</h3>
 	
 		<div class="form-group">
 		<div class="col-sm-12 pull-left">

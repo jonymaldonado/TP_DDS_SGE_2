@@ -42,7 +42,7 @@
 		</tr>
 		{{#each listainteligentes}}
 		<tr>
-			<td>{{nombre}}</td>
+			<td>{{nombre}}{{Id_Dispositivo}}</td>
 			<td>{{estado.nombre}}</td>
 			<td>{{estado.fechaInicio}}</td>
 			<td>{{kwPorHora}}</td>
@@ -58,18 +58,14 @@
 		<table class="table">
 		<tr>
 			<br>
-			<br>
 		</tr>
-		
 		{{#each inteligente}}
-		
 		<tr>
 			<td>
 				<a class="btn btn-secondary" href="inteligentes/{{this}}/regla">editar</a>
 			</td>
 		</tr>
 		{{/each}}
-		
 		</table>
 		</td>
 		

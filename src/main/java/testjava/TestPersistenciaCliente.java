@@ -80,8 +80,8 @@ public class TestPersistenciaCliente {
 		//repo.agregar(lavarropa);
 		//repo.agregar(tv);
 		//repo.agregar(aire2);
-		tv1 =new modeloInteligente("smart 40", 0.18,0.2,120,100);
-		aire1 =new modeloInteligente("lg", 0.18,0.2,200,180);
+		tv1 =new modeloInteligente("smart40", 0.18,0.2,120,100);
+		aire1 =new modeloInteligente("Airelg", 0.18,0.2,200,180);
 		lavarropa1=new modeloInteligente("lavarropalg", 0.20, 0.2, 140, 70);
 		foco=new modeloStandar("foco", 0.1);
 		

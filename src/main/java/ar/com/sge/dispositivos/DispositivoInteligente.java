@@ -84,8 +84,9 @@ public class DispositivoInteligente extends IDispositivo{
 	}
 	
 	public DispositivoInteligente() {
-		listaDeEstados = new ArrayList<>();
-		this.setEstado(new Apagado());
+		super();
+		listaDeEstados = new ArrayList<>();		
+		this.setEstado(new Apagado());		
 	}
 	@Override
 	public IDispositivo clone() throws CloneNotSupportedException{

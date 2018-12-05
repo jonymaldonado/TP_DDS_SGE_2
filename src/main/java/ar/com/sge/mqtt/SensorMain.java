@@ -16,7 +16,7 @@ public class SensorMain {
         System.out.println("== START Publisher ==");
 
 
-        MqttClient client = new MqttClient("tcp://localhost:1883", MqttClient.generateClientId());
+        MqttClient client = new MqttClient("tcp://192.168.0.31:1883", MqttClient.generateClientId());
         client.connect();
 
 
@@ -31,7 +31,7 @@ public class SensorMain {
             } else {
                 MqttMessage message = new MqttMessage();
                 message.setPayload(selection.getBytes());
-                client.publish("sensorTV", message);
+                client.publish("sensorlg", message);
             }
         }
 

@@ -3,7 +3,10 @@ package ar.com.sge.comandos;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
+import org.eclipse.paho.client.mqttv3.MqttException;
+
 import ar.com.sge.dispositivos.DispositivoInteligente;
+import ar.com.sge.mqtt.PublisherMQTT;
 
 
 @Entity
@@ -22,13 +25,19 @@ public class ComandoApagar extends Comando {
 	}
 
 	public ComandoApagar() {
+		this.nombreComando = "apagar";
+	}
+
+	public void ejecutar(DispositivoInteligente dispositivo, PublisherMQTT publicador){
 		
+		try {
+			dispositivo.apagar();
+			publicador.enviarComando(dispositivo.getNombre(),this.nombreComando);
+		} catch (MqttException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	public void ejecutar(DispositivoInteligente dispositivo) {
-		dispositivo.apagar();
-	}
-
-
 
 	public String getNombre() {
 		return nombreComando;
@@ -36,11 +45,5 @@ public class ComandoApagar extends Comando {
 
 	public void setNombreComando(String nombrecomando) {
 		this.nombreComando = nombrecomando;
-	}
-	public DispositivoInteligente getDispositivo() {
-		return dispositivo;
-	}
-	public void setDispositivo(DispositivoInteligente dispositivo) {
-		this.dispositivo = dispositivo;
 	}
 }

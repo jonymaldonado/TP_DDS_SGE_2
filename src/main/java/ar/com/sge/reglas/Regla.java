@@ -14,7 +14,7 @@ public class Regla {
 	@GeneratedValue
 	private int id_regla;
 	private String operador;
-	private float valorcomparacion;
+	private Double valorcomparacion;
 	//private Actuador actuador;
 	private String accion;
 	
@@ -22,14 +22,14 @@ public class Regla {
 		
 	}
 	
-	public Regla(String operador,float valor,String accion,Actuador actuador) {
+	public Regla(String operador,Double valor,String accion,Actuador actuador) {
 		this.operador=operador;
 		this.valorcomparacion=valor;
 		this.accion=accion;
 	//	this.actuador=actuador;
 		
 	}
-	public Regla(String operador,float valor,String accion) {
+	public Regla(String operador,Double valor,String accion) {
 		this.operador=operador;
 		this.valorcomparacion=valor;
 		this.accion=accion;
@@ -66,7 +66,7 @@ public class Regla {
 	public void setOperador(String operador) {
 		this.operador = operador;
 	}
-	public void setValorcomparacion(float valorcomparacion) {
+	public void setValorcomparacion(Double valorcomparacion) {
 		this.valorcomparacion = valorcomparacion;
 	}
 
@@ -90,7 +90,7 @@ public class Regla {
 		this.id_regla = id_regla;
 	}
 
-	public float getValorcomparacion() {
+	public Double getValorcomparacion() {
 		return valorcomparacion;
 	}
 

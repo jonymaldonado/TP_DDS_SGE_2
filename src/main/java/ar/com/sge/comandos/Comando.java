@@ -8,6 +8,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.Table;
 
 import ar.com.sge.dispositivos.DispositivoInteligente;
+import ar.com.sge.mqtt.PublisherMQTT;
 
 @Entity
 @Inheritance
@@ -19,7 +20,7 @@ public abstract class Comando {
 	@Id
 	@GeneratedValue
 	private int Idcomando;
-	public abstract void ejecutar(DispositivoInteligente dispositivo);
+	public abstract void ejecutar(DispositivoInteligente dispositivo, PublisherMQTT publicador);
 	public abstract String getNombre();
 	
 }

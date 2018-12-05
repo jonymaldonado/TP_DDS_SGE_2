@@ -54,8 +54,8 @@ public class CambioDeNombre {
 		sensor2=new Sensor();
 		actuador1=new Actuador();
 		actuador2=new Actuador();
-		regla1=new Regla("mayor", 2, "encender");
-		regla2=new Regla("igual", 21, "apagar");
+		regla1=new Regla("mayor", 2.1, "encender");
+		regla2=new Regla("igual", 21.0, "apagar");
 		sensor1.agregarObservador(regla1);
 		sensor2.agregarObservador(regla2);
 		tv.setSensor(sensor1);

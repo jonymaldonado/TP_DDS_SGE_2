@@ -14,9 +14,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.eclipse.paho.client.mqttv3.MqttException;
 
 import ar.com.sge.dispositivos.DispositivoInteligente;
-import ar.com.sge.mqtt.SubscriberMQTTPrueba;
+import ar.com.sge.mqtt.SubscriberMQTT;
 
 
 @Entity
@@ -33,15 +36,15 @@ public class Sensor {
 	/*@OneToOne(cascade={CascadeType.ALL})
 	@JoinColumn(name = "id_tarea")
 	private TimerTask tarea;*/
-	private SubscriberMQTTPrueba subscriberSensor;
+	@Transient
+	private SubscriberMQTT subscriberSensor;
 	
 	
 	public Sensor() {
 		this.observadores = new ArrayList<>();
-		this.subscriberSensor = new SubscriberMQTTPrueba();
 	}
 	
-	public Sensor(String comparador,float valor,String accion) {
+	public Sensor(String comparador,Double valor,String accion) {
 		this.observadores = new ArrayList<>();
 		this.agregarObservador(new Regla(comparador,valor,accion));
 	}
@@ -66,7 +69,7 @@ public class Sensor {
 		//observadores.forEach(r -> r.verificarRegla(valor));
 		observadores.forEach(r -> r.verificarRegla(valor,inteligente));
 	}
-	public void notificarALosObservadores(double valor) {
+	public void notificarALosObservadores(Double valor) {
 		//this.getObservadores().forEach(r -> r.verificarRegla(valor));
 		this.observadores.forEach(r -> r.verificarRegla(valor,inteligente));
 		
@@ -77,8 +80,6 @@ public class Sensor {
 		this.observadores.removeIf(i->i.getId_regla()==valor);
 		
 	}
-	
-	
 	
 	/*public void desactivate(){
 		tarea.cancel();
@@ -95,11 +96,17 @@ public class Sensor {
 	public void agregarObservador(Regla regla){
 		observadores.add(regla);
 	}
-	public void setValor(double unValor) {
-		this.notificarALosObservadores(unValor);
-	}
+	
+	
 	public List<Regla> getObservadores() {
 		return observadores;
+	}
+	
+	public void suscripcion() throws MqttException, InterruptedException{
+		
+		SubscriberMQTT suscriptor = new SubscriberMQTT();
+		suscriptor.setUpMQTTSubscriber(this, inteligente.getNombre());
+		//System.out.println("Llega 2 ");	
 	}
 }
 

@@ -31,7 +31,7 @@ public class SensorMain {
             } else {
                 MqttMessage message = new MqttMessage();
                 message.setPayload(selection.getBytes());
-                client.publish("sensor", message);
+                client.publish("sensorTV", message);
             }
         }
 

@@ -90,7 +90,7 @@ public class repositorioDispositivo {
 		}
 		listaActualEstandar.add(dispositivo);
 	}
-	public void seleccionarInteligente(Cliente cliente,String dispositivoSeleccionado,String regla,float valor, String accion) throws CloneNotSupportedException{
+	public void seleccionarInteligente(Cliente cliente,String dispositivoSeleccionado,String regla,Double valor, String accion) throws CloneNotSupportedException{
 		List<modeloInteligente> lstDispEnc;
 		lstDispEnc = listaActualInteligentes.stream().filter(a-> a.getNombre().equals(dispositivoSeleccionado)).collect(Collectors.toList());
 		System.out.println("nombre "+dispositivoSeleccionado+" tama�o "+listaActualInteligentes.get(0).getNombre());

@@ -106,7 +106,7 @@ public class EmpresaController {
 		if(nombreinteligente!=null) {
 				
 		System.out.println("nombre "+nombreinteligente+repobase.getListaActualInteligentes().get(0).getNombre());
-		repobase.seleccionarInteligente(clientebase, nombreinteligente,regla,Integer.parseInt(valor),accion);
+		repobase.seleccionarInteligente(clientebase, nombreinteligente,regla,Double.parseDouble(valor),accion);
 		
 		//transaction.commit();
 		
@@ -255,7 +255,7 @@ public class EmpresaController {
 		}
 		List<Regla> reglas=inteligentebase.getSensor().getObservadores();
 		if(regla!=null) {
-			Regla reglanueva=new Regla(regla,Integer.parseInt(valor),accion);
+			Regla reglanueva=new Regla(regla,Double.parseDouble(valor),accion);
 			inteligentebase.getSensor().agregarObservador(reglanueva);
 			
 			//transaction.commit();

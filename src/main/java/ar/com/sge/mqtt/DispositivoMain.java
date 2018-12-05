@@ -3,22 +3,9 @@ package ar.com.sge.mqtt;
 
 import org.eclipse.paho.client.mqttv3.*;
 
-import ar.com.sge.reglas.Sensor;
+public class DispositivoMain {
 
-public class SubscriberMQTTPrueba {
-	
-	private Sensor sensor;
-	
-
-    public SubscriberMQTTPrueba(Sensor sensor) {
-		super();
-		this.sensor = sensor;
-	}
-
-
-
-
-	public void main() throws MqttException, InterruptedException {
+    public static void main(String[] args) throws MqttException, InterruptedException {
 
         System.out.println("== START SUBSCRIBER ==");
 
@@ -29,15 +16,15 @@ public class SubscriberMQTTPrueba {
             }
 
             public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
-                //System.out.println("Message received:\t" + new String(mqttMessage.getPayload()));
+                System.out.println("Message received:\t" + new String(mqttMessage.getPayload()));
             }
-            
+
             public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
             }
         });
         client.connect();
 
-        client.subscribe("sensor");
+        client.subscribe("TV");
         System.out.println("ok!");
 
 

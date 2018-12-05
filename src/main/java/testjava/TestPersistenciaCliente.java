@@ -61,8 +61,8 @@ public class TestPersistenciaCliente {
 		sensor2=new Sensor();
 		actuador1=new Actuador();
 		actuador2=new Actuador();
-		regla1=new Regla("mayor", 2, "encender");
-		regla2=new Regla("igual", 21, "apagar");
+		regla1=new Regla("mayor", 2.0, "encender");
+		regla2=new Regla("igual", 21.0, "apagar");
 		sensor1.agregarObservador(regla1);
 		sensor2.agregarObservador(regla2);
 		tv.setSensor(sensor1);
@@ -305,7 +305,7 @@ public class TestPersistenciaCliente {
 		/*DispositivoEstandar pc =new DispositivoEstandar("pc", 0.25);
 		DispositivoEstandar televisor =new DispositivoEstandar("televisor", 0.20);
 		DispositivoEstandar plancha =new DispositivoEstandar("plancha", 0.40);*/
-		//DispositivoEstandar lampara =new DispositivoEstandar("Lámpara", 0.35);
+		//DispositivoEstandar lampara =new DispositivoEstandar("Lï¿½mpara", 0.35);
 		//repo.agregarStandar(lampara);
 		repo.agregarStandar(foco);
 		repo.agregar(tv1);

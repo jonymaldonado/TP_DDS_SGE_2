@@ -128,7 +128,7 @@ public class EmpresaController {
 		String usuarioBuscado = req.params(":usuario");
 		
 		entityManager = PerThreadEntityManagers.getEntityManager();
-		EntityTransaction transaction = entityManager.getTransaction();
+//		EntityTransaction transaction = entityManager.getTransaction();
 		
 		Cliente clientebase=(Cliente) entityManager.createNativeQuery("select * from usuario where nombre_usuario = '"+usuarioBuscado+"'", Cliente.class).getResultList().get(0);
 		
@@ -154,7 +154,7 @@ public class EmpresaController {
 		
 		
 		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
-		EntityTransaction transaction = entityManager.getTransaction();
+	//	EntityTransaction transaction = entityManager.getTransaction();
 		//transaction.begin();
 		
 		
@@ -209,7 +209,7 @@ public class EmpresaController {
 		
 		System.out.print("fecha inicio"+fechainicio+"**** fecha fin "+fechafin);
 		EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
-		EntityTransaction transaction = entityManager.getTransaction();
+		//EntityTransaction transaction = entityManager.getTransaction();
 
 		List<Cliente> listaclientesbase=(List<Cliente>) entityManager.createQuery("from Usuario where nombre_usuario='"+usuarioBuscado+"'").getResultList(); 
 		Cliente clientebase=listaclientesbase.get(0);

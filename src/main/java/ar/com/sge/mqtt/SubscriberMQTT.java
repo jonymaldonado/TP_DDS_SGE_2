@@ -10,7 +10,7 @@ public class SubscriberMQTT {
 	public void setUpMQTTSubscriber(Sensor sensor, String topico) throws MqttException, InterruptedException {
     	
 		System.out.println("== START SUBSCRIBER ==");
-        MqttClient client = new MqttClient("tcp://localhost:1883", "serverClientId");
+        MqttClient client = new MqttClient("tcp://192.168.0.34:1883", "serverClientId");
         
         client.setCallback(new MqttCallback(){
             

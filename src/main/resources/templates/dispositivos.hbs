@@ -10,7 +10,7 @@
     		<ul class="nav navbar-nav navbar-right ">
       
       			<li class="nav-item">
-        			<a class="nav-link" href="#">Simple</a>
+        			<a class="nav-link" href="http://192.168.3.86:8080/usuario">inicio</a>
       			</li>
       			<li class="nav-item">
         			<a class="nav-link" href="/Mapa">Mapa</a>
@@ -18,12 +18,16 @@
       			
 	    		<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" > dispositivo <span class="caret"></span></a>
         			<ul class="dropdown-menu" >
-          				<li><a href="http://localhost:8080/usuario/{{usuario.nombre_usuario}}/inteligentes">Inteligente</a></li>
-          				<li><a href="usuario/{{usuario.nombre_usuario}}/standar">Standar</a></li>
+          				<li><a href="http://192.168.3.86:8080/usuario/{{usuario.nombre_usuario}}/inteligentes">Inteligente</a></li>
+          				<li><a href="http://192.168.3.86:8080/usuario/{{usuario.nombre_usuario}}/standar">Standar</a></li>
           			
           
         			</ul>
 	    		</li>
+	    			</li>
+	    				<li class="nav-item">
+        			<a class="nav-link" href="http://192.168.3.86:8080">Cerrar Sesion</a>
+      			</li>
     		</ul>
     		</div>
   		</div>
@@ -45,7 +49,7 @@
 		<tr>
 			<td>{{operador}} </td>
 			<td>{{valorcomparacion}}</td>
-			<td>{{accion}}  {{id_regla}} </td>
+			<td>{{accion}}   </td>
 			
 			<td>
 				<div class="form-group">

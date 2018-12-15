@@ -23,7 +23,7 @@ public class TestMQTT {
 		EntityTransaction transaction = entityManager.getTransaction();
 		//transaction.begin();
 		
-		Cliente clientebase=(Cliente) entityManager.createNativeQuery("select * from usuario where nombre_usuario = 'juan'", Cliente.class).getResultList().get(0);
+		Cliente clientebase=(Cliente) entityManager.createNativeQuery("select * from usuario where nombre_usuario = 'Rain'", Cliente.class).getResultList().get(0);
 		DispositivoInteligente dispositivo = clientebase.getLstDispositivosInteligentes().get(0);
 		Actuador actuador = dispositivo.getActuador();
 		Sensor sensor = dispositivo.getSensor();

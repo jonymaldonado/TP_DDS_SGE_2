@@ -77,7 +77,7 @@ public ModelAndView inicioUsuario(Request req, Response res)throws IOException{
 		
 		try {
 			EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
-			EntityTransaction transaction = entityManager.getTransaction();
+			//EntityTransaction transaction = entityManager.getTransaction();
 			String usuario = req.queryParams("usuario");
 			String contrasenia = req.queryParams("clave");
 			String tipo_usuario = req.queryParams("tipo_usuario");
